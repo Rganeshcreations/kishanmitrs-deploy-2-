@@ -1,23 +1,46 @@
-const nodemailer = require("nodemailer");
+const SibApiV3Sdk = require("@getbrevo/brevo");
 require("dotenv").config();
 
-const transporter = nodemailer.createTransport({
-  host: "smtp-relay.brevo.com",
-  port: 587,
-  secure: false,
+const apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
 
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
+apiInstance.setApiKey(
+  SibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey,
+  process.env.BREVO_API_KEY
+);
+
+const sendEmail = async (to, subject, htmlContent) => {
+
+  try {
+
+    const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
+
+    sendSmtpEmail.subject = subject;
+
+    sendSmtpEmail.htmlContent = htmlContent;
+
+    sendSmtpEmail.sender = {
+      name: "KisanMitra",
+      email: process.env.EMAIL_USER
+    };
+
+    sendSmtpEmail.to = [
+      {
+        email: to
+      }
+    ];
+
+    const result = await apiInstance.sendTransacEmail(sendSmtpEmail);
+
+    console.log("✅ Email sent:", result.messageId);
+
+    return result;
+
+  } catch (error) {
+
+    console.log("❌ Email Error:", error);
+
+    throw error;
   }
-});
+};
 
-transporter.verify((error, success) => {
-  if (error) {
-    console.log("❌ Mail Error:", error);
-  } else {
-    console.log("✅ Mail Server Ready");
-  }
-});
-
-module.exports = transporter;
+module.exports = sendEmail;

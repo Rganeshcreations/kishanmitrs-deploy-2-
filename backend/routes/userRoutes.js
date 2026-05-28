@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../db");
-const transporter = require("../mailer");
+const sendEmail = require("../mailer");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
@@ -123,12 +123,11 @@ otpStore[email]=otp;
 
 try{
 
-await transporter.sendMail({
-from:process.env.EMAIL_USER,
-to:email,
-subject:"KisanMitra Login OTP",
-text:`Your OTP is ${otp}`
-});
+await sendEmail(
+email,
+"KisanMitra Login OTP",
+`<h2>Your OTP is ${otp}</h2>`
+);
 
 console.log("✅ OTP sent:",otp,"to",email);
 

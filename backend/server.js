@@ -13,8 +13,7 @@ app.use(cors());
 app.use(express.json());
 
 // serve frontend
-app.use(express.static(path.join(__dirname, "../frontend")));
-
+app.use(express.static(path.join(__dirname, "./frontend")));
 // ✅ redirect root to home
 app.get("/", (req, res) => {
  res.redirect("/index.html");
@@ -29,7 +28,7 @@ app.get("/:page", (req, res) => {
   const page = req.params.page;
 
   res.sendFile(
-    path.join(__dirname, "../frontend", page + ".html"),
+    path.join(__dirname, "./frontend", page + ".html"),
     (err) => {
       if (err) {
         res.status(404).send("Page Not Found ❌");

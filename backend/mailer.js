@@ -1,12 +1,13 @@
 const SibApiV3Sdk = require("@getbrevo/brevo");
 require("dotenv").config();
 
-const apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
+const defaultClient = SibApiV3Sdk.ApiClient.instance;
 
-apiInstance.setApiKey(
-  SibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey,
-  process.env.BREVO_API_KEY
-);
+const apiKey = defaultClient.authentications["api-key"];
+
+apiKey.apiKey = process.env.BREVO_API_KEY;
+
+const apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
 
 const sendEmail = async (to, subject, htmlContent) => {
 
@@ -31,7 +32,7 @@ const sendEmail = async (to, subject, htmlContent) => {
 
     const result = await apiInstance.sendTransacEmail(sendSmtpEmail);
 
-    console.log("✅ Email sent:", result.messageId);
+    console.log("✅ Email sent:", result);
 
     return result;
 

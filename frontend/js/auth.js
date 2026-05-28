@@ -86,7 +86,7 @@ function registerUser() {
     return;
   }
 
-  fetch("http://localhost:5000/api/users/register", {
+  fetch("https://kishanmitrs-deploy-2-production.up.railway.app/api/users/register", {
 
     method: "POST",
 
@@ -136,7 +136,7 @@ function loginUser() {
     return;
   }
 
-  fetch("http://localhost:5000/api/users/login", {
+  fetch("https://kishanmitrs-deploy-2-production.up.railway.app/api/users/login", {
 
     method: "POST",
 
@@ -176,7 +176,7 @@ function sendOtp() {
     return;
   }
 
-  fetch("http://localhost:5000/api/users/send-otp", {
+  fetch("https://kishanmitrs-deploy-2-production.up.railway.app/api/users/send-otp", {
 
     method: "POST",
 
@@ -221,7 +221,7 @@ function verifyOtp() {
     return;
   }
 
-  fetch("http://localhost:5000/api/users/verify-otp", {
+  fetch("https://kishanmitrs-deploy-2-production.up.railway.app/api/users/verify-otp", {
 
     method: "POST",
 
@@ -347,7 +347,7 @@ function saveFarmerProfile() {
     return;
   }
 
-  fetch("http://localhost:5000/api/users/farmer-profile", {
+  fetch("https://kishanmitrs-deploy-2-production.up.railway.app/api/users/farmer-profile", {
 
     method: "POST",
 

@@ -126,7 +126,7 @@ background:#2980b9;
 
 async function loadExperts(){
 
-const res = await fetch("http://localhost:5000/api/admin/experts");
+const res = await fetch("https://kishanmitrs-deploy-2-production.up.railway.app/api/admin/experts");
 const experts = await res.json();
 
 let table = "";

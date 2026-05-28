@@ -168,7 +168,7 @@ let allCrops = [];
 
 async function loadCrops(){
 
-const res = await fetch("http://localhost:5000/api/admin/crops");
+const res = await fetch("https://kishanmitrs-deploy-2-production.up.railway.app/api/admin/crops");
 const crops = await res.json();
 
 allCrops = crops;

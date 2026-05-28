@@ -237,7 +237,7 @@ async function loadFarmers(){
 
 try{
 
-const res = await fetch("http://localhost:5000/api/admin/farmers");
+const res = await fetch("https://kishanmitrs-deploy-2-production.up.railway.app/api/admin/farmers");
 const farmers = await res.json();
 
 allFarmers = farmers;

@@ -125,7 +125,7 @@ document.getElementById("expertName").innerText = user.name || "Expert";
 try{
 
 const res = await fetch(
-"http://localhost:5000/api/users/expert-profile/" + user.id
+"https://kishanmitrs-deploy-2-production.up.railway.app/api/users/expert-profile/" + user.id
 );
 
 // 🚨 API error check

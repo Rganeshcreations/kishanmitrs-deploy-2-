@@ -1004,7 +1004,7 @@ async function loadData(){
   // ================= PROFILE =================
   try {
     const profile = await fetch(
-      `http://localhost:5000/api/users/farmer-profile/${userId}`
+      `https://kishanmitrs-deploy-2-production.up.railway.app/api/users/farmer-profile/${userId}`
     ).then(r=>r.json());
 
     if(profile.exists){
@@ -1022,8 +1022,8 @@ async function loadData(){
 
   try {
     const [cropRes, expRes] = await Promise.all([
-      fetch(`http://localhost:5000/api/users/get-crops/${userId}`),
-      fetch(`http://localhost:5000/api/users/get-all-expenditures/${userId}`)
+      fetch(`https://kishanmitrs-deploy-2-production.up.railway.app/api/users/get-crops/${userId}`),
+      fetch(`https://kishanmitrs-deploy-2-production.up.railway.app/api/users/get-all-expenditures/${userId}`)
     ]);
 
     crops = await cropRes.json();
@@ -1107,7 +1107,7 @@ async function loadData(){
   // ================= PROFIT =================
   try {
     const summary = await fetch(
-      `http://localhost:5000/api/users/farmer-dashboard/${userId}`
+      `https://kishanmitrs-deploy-2-production.up.railway.app/api/users/farmer-dashboard/${userId}`
     ).then(r=>r.json());
 
     document.getElementById("ps-crops").textContent   = summary.totalCrops;
@@ -1128,7 +1128,7 @@ async function loadData(){
   // ================= SCHEMES =================
   try {
     const schemes = await fetch(
-      `http://localhost:5000/api/users/farmer-schemes/${userId}`
+      `https://kishanmitrs-deploy-2-production.up.railway.app/api/users/farmer-schemes/${userId}`
     ).then(r=>r.json());
 
     let html = "";
@@ -1154,7 +1154,7 @@ async function loadData(){
   // ================= EXPERTS =================
   try {
     const experts = await fetch(
-      `http://localhost:5000/api/users/farmer-experts/${userId}`
+      `https://kishanmitrs-deploy-2-production.up.railway.app/api/users/farmer-experts/${userId}`
     ).then(r=>r.json());
 
     let html = "";

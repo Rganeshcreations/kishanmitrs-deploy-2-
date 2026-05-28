@@ -136,7 +136,7 @@ renderSummary(); // async safe now
 async function loadCrop(){
 
 const res = await fetch(
-"http://localhost:5000/api/users/get-crop/"+cropId
+"https://kishanmitrs-deploy-2-production.up.railway.app/api/users/get-crop/"+cropId
 );
 
 const data = await res.json();
@@ -154,7 +154,7 @@ renderDetails();
 async function loadExpenses(){
 
 const res=await fetch(
-"http://localhost:5000/api/users/get-expenditures/"+cropId
+"https://kishanmitrs-deploy-2-production.up.railway.app/api/users/get-expenditures/"+cropId
 );
 
 expenses=await res.json();
@@ -220,7 +220,7 @@ return;
 try{
 
 const res = await fetch(
-"http://localhost:5000/api/users/update-production/"+cropId,
+"https://kishanmitrs-deploy-2-production.up.railway.app/api/users/update-production/"+cropId,
 {
 method:"PUT",
 headers:{"Content-Type":"application/json"},
@@ -307,7 +307,7 @@ return;
 try{
 
 const res = await fetch(
-"http://localhost:5000/api/users/add-expenditure",
+"https://kishanmitrs-deploy-2-production.up.railway.app/api/users/add-expenditure",
 {
 method:"POST",
 headers:{"Content-Type":"application/json"},

@@ -101,7 +101,7 @@ window.location.href="/login";
 async function loadCrops(){
 
 const res = await fetch(
-"http://localhost:5000/api/users/get-crops/"+user.id
+"https://kishanmitrs-deploy-2-production.up.railway.app/api/users/get-crops/"+user.id
 );
 
 const crops = await res.json();

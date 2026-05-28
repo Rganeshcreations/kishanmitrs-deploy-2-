@@ -318,7 +318,7 @@ let appliedIds = new Set();
 
 async function loadSchemes() {
   try {
-    const res = await fetch("http://localhost:5000/api/users/government/schemes");
+    const res = await fetch("https://kishanmitrs-deploy-2-production.up.railway.app/api/users/government/schemes");
     allSchemes = await res.json();
   } catch {
     // Demo fallback
@@ -378,7 +378,7 @@ async function applyScheme(id) {
   btn.textContent = '⏳ Submitting...';
   btn.style.opacity = '0.7';
   try {
-    await fetch("http://localhost:5000/api/users/farmer/apply-scheme", {
+    await fetch("https://kishanmitrs-deploy-2-production.up.railway.app/api/users/farmer/apply-scheme", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ farmer_id: user.id, scheme_id: id })

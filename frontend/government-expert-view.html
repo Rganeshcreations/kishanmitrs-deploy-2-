@@ -71,7 +71,7 @@ async function loadQA(){
 try{
 
 const data = await fetch(
-`http://localhost:5000/api/users/expert-questions/${expertId}`
+`https://kishanmitrs-deploy-2-production.up.railway.app/api/users/expert-questions/${expertId}`
 ).then(r=>r.json());
 
 let html="";

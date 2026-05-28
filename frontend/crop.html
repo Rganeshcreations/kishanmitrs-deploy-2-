@@ -200,7 +200,7 @@ return;
 
 try{
 
-await fetch("http://localhost:5000/api/users/add-crop",{
+await fetch("https://kishanmitrs-deploy-2-production.up.railway.app/api/users/add-crop",{
 method:"POST",
 headers:{"Content-Type":"application/json"},
 body:JSON.stringify({
@@ -240,7 +240,7 @@ async function loadCrops(){
 try{
 
 const response=await fetch(
-"http://localhost:5000/api/users/get-crops/"+user.id
+"https://kishanmitrs-deploy-2-production.up.railway.app/api/users/get-crops/"+user.id
 );
 
 const crops=await response.json();

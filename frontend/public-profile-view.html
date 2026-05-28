@@ -76,7 +76,7 @@ async function loadProfile(){
   try {
 
     const res = await fetch(
-      `http://localhost:5000/api/users/public-profile/${user.id}`
+      `https://kishanmitrs-deploy-2-production.up.railway.app/api/users/public-profile/${user.id}`
     );
 
     const data = await res.json();

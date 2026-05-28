@@ -393,7 +393,7 @@ function updateStats(questions) {
 async function loadQuestions() {
   try {
     const res = await fetch(
-      "http://localhost:5000/api/users/farmer-questions/" + user.id
+      "https://kishanmitrs-deploy-2-production.up.railway.app/api/users/farmer-questions/" + user.id
     );
     const questions = await res.json();
 

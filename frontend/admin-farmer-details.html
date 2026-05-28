@@ -203,7 +203,7 @@ const farmerId = urlParams.get("id");
 
 async function loadFarmer(){
 
-const res = await fetch(`http://localhost:5000/api/admin/farmer-details/${farmerId}`);
+const res = await fetch(`https://kishanmitrs-deploy-2-production.up.railway.app/api/admin/farmer-details/${farmerId}`);
 const data = await res.json();
 
 /* Farmer */

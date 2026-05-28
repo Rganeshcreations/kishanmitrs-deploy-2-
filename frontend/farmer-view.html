@@ -118,7 +118,7 @@ document.getElementById("farmerName").innerText = user.name || "Farmer";
 try {
 
 const res = await fetch(
-"http://localhost:5000/api/users/farmer-profile/" + user.id
+"https://kishanmitrs-deploy-2-production.up.railway.app/api/users/farmer-profile/" + user.id
 );
 
 const profile = await res.json();

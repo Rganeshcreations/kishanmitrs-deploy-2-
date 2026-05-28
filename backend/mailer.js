@@ -5,7 +5,7 @@ const transporter = nodemailer.createTransport({
 
   host: "smtp.gmail.com",
   port: 587,
-  secure: false, // use TLS
+  secure: false, // TLS
 
   auth: {
     user: process.env.EMAIL_USER,
@@ -14,16 +14,17 @@ const transporter = nodemailer.createTransport({
 
 });
 
-transporter.verify((error, success) => {
+// TEMPORARILY DISABLED FOR RAILWAY
+// transporter.verify((error, success) => {
 
-  if (error) {
-    console.log("❌ Mail server connection failed");
-    console.log(error);
-  } 
-  else {
-    console.log("✅ Mail server ready");
-  }
+//   if (error) {
+//     console.log("❌ Mail server connection failed");
+//     console.log(error);
+//   } 
+//   else {
+//     console.log("✅ Mail server ready");
+//   }
 
-});
+// });
 
 module.exports = transporter;

@@ -17,7 +17,7 @@ app.use(express.static(path.join(__dirname, "../frontend")));
 
 // ✅ redirect root to home
 app.get("/", (req, res) => {
-  res.redirect("/home");
+ res.redirect("/index.html");
 });
 
 // API routes

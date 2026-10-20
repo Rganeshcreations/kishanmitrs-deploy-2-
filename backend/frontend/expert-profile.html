@@ -1,149 +1,162 @@
-﻿<!DOCTYPE html>
-<html>
+﻿
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>Expert Profile - KisanMitra</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Expert Profile - KisanMitra</title>
 
-<style>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-body{
-margin:0;
-font-family:Arial;
-background:url("images/farm-bg.jpg") no-repeat center center/cover;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-}
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: url("images/farm-bg.jpg") no-repeat center center / cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
 
-.container{
-background:white;
-padding:40px;
-width:450px;
-border-radius:15px;
-box-shadow:0 10px 30px rgba(0,0,0,0.2);
-text-align:center;
-}
+        .container {
+            background: white;
+            padding: 40px;
+            width: 100%;
+            max-width: 530px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
 
-.container h1{
-color:#2e7d32;
-margin-bottom:20px;
-}
+        .container h1 {
+            color: #2e7d32;
+            margin-bottom: 25px;
+            font-size: 30px;
+        }
 
-.container input{
-width:100%;
-padding:10px;
-margin:8px 0;
-border-radius:8px;
-border:1px solid #ccc;
-}
+        .container input {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
 
-.container button{
-width:100%;
-padding:12px;
-margin-top:15px;
-border:none;
-border-radius:8px;
-background:#2e7d32;
-color:white;
-font-size:16px;
-cursor:pointer;
-}
+        .container input:focus {
+            outline: none;
+            border-color: #2e7d32;
+        }
 
-.container button:hover{
-background:#1b5e20;
-}
+        .container button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 8px;
+            background: #2e7d32;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
 
-#message{
-margin-top:10px;
-font-weight:bold;
-}
+        .container button:hover {
+            background: #1b5e20;
+        }
 
-</style>
+        #message {
+            margin-top: 15px;
+            font-weight: bold;
+        }
 
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px;
+            }
+
+            .container h1 {
+                font-size: 25px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="container">
+    <div class="container">
+        <h1>Complete Expert Profile</h1>
 
-<h1>ðŸ‘¨â€ðŸŒ¾ Complete Expert Profile</h1>
+        <input type="text" id="specialization" placeholder="Specialization">
+        <input type="number" id="experience" placeholder="Experience (Years)" min="0">
+        <input type="text" id="qualification" placeholder="Qualification">
+        <input type="text" id="location" placeholder="Location">
+        <input type="tel" id="phone" placeholder="Phone Number">
 
-<input type="text" id="specialization" placeholder="Specialization">
-<input type="number" id="experience" placeholder="Experience (Years)">
-<input type="text" id="qualification" placeholder="Qualification">
-<input type="text" id="location" placeholder="Location">
-<input type="text" id="phone" placeholder="Phone Number">
+        <button type="button" onclick="saveExpertProfile()">Save Profile</button>
 
-<button onclick="saveExpertProfile()">Save Profile</button>
+        <p id="message" role="status"></p>
+    </div>
 
-<p id="message"></p>
+    <script>
+        const user = JSON.parse(localStorage.getItem("user"));
 
-</div>
+        if (!user) {
+            alert("Please login first");
+            window.location.href = "/login";
+        }
 
+        async function saveExpertProfile() {
+            const specialization = document.getElementById("specialization").value.trim();
+            const experience = document.getElementById("experience").value;
+            const qualification = document.getElementById("qualification").value.trim();
+            const location = document.getElementById("location").value.trim();
+            const phone = document.getElementById("phone").value.trim();
+            const message = document.getElementById("message");
 
-<script>
+            if (!specialization || !experience || !qualification || !location || !phone) {
+                message.innerText = "Please fill all fields";
+                return;
+            }
 
-const user = JSON.parse(localStorage.getItem("user"));
+            message.innerText = "Saving profile...";
 
-if(!user){
-alert("Please login first");
-window.location.href="/login";
-}
+            try {
+                const res = await fetch("/api/users/expert-profile", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        user_id: user.id,
+                        specialization,
+                        experience,
+                        qualification,
+                        location,
+                        phone
+                    })
+                });
 
+                const data = await res.json();
+                message.innerText = data.message || (
+                    res.ok ? "Profile saved successfully" : "Unable to save profile"
+                );
 
-
-// ======================
-// SAVE EXPERT PROFILE
-// ======================
-
-async function saveExpertProfile(){
-
-const specialization = document.getElementById("specialization").value;
-const experience = document.getElementById("experience").value;
-const qualification = document.getElementById("qualification").value;
-const location = document.getElementById("location").value;
-const phone = document.getElementById("phone").value;
-
-if(!specialization || !experience || !qualification || !location || !phone){
-
-document.getElementById("message").innerText="Please fill all fields";
-return;
-
-}
-
-const res = await fetch(
-"/api/users/expert-profile",
-{
-method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
-body:JSON.stringify({
-user_id:user.id,
-specialization,
-experience,
-qualification,
-location,
-phone
-})
-}
-);
-
-const data = await res.json();
-
-document.getElementById("message").innerText=data.message;
-
-if(res.ok){
-
-setTimeout(()=>{
-window.location.href="expert";
-},1500);
-
-}
-
-}
-
-</script>
+                if (res.ok) {
+                    setTimeout(() => {
+                        window.location.href = "expert";
+                    }, 1500);
+                }
+            } catch (error) {
+                console.error("Error saving expert profile:", error);
+                message.innerText = "Unable to connect to the server. Please try again.";
+            }
+        }
+    </script>
 
 </body>
 </html>

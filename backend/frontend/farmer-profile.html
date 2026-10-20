@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
   <title>Farmer Profile - KisanMitra</title>
@@ -73,7 +73,7 @@
 
 <div class="profile-card">
 
-<h1>🌾 Complete Your Farmer Profile</h1>
+<h1>ðŸŒ¾ Complete Your Farmer Profile</h1>
 
 <img id="photoPreview"
 src="images/ganesh.jpg"
@@ -138,54 +138,56 @@ function previewPhoto(){
 // SAVE FARMER PROFILE
 // =======================
 
-async function saveFarmerProfile(){
 
-  const crops = document.getElementById("crops").value;
-  const land_area = document.getElementById("land_area").value;
-  const soil_type = document.getElementById("soil_type").value;
-  const location = document.getElementById("location").value;
-  const irrigation_type = document.getElementById("irrigation_type").value;
+async function saveFarmerProfile() {
+  const message = document.getElementById("message");
 
-  if(!crops || !land_area || !soil_type || !location || !irrigation_type){
+  const crops = document.getElementById("crops").value.trim();
+  const land_area = document.getElementById("land_area").value.trim();
+  const soil_type = document.getElementById("soil_type").value.trim();
+  const location = document.getElementById("location").value.trim();
+  const irrigation_type = document.getElementById("irrigation_type").value.trim();
 
-      document.getElementById("message").innerText =
-      "Please fill all fields";
-
-      return;
-
+  if (!crops || !land_area || !soil_type || !location || !irrigation_type) {
+    message.innerText = "Please fill all fields";
+    return;
   }
 
-  const res = await fetch(
-    "https://kishanmitrs-deploy-2-production.up.railway.app/api/users/farmer-profile",
-    {
-      method:"POST",
-      headers:{
-        "Content-Type":"application/json"
+  try {
+    message.innerText = "Saving profile...";
+
+    const res = await fetch("/api/users/farmer-profile", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
       },
-      body:JSON.stringify({
-        user_id:user.id,
+      body: JSON.stringify({
+        user_id: user.id,
         crops,
         land_area,
         soil_type,
         location,
         irrigation_type
       })
+    });
+
+    const data = await res.json();
+
+    message.innerText = data.message || (
+      res.ok ? "Profile saved successfully" : "Failed to save profile"
+    );
+
+    if (res.ok) {
+      setTimeout(() => {
+        window.location.href = "farmer";
+      }, 1500);
     }
-  );
-
-  const data = await res.json();
-
-  document.getElementById("message").innerText = data.message;
-
-  if(res.ok){
-
-      setTimeout(()=>{
-          window.location.href = "farmer";
-      },1500);
-
+  } catch (error) {
+    console.error("Save farmer profile error:", error);
+    message.innerText = "Unable to connect to the server. Please try again.";
   }
-
 }
+
 
 </script>
 

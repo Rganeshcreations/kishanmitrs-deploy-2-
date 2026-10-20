@@ -266,6 +266,24 @@ input:focus, select:focus {
   font-size: 12px;
 }
 
+.official-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+  max-width: 100%;
+  color: #17633d;
+  font-size: 13px;
+  font-weight: bold;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
+}
+
+.official-link:hover {
+  color: #0b4026;
+}
+
 .apply-btn {
   padding: 11px 15px;
   border: none;
@@ -606,6 +624,46 @@ footer {
     );
   }
 
+  // Use known official scheme sites when the scheme name is recognised.
+  // For unrecognised names, direct farmers to the Government of India's
+  // MyScheme portal rather than inventing a scheme-specific URL.
+  function getOfficialSchemeUrl(scheme) {
+    const name = String(getSchemeName(scheme)).toLowerCase();
+    const knownSites = [
+      { terms: ["pm-kisan", "pm kisan", "pradhan mantri kisan samman"], url: "https://pmkisan.gov.in/" },
+      { terms: ["pradhan mantri fasal bima", "pmfby", "crop insurance"], url: "https://pmfby.gov.in/" },
+      { terms: ["agriculture infrastructure fund"], url: "https://agriinfra.dac.gov.in/" },
+      { terms: ["kisan credit card", "kcc"], url: "https://www.myscheme.gov.in/" },
+      { terms: ["soil health card"], url: "https://soilhealth.dac.gov.in/" },
+      { terms: ["pm kusum", "kusum"], url: "https://pmkusum.mnre.gov.in/" },
+      { terms: ["e-nam", "enam", "national agriculture market"], url: "https://www.enam.gov.in/" },
+      { terms: ["pm krishi sinchai", "per drop more crop"], url: "https://pmksy.gov.in/" },
+      { terms: ["r k v y", "rashtriya krishi vikas"], url: "https://rkvy.nic.in/" }
+    ];
+
+    const match = knownSites.find(item =>
+      item.terms.some(term => name.includes(term))
+    );
+
+    const suppliedUrl = getValue(scheme, [
+      "official_url", "officialUrl", "website_url", "websiteUrl",
+      "scheme_url", "schemeUrl", "url", "link"
+    ]);
+
+    if (suppliedUrl) {
+      try {
+        const parsed = new URL(String(suppliedUrl), window.location.origin);
+        if (parsed.protocol === "https:" || parsed.protocol === "http:") {
+          return parsed.href;
+        }
+      } catch (_) {
+        // Ignore invalid URL values and use a known official destination.
+      }
+    }
+
+    return match ? match.url : "https://www.myscheme.gov.in/";
+  }
+
   function normaliseSchemes(data) {
     if (Array.isArray(data)) return data;
     if (data && Array.isArray(data.schemes)) return data.schemes;
@@ -703,11 +761,22 @@ footer {
       img.alt = name;
       img.loading = "lazy";
 
+      let imageFallbackIndex = 0;
       img.onerror = () => {
+        imageFallbackIndex += 1;
+        if (imageFallbackIndex < defaultImages.length) {
+          const nextImage = defaultImages[
+            (originalIndex + imageFallbackIndex) % defaultImages.length
+          ];
+          if (img.src !== nextImage) {
+            img.src = nextImage;
+            return;
+          }
+        }
         img.onerror = null;
-        img.src = defaultImages[
-          originalIndex % defaultImages.length
-        ];
+        img.style.display = "none";
+        imageContainer.style.background =
+          "linear-gradient(135deg, #dce9d8, #a9c9a5)";
       };
 
       const badge = document.createElement("span");
@@ -748,6 +817,14 @@ footer {
         info.appendChild(benefitLabel);
       }
 
+      const officialLink = document.createElement("a");
+      officialLink.className = "official-link";
+      officialLink.href = getOfficialSchemeUrl(scheme);
+      officialLink.target = "_blank";
+      officialLink.rel = "noopener noreferrer";
+      officialLink.textContent = "Visit Official Website ↗";
+      officialLink.setAttribute("aria-label", "Open official information for " + name);
+
       const actions = document.createElement("div");
       actions.className = "scheme-actions";
 
@@ -775,7 +852,7 @@ footer {
       });
 
       actions.append(deadline, button);
-      content.append(heading, description, info, actions);
+      content.append(heading, description, info, officialLink, actions);
       card.append(imageContainer, content);
       grid.appendChild(card);
     });

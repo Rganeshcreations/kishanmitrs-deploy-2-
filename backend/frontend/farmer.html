@@ -1,258 +1,367 @@
-﻿<!DOCTYPE html>
-<html>
+﻿
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>Farmer Dashboard - KisanMitra</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Farmer Dashboard - KisanMitra</title>
 
-<style>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-body{
-margin:0;
-font-family:Arial,sans-serif;
-background:
-linear-gradient(rgba(34,139,34,0.6),rgba(0,0,0,0.7)),
-url("images/farmer-bg.jpg");
-background-size:cover;
-color:white;
-}
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background:
+        linear-gradient(rgba(34, 139, 34, 0.55), rgba(0, 0, 0, 0.65)),
+        url("images/farmer-bg.jpg") center / cover fixed no-repeat;
+      color: white;
+    }
 
-/* SIDEBAR */
-.sidebar{
-width:240px;
-height:100vh;
-background:rgba(0,100,0,0.95);
-position:fixed;
-left:0;
-top:0;
-padding-top:30px;
-}
+    /* SIDEBAR */
+    .sidebar {
+      width: 240px;
+      min-height: 100vh;
+      background: rgba(0, 100, 0, 0.95);
+      position: fixed;
+      top: 0;
+      left: 0;
+      padding: 25px 10px;
+      z-index: 10;
+    }
 
-.sidebar h3{
-text-align:center;
-margin-bottom:30px;
-}
+    .sidebar h3 {
+      text-align: center;
+      margin: 20px 0 30px;
+      font-size: 21px;
+    }
 
-.sidebar button{
-width:85%;
-margin:12px 15px;
-padding:12px;
-border:none;
-border-radius:8px;
-background:white;
-color:#2e7d32;
-font-weight:bold;
-cursor:pointer;
-}
+    .sidebar button {
+      display: block;
+      width: 100%;
+      margin: 12px 0;
+      padding: 13px 8px;
+      border: none;
+      border-radius: 8px;
+      background: white;
+      color: #2e7d32;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
 
-/* CONTENT */
-.content{
-margin-left:260px;
-padding:30px;
-}
+    .sidebar button:hover {
+      background: #e8f5e9;
+      transform: translateX(3px);
+    }
 
-/* PROFILE */
-.profile{
-position:absolute;
-top:20px;
-right:30px;
-text-align:center;
-}
+    /* MAIN CONTENT */
+    .content {
+      margin-left: 240px;
+      padding: 35px;
+      min-height: 100vh;
+    }
 
-.profile img{
-width:90px;
-height:90px;
-border-radius:50%;
-border:3px solid white;
-object-fit:cover;
-cursor:pointer;
-}
+    .welcome {
+      margin: 15px 0 25px;
+      padding-right: 150px;
+      font-size: 26px;
+      line-height: 1.4;
+    }
 
-/* DASHBOARD */
-.dashboard{
-display:flex;
-gap:20px;
-flex-wrap:wrap;
-margin-top:20px;
-}
+    /* PROFILE */
+    .profile {
+      position: absolute;
+      top: 18px;
+      right: 25px;
+      width: 120px;
+      text-align: center;
+      z-index: 5;
+    }
 
-.card{
-background:rgba(255,255,255,0.15);
-padding:20px;
-border-radius:15px;
-width:200px;
-text-align:center;
-backdrop-filter:blur(10px);
-}
+    .profile img {
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      border: 3px solid white;
+      object-fit: cover;
+      cursor: pointer;
+    }
 
-.card h2{
-margin:10px 0;
-}
+    #farmerName {
+      margin: 5px 0;
+      font-weight: bold;
+      overflow-wrap: anywhere;
+    }
 
-.profit{
-color:lightgreen;
-}
+    .logout {
+      margin-top: 5px;
+      padding: 7px 14px;
+      border: none;
+      border-radius: 6px;
+      background: #d32f2f;
+      color: white;
+      cursor: pointer;
+    }
 
-.loss{
-color:red;
-}
+    .logout:hover {
+      background: #b71c1c;
+    }
 
-.logout{
-margin-top:8px;
-padding:6px 12px;
-border:none;
-border-radius:5px;
-background:red;
-color:white;
-cursor:pointer;
-}
+    /* DASHBOARD CARDS */
+    .dashboard {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(150px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
 
-</style>
+    .card {
+      min-height: 140px;
+      padding: 22px 15px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.20);
+      text-align: center;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 5px 18px rgba(0, 0, 0, 0.12);
+    }
 
+    .card p {
+      margin: 10px 0 18px;
+      font-size: 16px;
+    }
+
+    .card h2 {
+      margin: 0;
+      font-size: 27px;
+      overflow-wrap: anywhere;
+    }
+
+    .profit {
+      color: #a5ffb0;
+    }
+
+    .loss {
+      color: #ff8a80;
+    }
+
+    #message {
+      margin-top: 20px;
+      padding: 12px;
+      border-radius: 8px;
+      background: rgba(0, 0, 0, 0.25);
+      overflow-wrap: anywhere;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    /* RESPONSIVE LAYOUT */
+    @media (max-width: 1100px) {
+      .dashboard {
+        grid-template-columns: repeat(2, minmax(150px, 1fr));
+      }
+    }
+
+    @media (max-width: 650px) {
+      .sidebar {
+        position: relative;
+        width: 100%;
+        min-height: auto;
+        padding: 12px;
+      }
+
+      .sidebar h3 {
+        margin: 10px 0 15px;
+      }
+
+      .sidebar button {
+        width: 100%;
+        margin: 8px 0;
+      }
+
+      .content {
+        margin-left: 0;
+        padding: 20px;
+      }
+
+      .profile {
+        position: relative;
+        top: auto;
+        right: auto;
+        width: 100%;
+        padding: 15px;
+      }
+
+      .welcome {
+        margin-top: 10px;
+        padding-right: 0;
+        font-size: 23px;
+      }
+
+      .dashboard {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        min-height: 120px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- SIDEBAR -->
-<div class="sidebar">
-<h3>ðŸŒ¾ Farmer Panel</h3>
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <h3>🌾 Farmer Panel</h3>
 
-<button onclick="location.href='crop-list'">ðŸŒ± Crop Data</button>
-<button onclick="location.href='weather'">â˜ Weather</button>
-<button onclick="location.href='ask-options'">ðŸ‘¨â€ðŸŒ¾ Ask Expert</button>
-<button onclick="location.href='farmer-answers'">ðŸ“© My Questions</button>
-<button onclick="location.href='farmer-schemes'">ðŸ› Schemes</button>
+    <button onclick="navigateTo('crop-list')">🌱 Crop Data</button>
+    <button onclick="navigateTo('weather')">🌦️ Weather</button>
+    <button onclick="navigateTo('ask-options')">👨‍🌾 Ask Expert</button>
+    <button onclick="navigateTo('farmer-answers')">📩 My Questions</button>
+    <button onclick="navigateTo('farmer-schemes')">🏛️ Schemes</button>
+  </aside>
 
-</div>
+  <!-- MAIN CONTENT -->
+  <main class="content">
+    <h1 class="welcome">Welcome to KisanMitra Dashboard 🌾</h1>
 
-<!-- CONTENT -->
-<div class="content">
+    <section class="dashboard" aria-label="Farmer statistics">
+      <div class="card">
+        <p>🌱 Total Crops</p>
+        <h2 id="totalCrops">—</h2>
+      </div>
 
-<h2>Welcome to KisanMitra Dashboard ðŸšœ</h2>
+      <div class="card">
+        <p>💸 Total Expense</p>
+        <h2 id="totalExpense">—</h2>
+      </div>
 
-<div class="dashboard">
+      <div class="card">
+        <p>💰 Total Revenue</p>
+        <h2 id="totalRevenue">—</h2>
+      </div>
 
-<div class="card">
-<p>Total Crops</p>
-<h2 id="totalCrops">0</h2>
-</div>
+      <div class="card">
+        <p>📊 Profit / Loss</p>
+        <h2 id="profit">—</h2>
+      </div>
+    </section>
 
-<div class="card">
-<p>Total Expense</p>
-<h2 id="totalExpense">â‚¹0</h2>
-</div>
+    <p id="message" role="status" hidden></p>
+  </main>
 
-<div class="card">
-<p>Total Revenue</p>
-<h2 id="totalRevenue">â‚¹0</h2>
-</div>
+  <!-- PROFILE -->
+  <div class="profile">
+    <img
+      src="images/ganesh.jpg"
+      alt="Farmer profile"
+      onclick="openProfile()"
+      onerror="this.onerror=null; this.src='images/farmer-bg.jpg';"
+    >
 
-<div class="card">
-<p>Profit / Loss</p>
-<h2 id="profit">â‚¹0</h2>
-</div>
+    <p id="farmerName">Farmer</p>
+    <button class="logout" onclick="logout()">Logout</button>
+  </div>
 
-</div>
+  <script>
+    // Use the saved login session.
+    let user = null;
 
-</div>
+    try {
+      user = JSON.parse(localStorage.getItem("user"));
+    } catch (error) {
+      console.error("Unable to read saved user:", error);
+    }
 
-<!-- PROFILE -->
-<div class="profile">
+    if (!user || !user.id) {
+      window.location.href = "/login";
+    } else {
+      document.getElementById("farmerName").textContent =
+        user.name || "Farmer";
 
-<!-- CLICKABLE PROFILE IMAGE -->
-<img src="images/ganesh.jpg" onclick="openProfile()">
+      loadDashboard();
+    }
 
-<p id="farmerName"></p>
+    function navigateTo(page) {
+      window.location.href = page;
+    }
 
-<button class="logout" onclick="logout()">Logout</button>
+    function openProfile() {
+      window.location.href = "farmer-view";
+    }
 
-</div>
+    function showMessage(text) {
+      const message = document.getElementById("message");
+      message.textContent = text;
+      message.hidden = false;
+    }
 
-<script>
+    function formatRupees(value) {
+      const amount = Number(value);
 
-document.addEventListener("DOMContentLoaded", function(){
+      if (!Number.isFinite(amount)) {
+        return "₹ 0.00";
+      }
 
-const user = JSON.parse(localStorage.getItem("user"));
+      return "₹ " + amount.toLocaleString("en-IN", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+    }
 
-// LOGIN CHECK
-if(!user){
-window.location.href="/login";
-return;
-}
+    async function loadDashboard() {
+      try {
+        const response = await fetch(
+          "/api/users/farmer-dashboard/" + encodeURIComponent(user.id)
+        );
 
-// SHOW NAME
-document.getElementById("farmerName").innerText =
-user.name || "Farmer";
+        if (!response.ok) {
+          throw new Error("Dashboard API returned HTTP " + response.status);
+        }
 
-// LOAD DASHBOARD
-loadDashboard();
+        const data = await response.json();
 
-});
+        document.getElementById("totalCrops").textContent =
+          Number(data.totalCrops ?? 0).toLocaleString("en-IN");
 
+        document.getElementById("totalExpense").textContent =
+          formatRupees(data.totalExpense);
 
-// =======================
-// OPEN PROFILE PAGE
-// =======================
+        document.getElementById("totalRevenue").textContent =
+          formatRupees(data.totalRevenue);
 
-function openProfile(){
-window.location.href = "farmer-view";
-}
+        const profitElement = document.getElementById("profit");
+        const profitValue = Number(data.profit ?? 0);
 
+        profitElement.textContent = formatRupees(profitValue);
+        profitElement.classList.remove("profit", "loss");
+        profitElement.classList.add(
+          profitValue >= 0 ? "profit" : "loss"
+        );
 
-// =======================
-// LOAD DASHBOARD DATA
-// =======================
+        document.getElementById("message").hidden = true;
+      } catch (error) {
+        console.error("Failed to load farmer dashboard:", error);
+        showMessage(
+          "Could not load dashboard statistics. Please refresh the page or try again later."
+        );
+      }
+    }
 
-async function loadDashboard(){
-
-try{
-
-const user = JSON.parse(localStorage.getItem("user"));
-
-const res = await fetch(
-"/api/users/farmer-dashboard/"+user.id
-);
-
-const data = await res.json();
-
-// update UI
-document.getElementById("totalCrops").innerText = data.totalCrops;
-
-document.getElementById("totalExpense").innerText =
-"â‚¹ " + data.totalExpense;
-
-document.getElementById("totalRevenue").innerText =
-"â‚¹ " + data.totalRevenue;
-
-const profitEl = document.getElementById("profit");
-
-profitEl.innerText = "â‚¹ " + data.profit;
-
-// color
-if(data.profit >= 0){
-profitEl.classList.add("profit");
-}else{
-profitEl.classList.add("loss");
-}
-
-}catch(err){
-
-console.log(err);
-alert("Failed to load dashboard");
-
-}
-
-}
-
-
-// =======================
-// LOGOUT
-// =======================
-
-function logout(){
-localStorage.clear();
-window.location.href="/login";
-}
-
-</script>
+    function logout() {
+      localStorage.removeItem("user");
+      window.location.href = "/login";
+    }
+  </script>
 
 </body>
 </html>
+

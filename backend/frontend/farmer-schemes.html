@@ -1,403 +1,1399 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Government Schemes – KisanMitra</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Government Schemes | KisanMitra</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --green: #153a23;
+  --green-light: #65e56b;
+  --gold: #ffcf45;
+  --white: #f8fff9;
+  --muted: #c5d4c9;
+  --glass: rgba(5, 31, 18, .83);
+  --border: rgba(255,255,255,.22);
+}
 
-  :root {
-    --green-dark:   #1a4a1f;
-    --green-mid:    #2d7a35;
-    --gold:         #e8b94a;
-    --gold-light:   #f5d87a;
-    --glass-bg:     rgba(10, 40, 14, 0.62);
-    --glass-border: rgba(255,255,255,0.18);
-    --text-light:   rgba(255,255,255,0.92);
-    --text-muted:   rgba(255,255,255,0.58);
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--white);
+  background: #0c2818;
+  font-family: "DM Sans", sans-serif;
+}
+
+/* ONLINE BACKGROUND IMAGE */
+.background {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background-image:
+    linear-gradient(90deg, rgba(2,22,10,.72), rgba(4,25,12,.25) 65%, rgba(2,18,9,.35)),
+    linear-gradient(0deg, rgba(3,22,11,.88), transparent 70%),
+    url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=2200&q=85");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.page {
+  width: min(1440px, calc(100% - 48px));
+  margin: auto;
+  padding: 12px 0 35px;
+}
+
+/* NAVIGATION */
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: 21px;
+  background: rgba(4,29,17,.79);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 10px 35px #0004;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  text-decoration: none;
+  font-size: 1.65rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.brand-icon {
+  display: grid;
+  place-items: center;
+  width: 43px;
+  height: 43px;
+  border-radius: 13px;
+  background: #143b20;
+  font-size: 27px;
+}
+
+.brand-yellow {
+  color: var(--gold);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.nav-links a {
+  padding: 15px 12px;
+  color: white;
+  text-decoration: none;
+  border-radius: 10px;
+  font-size: .88rem;
+  white-space: nowrap;
+  transition: .2s;
+}
+
+.nav-links a:hover {
+  background: #ffffff18;
+}
+
+.nav-links a.active {
+  color: var(--gold);
+  background: #ffffff13;
+  box-shadow: inset 0 -4px var(--green-light);
+}
+
+.farmer-badge {
+  padding: 12px 17px;
+  border-radius: 40px;
+  background: #ffffff16;
+  white-space: nowrap;
+  font-size: .88rem;
+}
+
+/* HERO */
+
+.hero {
+  padding: 37px 22px 18px;
+  animation: appear .6s ease both;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 15px;
+  border: 1px solid #8de88c;
+  border-radius: 30px;
+  background: rgba(15,62,30,.82);
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .7px;
+  text-transform: uppercase;
+}
+
+.eyebrow span {
+  color: var(--gold);
+}
+
+.hero h1 {
+  margin: 13px 0 9px;
+  font-family: "Playfair Display", serif;
+  font-size: clamp(2.7rem, 5.2vw, 4.45rem);
+  line-height: 1.12;
+  letter-spacing: -1.5px;
+  text-shadow: 0 4px 15px #0006;
+}
+
+.hero h1 span {
+  color: var(--gold);
+}
+
+.hero p {
+  max-width: 680px;
+  color: #f1f6f1;
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
+  line-height: 1.55;
+}
+
+/* STATISTICS */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 17px;
+  margin: 0 22px 16px;
+}
+
+.stat {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 100px;
+  padding: 16px;
+  border: 1px solid #6cba706b;
+  border-radius: 19px;
+  background: rgba(8,49,24,.81);
+  backdrop-filter: blur(15px);
+  transition: transform .2s;
+}
+
+.stat:hover {
+  transform: translateY(-3px);
+}
+
+.stat:nth-child(2) {
+  background: rgba(24,75,21,.82);
+  border-color: #65d65b;
+}
+
+.stat:nth-child(3) {
+  background: rgba(18,65,68,.82);
+  border-color: #58b9cc;
+}
+
+.stat:nth-child(4) {
+  background: rgba(75,62,8,.82);
+  border-color: #d9b739;
+}
+
+.stat-icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #ffffff19;
+  font-size: 1.8rem;
+}
+
+.stat strong {
+  display: block;
+  font-family: "Playfair Display", serif;
+  font-size: 2rem;
+}
+
+.stat p {
+  margin-top: 3px;
+  font-size: .84rem;
+  line-height: 1.35;
+}
+
+/* MAIN PANEL */
+
+.panel {
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  background: rgba(4,31,19,.85);
+  backdrop-filter: blur(22px);
+  box-shadow: 0 20px 60px #0005;
+}
+
+.toolbar {
+  display: grid;
+  grid-template-columns: minmax(180px, 1fr) 180px 165px auto;
+  gap: 12px;
+  padding: 19px;
+}
+
+.search-wrap {
+  position: relative;
+}
+
+.search-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.5rem;
+}
+
+.toolbar input,
+.toolbar select {
+  width: 100%;
+  height: 53px;
+  padding: 0 13px;
+  border: 1px solid #ffffff45;
+  border-radius: 12px;
+  outline: none;
+  background: rgba(3,24,14,.78);
+  color: white;
+  font: inherit;
+  font-size: .88rem;
+}
+
+.toolbar input {
+  padding-left: 47px;
+}
+
+.toolbar input::placeholder {
+  color: #afc0b4;
+}
+
+.toolbar input:focus,
+.toolbar select:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px #ffcf4520;
+}
+
+.toolbar select option {
+  background: #153b25;
+  color: white;
+}
+
+.reset-button {
+  height: 53px;
+  padding: 0 21px;
+  border: 1px solid #72e76a;
+  border-radius: 13px;
+  background: linear-gradient(135deg, #40c83c, #188c3a);
+  color: white;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.reset-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px #35c34b40;
+}
+
+.list-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 3px 22px 0;
+}
+
+.list-heading h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 1.35rem;
+}
+
+.result-count {
+  color: var(--muted);
+  font-size: .84rem;
+}
+
+/* SCHEME CARDS */
+
+.scheme-list {
+  display: grid;
+  gap: 10px;
+  padding: 17px 14px 18px;
+}
+
+.scheme-card {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr) 210px 140px;
+  align-items: center;
+  gap: 18px;
+  padding: 13px;
+  border: 1px solid #ffffff2c;
+  border-radius: 19px;
+  background: linear-gradient(110deg, #ffffff13, #ffffff08);
+  transition: .2s;
+  animation: appear .4s ease both;
+}
+
+.scheme-card:hover {
+  transform: translateY(-2px);
+  border-color: #90d89b80;
+  background: #ffffff16;
+}
+
+.scheme-image {
+  width: 100%;
+  height: 134px;
+  overflow: hidden;
+  border-radius: 13px;
+  background: linear-gradient(135deg, #225b32, #102b1a);
+}
+
+.scheme-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .4s;
+}
+
+.scheme-card:hover .scheme-image img {
+  transform: scale(1.05);
+}
+
+.scheme-info {
+  min-width: 0;
+}
+
+.scheme-top {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.scheme-title {
+  font-family: "Playfair Display", serif;
+  font-size: 1.22rem;
+  line-height: 1.35;
+}
+
+.status {
+  padding: 6px 13px;
+  border-radius: 30px;
+  background: #70ed68;
+  color: #0a3516;
+  font-size: .72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.status.ongoing {
+  background: #8fc9ff;
+  color: #123752;
+}
+
+.status.new {
+  background: #ffdc60;
+  color: #483800;
+}
+
+.status.closed {
+  background: #f6a6a6;
+  color: #5b1515;
+}
+
+.scheme-description {
+  color: #d7e4da;
+  font-size: .89rem;
+  line-height: 1.55;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 11px;
+}
+
+.tag {
+  padding: 7px 10px;
+  border: 1px solid #ffffff15;
+  border-radius: 30px;
+  background: #ffffff0e;
+  color: #f4f8f4;
+  font-size: .72rem;
+}
+
+.scheme-meta {
+  display: grid;
+  gap: 13px;
+  padding: 7px 14px;
+  border-left: 1px solid #ffffff22;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.meta-icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 37px;
+  height: 37px;
+  border-radius: 50%;
+  background: #ffffff13;
+  font-size: 1.1rem;
+}
+
+.meta-label {
+  display: block;
+  margin-bottom: 3px;
+  color: #bdcec1;
+  font-size: .73rem;
+}
+
+.meta-value {
+  display: block;
+  color: white;
+  font-size: .82rem;
+  font-weight: 700;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.scheme-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.view-button,
+.apply-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 44px;
+  padding: 10px 12px;
+  border-radius: 30px;
+  text-align: center;
+  text-decoration: none;
+  font-size: .81rem;
+  font-weight: 800;
+  transition: .2s;
+}
+
+.view-button {
+  border: 1px solid #ffffff35;
+  background: #ffffff10;
+  color: white;
+}
+
+.view-button:hover {
+  background: #ffffff20;
+}
+
+.apply-button {
+  border: none;
+  background: linear-gradient(135deg, #ffda66, #f6bb2e);
+  color: #1c341b;
+  cursor: pointer;
+}
+
+.apply-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 18px #ffc94340;
+}
+
+.apply-button:disabled {
+  cursor: default;
+  opacity: .82;
+  transform: none;
+}
+
+.apply-button.applied {
+  background: #268f4b;
+  color: white;
+}
+
+.empty-state {
+  padding: 50px 20px;
+  text-align: center;
+  color: var(--muted);
+}
+
+.empty-state .empty-icon {
+  margin-bottom: 12px;
+  font-size: 3rem;
+}
+
+.empty-state h3 {
+  margin-bottom: 8px;
+  color: white;
+  font-family: "Playfair Display", serif;
+  font-size: 1.4rem;
+}
+
+.empty-state button {
+  margin-top: 15px;
+  padding: 10px 18px;
+  border: 1px solid #ffffff40;
+  border-radius: 10px;
+  background: #ffffff10;
+  color: white;
+  cursor: pointer;
+}
+
+.toast {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 10;
+  max-width: calc(100% - 44px);
+  padding: 14px 20px;
+  border: 1px solid #ffffff30;
+  border-radius: 13px;
+  background: #176d39;
+  color: white;
+  box-shadow: 0 10px 35px #0005;
+  opacity: 0;
+  transform: translateY(15px);
+  pointer-events: none;
+  transition: .25s;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.footer {
+  padding: 22px 10px 0;
+  color: #d1dfd4;
+  text-align: center;
+  font-size: .8rem;
+}
+
+.footer strong {
+  color: var(--gold);
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1180px) {
+  .nav-links a {
+    padding: 12px 7px;
+    font-size: .78rem;
   }
 
-  html, body { min-height: 100vh; font-family: 'DM Sans', sans-serif; color: var(--text-light); }
-
-  /* â”€â”€ BACKGROUND â”€â”€ */
-  .bg-wrap {
-    position: fixed; inset: 0; z-index: -1;
-    background: url('plant.jpg') center/cover no-repeat;
-    background-color: #1a4a1f;
-  }
-  .bg-wrap::after {
-    content: '';
-    position: absolute; inset: 0;
-    background: linear-gradient(135deg,
-      rgba(10,35,12,0.80) 0%,
-      rgba(26,74,31,0.68) 50%,
-      rgba(5,20,8,0.88) 100%
-    );
+  .scheme-card {
+    grid-template-columns: 190px minmax(0, 1fr) 185px;
   }
 
-  /* â”€â”€ PAGE â”€â”€ */
-  .page { min-height: 100vh; padding: 36px 24px 60px; display: flex; flex-direction: column; align-items: center; }
+  .scheme-actions {
+    grid-column: 2 / -1;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
 
-  /* â”€â”€ NAV â”€â”€ */
-  .topnav {
-    width: 100%; max-width: 1150px;
-    display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 40px;
-    padding: 13px 24px;
-    background: rgba(10,40,14,0.55);
-    border: 1px solid var(--glass-border);
-    border-radius: 16px;
-    backdrop-filter: blur(14px);
-    animation: slideDown .6s ease both;
+  .scheme-actions > * {
+    min-width: 130px;
   }
-  .nav-brand { font-family:'Playfair Display',serif; font-size:1.4rem; font-weight:700; color:var(--gold); text-decoration:none; }
-  .nav-brand span { color:#fff; }
-  .nav-back {
-    display:flex; align-items:center; gap:7px;
-    padding:8px 20px;
-    background:var(--gold); color:var(--green-dark);
-    font-weight:700; font-size:13px;
-    border-radius:8px; text-decoration:none;
-    transition:all .22s;
-  }
-  .nav-back:hover { transform:translateY(-2px); box-shadow:0 6px 18px rgba(232,185,74,.4); }
+}
 
-  /* â”€â”€ PAGE HEADER â”€â”€ */
-  .page-header { text-align:center; margin-bottom:36px; animation:fadeUp .7s ease .1s both; }
-  .badge {
-    display:inline-block;
-    background:linear-gradient(135deg,var(--green-mid),#3aaa44);
-    color:#fff; font-size:11px; font-weight:700;
-    letter-spacing:2.5px; text-transform:uppercase;
-    padding:5px 18px; border-radius:20px; margin-bottom:14px;
+@media (max-width: 900px) {
+  .page {
+    width: calc(100% - 26px);
   }
-  .page-header h1 {
-    font-family:'Playfair Display',serif;
-    font-size:2.4rem; font-weight:800;
-    color:var(--gold); text-shadow:0 3px 14px rgba(0,0,0,.5);
-  }
-  .page-header p { margin-top:10px; font-size:15px; color:var(--text-muted); font-weight:300; }
-  .header-divider { width:64px; height:3px; background:linear-gradient(90deg,var(--gold),var(--green-mid)); border-radius:2px; margin:14px auto 0; }
 
-  /* â”€â”€ STATS ROW â”€â”€ */
-  .stats-row {
-    display:flex; gap:14px; margin-bottom:30px;
-    flex-wrap:wrap; justify-content:center;
-    animation:fadeUp .7s ease .2s both;
+  .nav-links {
+    display: none;
   }
-  .stat-chip {
-    background:var(--glass-bg);
-    border:1px solid var(--glass-border);
-    backdrop-filter:blur(12px);
-    border-radius:50px; padding:10px 22px;
-    display:flex; align-items:center; gap:8px;
-    font-size:13.5px; font-weight:500;
-  }
-  .chip-dot { width:9px; height:9px; border-radius:50%; }
-  .dot-total  { background:var(--gold); }
-  .dot-open   { background:#4caf50; box-shadow:0 0 6px #4caf50; }
-  .dot-applied{ background:#2196f3; box-shadow:0 0 6px #2196f3; }
 
-  /* â”€â”€ SEARCH BAR â”€â”€ */
+  .hero {
+    padding: 32px 9px 22px;
+  }
+
+  .stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-inline: 8px;
+  }
+
+  .toolbar {
+    grid-template-columns: 1fr 1fr;
+  }
+
   .search-wrap {
-    width:100%; max-width:1150px;
-    margin-bottom:24px;
-    animation:fadeUp .7s ease .25s both;
-  }
-  .search-box {
-    width:100%; padding:14px 20px;
-    background:rgba(10,40,14,0.55);
-    border:1.5px solid var(--glass-border);
-    border-radius:12px;
-    backdrop-filter:blur(12px);
-    color:#fff; font-size:14px;
-    font-family:'DM Sans',sans-serif;
-    outline:none; transition:border .2s;
-  }
-  .search-box::placeholder { color:var(--text-muted); }
-  .search-box:focus { border-color:var(--gold); }
-
-  /* â”€â”€ PANEL â”€â”€ */
-  .panel {
-    width:100%; max-width:1150px;
-    background:var(--glass-bg);
-    border:1.5px solid var(--glass-border);
-    backdrop-filter:blur(20px);
-    -webkit-backdrop-filter:blur(20px);
-    border-radius:24px; overflow:hidden;
-    box-shadow:0 20px 60px rgba(0,0,0,.45);
-    animation:fadeUp .7s ease .3s both;
+    grid-column: 1 / -1;
   }
 
-  /* â”€â”€ TABLE HEAD â”€â”€ */
-  .table-head {
-    display:grid;
-    grid-template-columns: 200px 1fr 180px 120px 120px;
-    background:linear-gradient(90deg, rgba(26,74,31,.92), rgba(45,122,53,.8));
-    border-bottom:1.5px solid var(--glass-border);
-  }
-  .th {
-    padding:16px 18px;
-    font-size:11px; font-weight:700;
-    letter-spacing:1.8px; text-transform:uppercase;
-    color:var(--gold-light);
-    display:flex; align-items:center; gap:6px;
-  }
-  .th:not(:last-child) { border-right:1px solid rgba(255,255,255,.1); }
-
-  /* â”€â”€ TABLE ROWS â”€â”€ */
-  #schemes-body { width:100%; }
-  .s-row {
-    display:grid;
-    grid-template-columns: 200px 1fr 180px 120px 120px;
-    border-bottom:1px solid rgba(255,255,255,.07);
-    transition:background .2s;
-    animation:rowIn .45s ease both;
-  }
-  .s-row:last-child { border-bottom:none; }
-  .s-row:hover { background:rgba(255,255,255,.06); }
-  .td {
-    padding:18px 18px;
-    font-size:13.5px; line-height:1.55;
-    color:var(--text-light);
-    display:flex; align-items:center;
-  }
-  .td:not(:last-child) { border-right:1px solid rgba(255,255,255,.06); }
-
-  /* Title cell */
-  .scheme-title { font-weight:700; font-size:14px; color:var(--gold-light); }
-
-  /* Eligibility badge */
-  .elig-badge {
-    display:inline-block;
-    background:rgba(232,185,74,.12);
-    border:1px solid rgba(232,185,74,.3);
-    color:var(--gold-light);
-    font-size:11.5px; font-weight:600;
-    padding:4px 12px; border-radius:20px;
+  .scheme-card {
+    grid-template-columns: 155px minmax(0, 1fr);
   }
 
-  /* View link */
-  .view-link {
-    display:inline-flex; align-items:center; gap:5px;
-    padding:7px 16px;
-    background:rgba(255,255,255,.1);
-    border:1px solid rgba(255,255,255,.2);
-    color:#fff; font-size:12.5px; font-weight:600;
-    border-radius:8px; text-decoration:none;
-    transition:all .2s;
-  }
-  .view-link:hover { background:rgba(255,255,255,.18); transform:translateY(-2px); }
-
-  /* Apply button */
-  .btn-apply {
-    display:inline-flex; align-items:center; gap:6px;
-    padding:9px 18px;
-    background:linear-gradient(135deg, var(--gold), #c8962a);
-    color:var(--green-dark);
-    font-weight:700; font-size:12.5px;
-    border:none; border-radius:8px;
-    cursor:pointer; transition:all .22s;
-    font-family:'DM Sans',sans-serif;
-  }
-  .btn-apply:hover { transform:translateY(-2px); box-shadow:0 6px 18px rgba(232,185,74,.4); }
-  .btn-apply.applied {
-    background:linear-gradient(135deg,#4caf50,#388e3c);
-    color:#fff; cursor:default;
-    pointer-events:none;
+  .scheme-image {
+    height: 135px;
   }
 
-  /* Empty state */
-  .empty-state { padding:70px 24px; text-align:center; color:var(--text-muted); }
-  .empty-state .empty-icon { font-size:3.5rem; margin-bottom:16px; }
-  .empty-state h3 { font-family:'Playfair Display',serif; font-size:1.4rem; color:var(--gold); margin-bottom:8px; }
-
-  /* Skeleton */
-  .skeleton-row {
-    display:grid;
-    grid-template-columns: 200px 1fr 180px 120px 120px;
-    border-bottom:1px solid rgba(255,255,255,.07);
-    padding:20px 18px; gap:18px;
-  }
-  .skel {
-    height:18px; border-radius:6px;
-    background:linear-gradient(90deg,rgba(255,255,255,.06) 25%,rgba(255,255,255,.12) 50%,rgba(255,255,255,.06) 75%);
-    background-size:200% 100%;
-    animation:shimmer 1.5s infinite;
+  .scheme-meta {
+    grid-column: 1 / -1;
+    grid-template-columns: 1fr 1fr;
+    padding: 13px 0 0;
+    border-top: 1px solid #ffffff20;
+    border-left: 0;
   }
 
-  /* Toast */
-  .toast {
-    position:fixed; bottom:28px; right:28px;
-    background:linear-gradient(135deg,#4caf50,#388e3c);
-    color:#fff; padding:14px 24px;
-    border-radius:12px; font-weight:600; font-size:14px;
-    box-shadow:0 8px 24px rgba(0,0,0,.35);
-    z-index:9999;
-    transform:translateY(80px); opacity:0;
-    transition:all .4s cubic-bezier(.34,1.56,.64,1);
+  .scheme-actions {
+    grid-column: 1 / -1;
   }
-  .toast.show { transform:translateY(0); opacity:1; }
+}
 
-  /* Animations */
-  @keyframes slideDown { from{opacity:0;transform:translateY(-18px)} to{opacity:1;transform:translateY(0)} }
-  @keyframes fadeUp    { from{opacity:0;transform:translateY(22px)}  to{opacity:1;transform:translateY(0)} }
-  @keyframes rowIn     { from{opacity:0;transform:translateX(-10px)} to{opacity:1;transform:translateX(0)} }
-  @keyframes shimmer   { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+@media (max-width: 520px) {
+  .page {
+    width: calc(100% - 16px);
+    padding-top: 8px;
+  }
 
-  /* Responsive */
-  @media(max-width:900px){
-    .table-head,.s-row,.skeleton-row { grid-template-columns:1fr 1fr; }
-    .th:not(:last-child),.td:not(:last-child){ border-right:none; border-bottom:1px solid rgba(255,255,255,.07); }
-    .page-header h1 { font-size:1.8rem; }
+  .nav {
+    padding: 9px 11px;
   }
-  @media(max-width:580px){
-    .table-head,.s-row,.skeleton-row { grid-template-columns:1fr; }
+
+  .brand {
+    font-size: 1.2rem;
   }
+
+  .brand-icon {
+    width: 35px;
+    height: 35px;
+    font-size: 21px;
+  }
+
+  .farmer-badge {
+    padding: 9px 11px;
+    font-size: .75rem;
+  }
+
+  .hero {
+    padding: 27px 5px 19px;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero p {
+    font-size: .93rem;
+  }
+
+  .stats {
+    gap: 8px;
+    margin-inline: 2px;
+  }
+
+  .stat {
+    min-height: 80px;
+    padding: 10px;
+    gap: 9px;
+  }
+
+  .stat-icon {
+    width: 39px;
+    height: 39px;
+    font-size: 1.2rem;
+  }
+
+  .stat strong {
+    font-size: 1.45rem;
+  }
+
+  .stat p {
+    font-size: .7rem;
+  }
+
+  .toolbar {
+    grid-template-columns: 1fr;
+    padding: 12px;
+  }
+
+  .search-wrap {
+    grid-column: auto;
+  }
+
+  .list-heading {
+    padding: 4px 14px 0;
+  }
+
+  .list-heading h2 {
+    font-size: 1.12rem;
+  }
+
+  .scheme-list {
+    padding: 12px;
+  }
+
+  .scheme-card {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 12px;
+  }
+
+  .scheme-image {
+    height: 165px;
+  }
+
+  .scheme-meta {
+    grid-template-columns: 1fr 1fr;
+    gap: 9px;
+  }
+
+  .meta-icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .meta-value {
+    font-size: .75rem;
+  }
+
+  .scheme-title {
+    font-size: 1.05rem;
+  }
+
+  .scheme-actions {
+    grid-column: auto;
+    flex-direction: row;
+  }
+
+  .scheme-actions > * {
+    flex: 1;
+    min-width: 0;
+  }
+}
 </style>
 </head>
+
 <body>
+<div class="background" aria-hidden="true"></div>
 
-<div class="bg-wrap"></div>
+<main class="page">
 
-<div class="page">
+  <nav class="nav">
+    <a href="/" class="brand">
+      <span class="brand-icon">🌱</span>
+      <span><span class="brand-yellow">Kisan</span>Mitra</span>
+    </a>
 
-  <!-- Nav -->
-  <nav class="topnav">
-    <a href="/" class="nav-brand"><span>Kisan</span>Mitra</a>
-    <a href="javascript:history.back()" class="nav-back">â† Dashboard</a>
+    <div class="nav-links">
+      <a href="/">⌂ Home</a>
+      <a href="crop-guide.html">♧ Crop Guide</a>
+      <a href="human-experts.html">♟ Expert Support</a>
+      <a href="government-schemes.html" class="active">🏛 Government Schemes</a>
+      <a href="weather.html">☀ Weather</a>
+    </div>
+
+    <div class="farmer-badge">👤 Farmer⌄</div>
   </nav>
 
-  <!-- Header -->
-  <div class="page-header">
-    <div class="badge">ðŸ›ï¸ Welfare Programs</div>
-    <h1>Government Schemes</h1>
-    <p>Explore and apply for government welfare schemes designed to support Indian farmers</p>
-    <div class="header-divider"></div>
-  </div>
+  <header class="hero">
+    <div class="eyebrow"><span>✦</span> 🏛 Government Support <span>✦</span></div>
+    <h1>Government <span>Schemes</span></h1>
+    <p>
+      Explore and apply for government schemes designed to support
+      farmers and boost agricultural growth.
+    </p>
+  </header>
 
-  <!-- Stats -->
-  <div class="stats-row">
-    <div class="stat-chip"><span class="chip-dot dot-total"></span><span id="statTotal">— Total Schemes</span></div>
-    <div class="stat-chip"><span class="chip-dot dot-open"></span><span id="statOpen">— Available</span></div>
-    <div class="stat-chip"><span class="chip-dot dot-applied"></span><span id="statApplied">— Applied</span></div>
-  </div>
+  <section class="stats">
+    <article class="stat">
+      <div class="stat-icon">▤</div>
+      <div><strong id="statTotal">—</strong><p>Total Schemes</p></div>
+    </article>
 
-  <!-- Search -->
-  <div class="search-wrap">
-    <input class="search-box" id="searchBox" type="text" placeholder="ðŸ”  Search schemes by title, eligibility..." oninput="filterSchemes()"/>
-  </div>
+    <article class="stat">
+      <div class="stat-icon">🌱</div>
+      <div><strong id="statOpen">—</strong><p>Available Schemes</p></div>
+    </article>
 
-  <!-- Panel -->
-  <div class="panel">
-    <div class="table-head">
-      <div class="th">📋 Scheme Title</div>
-      <div class="th">ðŸ“ Description</div>
-      <div class="th">✅ Eligibility</div>
-      <div class="th">🔗 Info</div>
-      <div class="th">🚀 Apply</div>
+    <article class="stat">
+      <div class="stat-icon">♟</div>
+      <div><strong>All</strong><p>Farmer Support</p></div>
+    </article>
+
+    <article class="stat">
+      <div class="stat-icon">★</div>
+      <div><strong id="statApplied">0</strong><p>Applied This Session</p></div>
+    </article>
+  </section>
+
+  <section class="panel">
+
+    <div class="toolbar">
+      <label class="search-wrap">
+        <span class="search-icon" aria-hidden="true">⌕</span>
+        <input id="searchBox" type="search"
+          placeholder="Search schemes (e.g. PM Kisan, fertilizer, irrigation)…"
+          aria-label="Search schemes">
+      </label>
+
+      <select id="categoryFilter" aria-label="Filter by category">
+        <option value="all">All Categories</option>
+        <option value="income">Income Support</option>
+        <option value="irrigation">Irrigation</option>
+        <option value="insurance">Crop Insurance</option>
+        <option value="credit">Credit Support</option>
+        <option value="equipment">Equipment</option>
+        <option value="other">Other Schemes</option>
+      </select>
+
+      <select id="statusFilter" aria-label="Filter by status">
+        <option value="all">All Status</option>
+        <option value="available">Available</option>
+        <option value="applied">Applied</option>
+      </select>
+
+      <button class="reset-button" id="resetButton" type="button">
+        ⚑ Reset
+      </button>
     </div>
-    <div id="schemes-body">
-      <div class="skeleton-row"><div class="skel" style="width:80%"></div><div class="skel" style="width:90%"></div><div class="skel" style="width:65%"></div><div class="skel" style="width:55%"></div><div class="skel" style="width:60%"></div></div>
-      <div class="skeleton-row"><div class="skel" style="width:70%"></div><div class="skel" style="width:85%"></div><div class="skel" style="width:70%"></div><div class="skel" style="width:50%"></div><div class="skel" style="width:55%"></div></div>
-      <div class="skeleton-row"><div class="skel" style="width:75%"></div><div class="skel" style="width:88%"></div><div class="skel" style="width:60%"></div><div class="skel" style="width:58%"></div><div class="skel" style="width:62%"></div></div>
+
+    <div class="list-heading">
+      <h2>Explore Government Schemes</h2>
+      <span class="result-count" id="resultsCount" aria-live="polite">
+        Loading…
+      </span>
     </div>
-  </div>
 
-</div>
+    <div class="scheme-list" id="schemesBody" aria-live="polite">
+      <div class="empty-state">
+        <div class="empty-icon">🌾</div>
+        <h3>Loading schemes</h3>
+        <p>Please wait while we load government scheme details.</p>
+      </div>
+    </div>
 
-<!-- Toast -->
-<div class="toast" id="toast">✅ Application submitted successfully!</div>
+  </section>
+
+  <footer class="footer">
+    Empowering farmers for a better tomorrow · <strong>KisanMitra</strong>
+  </footer>
+
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
-const user = JSON.parse(localStorage.getItem("user")) || { id: 1 };
+"use strict";
+
+const API_SCHEMES = "/api/users/government/schemes";
+const API_APPLY = "/api/users/farmer/apply-scheme";
+
+const ONLINE_IMAGES = {
+  background:
+    "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=2200&q=85",
+
+  farmer:
+    "https://images.unsplash.com/photo-1594708767771-a7502209ff51?auto=format&fit=crop&w=700&q=85",
+
+  irrigation:
+    "https://images.unsplash.com/photo-1560493676-04071c5f467b?auto=format&fit=crop&w=700&q=85",
+
+  crops:
+    "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=700&q=85",
+
+  equipment:
+    "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=700&q=85"
+};
+
 let allSchemes = [];
 let appliedIds = new Set();
+let currentUser = null;
+let toastTimer;
 
-async function loadSchemes() {
+const schemesBody = document.getElementById("schemesBody");
+const searchBox = document.getElementById("searchBox");
+const categoryFilter = document.getElementById("categoryFilter");
+const statusFilter = document.getElementById("statusFilter");
+
+function readUser() {
   try {
-    const res = await fetch("/api/users/government/schemes");
-    allSchemes = await res.json();
+    const user = JSON.parse(localStorage.getItem("user") || "null");
+
+    if (user && (user.id != null || user.user_id != null)) {
+      return user;
+    }
+
+    return null;
   } catch {
-    // Demo fallback
-    allSchemes = [
-      { id:1, title:"PM Kisan Samman Nidhi",     description:"Direct income support of ₹6,000 per year to all landholding farmer families across India.", eligibility:"All landholding farmers with cultivable land.", official_link:"https://pmkisan.gov.in" },
-      { id:2, title:"Pradhan Mantri Fasal Bima Yojana", description:"Crop insurance scheme providing financial support to farmers suffering crop loss due to unforeseen events.", eligibility:"All farmers including sharecroppers and tenant farmers.", official_link:"https://pmfby.gov.in" },
-      { id:3, title:"Kisan Credit Card",          description:"Provides farmers with affordable credit for agricultural needs, post-harvest expenses and allied activities.", eligibility:"Farmers, tenant farmers, oral lessees and sharecroppers.", official_link:"https://agricoop.nic.in" },
-      { id:4, title:"PM Krishi Sinchai Yojana",   description:"Ensures access to protective irrigation to all agricultural farms and improve water use efficiency.", eligibility:"All farmers with irrigated or rain-fed land.", official_link:"https://pmksy.gov.in" },
-      { id:5, title:"e-NAM",                      description:"Pan-India electronic trading portal for agricultural commodities, enabling farmers to sell at best prices.", eligibility:"Farmers registered in any APMC mandi.", official_link:"https://enam.gov.in" },
-    ];
+    return null;
   }
-  updateStats();
-  renderSchemes(allSchemes);
+}
+
+function safeText(value) {
+  return String(value ?? "").trim();
+}
+
+function getSchemeCategory(scheme) {
+  const content = [
+    scheme.title,
+    scheme.description,
+    scheme.category,
+    scheme.type
+  ].map(safeText).join(" ").toLowerCase();
+
+  if (/insurance|fasal bima|crop loss/.test(content)) return "insurance";
+  if (/irrigation|sinchai|water conservation/.test(content)) return "irrigation";
+  if (/credit|loan|kcc|kisan credit/.test(content)) return "credit";
+  if (/equipment|machinery|mechanization|tractor/.test(content)) return "equipment";
+  if (/income|pm.?kisan|samman nidhi/.test(content)) return "income";
+
+  return "other";
+}
+
+function getCategoryLabel(category) {
+  const labels = {
+    income: "🌿 Income Support",
+    irrigation: "💧 Irrigation",
+    insurance: "🛡 Crop Insurance",
+    credit: "₹ Credit Support",
+    equipment: "⚙ Equipment",
+    other: "🌾 Farmer Welfare"
+  };
+
+  return labels[category] || labels.other;
+}
+
+function getImageForScheme(scheme) {
+  const category = getSchemeCategory(scheme);
+
+  const images = {
+    income: ONLINE_IMAGES.farmer,
+    irrigation: ONLINE_IMAGES.irrigation,
+    insurance: ONLINE_IMAGES.crops,
+    credit: ONLINE_IMAGES.farmer,
+    equipment: ONLINE_IMAGES.equipment,
+    other: ONLINE_IMAGES.crops
+  };
+
+  const suppliedImage = safeText(scheme.image_url || scheme.image);
+
+  // Only allow normal HTTP(S) image URLs returned by the API.
+  if (/^https?:\/\/\S+$/i.test(suppliedImage)) {
+    return suppliedImage;
+  }
+
+  return images[category] || ONLINE_IMAGES.crops;
+}
+
+function createElement(tag, className, value) {
+  const node = document.createElement(tag);
+
+  if (className) node.className = className;
+  if (value !== undefined) node.textContent = value;
+
+  return node;
 }
 
 function updateStats() {
-  document.getElementById('statTotal').textContent   = allSchemes.length + ' Total Schemes';
-  document.getElementById('statOpen').textContent    = allSchemes.length + ' Available';
-  document.getElementById('statApplied').textContent = appliedIds.size   + ' Applied';
+  document.getElementById("statTotal").textContent = allSchemes.length;
+  document.getElementById("statOpen").textContent = allSchemes.filter(
+    scheme => !appliedIds.has(String(scheme.id))
+  ).length;
+
+  document.getElementById("statApplied").textContent = appliedIds.size;
 }
 
-function filterSchemes() {
-  const q = document.getElementById('searchBox').value.toLowerCase();
-  const filtered = allSchemes.filter(s =>
-    s.title.toLowerCase().includes(q) ||
-    s.eligibility.toLowerCase().includes(q) ||
-    s.description.toLowerCase().includes(q)
+function showEmptyState(icon, title, message, retry = false) {
+  schemesBody.replaceChildren();
+
+  const state = createElement("div", "empty-state");
+  state.append(
+    createElement("div", "empty-icon", icon),
+    createElement("h3", "", title),
+    createElement("p", "", message)
   );
-  renderSchemes(filtered);
+
+  if (retry) {
+    const button = createElement("button", "", "Try Again");
+    button.type = "button";
+    button.addEventListener("click", loadSchemes);
+    state.append(button);
+  }
+
+  schemesBody.append(state);
+  document.getElementById("resultsCount").textContent = "";
 }
 
-function renderSchemes(schemes) {
-  const body = document.getElementById('schemes-body');
-  if (!schemes.length) {
-    body.innerHTML = `<div class="empty-state"><div class="empty-icon">🌾</div><h3>No Schemes Found</h3><p>Try a different search keyword.</p></div>`;
+async function loadSchemes() {
+  showEmptyState("🌾", "Loading government schemes", "Connecting to KisanMitra…");
+
+  try {
+    const response = await fetch(API_SCHEMES, {
+      headers: { Accept: "application/json" }
+    });
+
+    if (!response.ok) {
+      throw new Error("Unable to load schemes. HTTP " + response.status);
+    }
+
+    const data = await response.json();
+
+    // Support either a plain array or a common wrapped API response.
+    const schemes = Array.isArray(data)
+      ? data
+      : Array.isArray(data.schemes)
+        ? data.schemes
+        : Array.isArray(data.data)
+          ? data.data
+          : null;
+
+    if (!schemes) {
+      throw new Error("Unexpected scheme API response format.");
+    }
+
+    allSchemes = schemes.filter(
+      scheme => scheme && typeof scheme === "object" && scheme.id != null
+    );
+
+    updateStats();
+    renderSchemes();
+
+  } catch (error) {
+    console.error("Loading schemes failed:", error);
+
+    allSchemes = [];
+    updateStats();
+
+    showEmptyState(
+      "⚠️",
+      "Unable to load schemes",
+      "Check your connection or backend API, then try again.",
+      true
+    );
+  }
+}
+
+function addMetaItem(parent, icon, label, value) {
+  const item = createElement("div", "meta-item");
+  item.append(createElement("span", "meta-icon", icon));
+
+  const content = document.createElement("div");
+  content.append(
+    createElement("span", "meta-label", label),
+    createElement("span", "meta-value", value || "Check official site")
+  );
+
+  item.append(content);
+  parent.append(item);
+}
+
+function renderSchemes() {
+  const query = searchBox.value.trim().toLowerCase();
+  const selectedCategory = categoryFilter.value;
+  const selectedStatus = statusFilter.value;
+
+  const filtered = allSchemes.filter(scheme => {
+    const searchable = [
+      scheme.title,
+      scheme.description,
+      scheme.category,
+      scheme.type,
+      scheme.eligibility
+    ].map(safeText).join(" ").toLowerCase();
+
+    const isApplied = appliedIds.has(String(scheme.id));
+
+    return searchable.includes(query)
+      && (selectedCategory === "all" ||
+          getSchemeCategory(scheme) === selectedCategory)
+      && (selectedStatus === "all"
+          || (selectedStatus === "applied" && isApplied)
+          || (selectedStatus === "available" && !isApplied));
+  });
+
+  schemesBody.replaceChildren();
+
+  document.getElementById("resultsCount").textContent =
+    `${filtered.length} ${filtered.length === 1 ? "scheme" : "schemes"} found`;
+
+  if (!filtered.length) {
+    showEmptyState(
+      "🔎",
+      allSchemes.length ? "No matching schemes" : "No schemes available",
+      allSchemes.length
+        ? "Try a different search term or change your filters."
+        : "No scheme records were returned by the server."
+    );
+
+    document.getElementById("resultsCount").textContent = "0 schemes found";
     return;
   }
-  body.innerHTML = schemes.map((s, i) => `
-    <div class="s-row" style="animation-delay:${i * 0.07}s">
-      <div class="td"><span class="scheme-title">${s.title}</span></div>
-      <div class="td" style="font-size:13px;color:rgba(255,255,255,.78)">${s.description}</div>
-      <div class="td"><span class="elig-badge">${s.eligibility}</span></div>
-      <div class="td"><a href="${s.official_link}" target="_blank" class="view-link">🔗 View</a></div>
-      <div class="td">
-        <button class="btn-apply ${appliedIds.has(s.id) ? 'applied' : ''}"
-                id="btn-${s.id}"
-                onclick="applyScheme(${s.id})">
-          ${appliedIds.has(s.id) ? '✅ Applied' : '🚀 Apply'}
-        </button>
-      </div>
-    </div>`).join('');
-}
 
-async function applyScheme(id) {
-  const btn = document.getElementById('btn-' + id);
-  if (!btn || btn.classList.contains('applied')) return;
-  btn.textContent = 'â³ Submitting...';
-  btn.style.opacity = '0.7';
-  try {
-    await fetch("/api/users/farmer/apply-scheme", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ farmer_id: user.id, scheme_id: id })
+  filtered.forEach((scheme, index) => {
+    const id = String(scheme.id);
+    const isApplied = appliedIds.has(id);
+    const category = getSchemeCategory(scheme);
+
+    const card = createElement("article", "scheme-card");
+    card.style.animationDelay = `${Math.min(index * 45, 250)}ms`;
+
+    // ONLINE IMAGE: no image file needs to be stored in the project.
+    const imageBox = createElement("div", "scheme-image");
+    const image = document.createElement("img");
+
+    image.src = getImageForScheme(scheme);
+    image.alt = safeText(scheme.title) || "Agricultural scheme";
+    image.loading = "lazy";
+    image.referrerPolicy = "no-referrer";
+
+    image.onerror = () => {
+      imageBox.replaceChildren();
+      imageBox.textContent = "🌾";
+      imageBox.style.display = "grid";
+      imageBox.style.placeItems = "center";
+      imageBox.style.fontSize = "3rem";
+    };
+
+    imageBox.append(image);
+
+    const info = createElement("div", "scheme-info");
+    const top = createElement("div", "scheme-top");
+
+    top.append(
+      createElement("h3", "scheme-title", safeText(scheme.title) || "Government Scheme")
+    );
+
+    const statusText = isApplied
+      ? "Applied"
+      : safeText(scheme.status) || "Available";
+
+    const normalizedStatus = statusText.toLowerCase();
+
+    let statusClass = "status";
+
+    if (/ongoing|progress/.test(normalizedStatus)) {
+      statusClass += " ongoing";
+    } else if (/new/.test(normalizedStatus)) {
+      statusClass += " new";
+    } else if (/closed|expired/.test(normalizedStatus)) {
+      statusClass += " closed";
+    }
+
+    const badge = createElement("span", statusClass, statusText);
+    top.append(badge);
+
+    const description = createElement(
+      "p",
+      "scheme-description",
+      safeText(scheme.description) ||
+        "View the official scheme details to learn about its benefits and eligibility."
+    );
+
+    const tags = createElement("div", "tags");
+    tags.append(
+      createElement("span", "tag", getCategoryLabel(category)),
+      createElement(
+        "span",
+        "tag",
+        safeText(scheme.eligibility) || "Farmer Support"
+      )
+    );
+
+    if (scheme.benefit != null && safeText(scheme.benefit)) {
+      tags.append(createElement("span", "tag", "₹ " + safeText(scheme.benefit)));
+    }
+
+    info.append(top, description, tags);
+
+    const meta = createElement("div", "scheme-meta");
+
+    addMetaItem(
+      meta,
+      "▦",
+      "Last Date",
+      safeText(scheme.last_date || scheme.deadline) || "Check official site"
+    );
+
+    addMetaItem(
+      meta,
+      "▤",
+      "Apply Mode",
+      safeText(scheme.apply_mode || scheme.application_mode) || "Online / CSC"
+    );
+
+    const actions = createElement("div", "scheme-actions");
+    const officialLink = safeText(scheme.official_link || scheme.website);
+
+    if (/^https?:\/\/\S+$/i.test(officialLink)) {
+      const view = createElement("a", "view-button", "View Details ↗");
+      view.href = officialLink;
+      view.target = "_blank";
+      view.rel = "noopener noreferrer";
+      actions.append(view);
+    }
+
+    const applyButton = createElement(
+      "button",
+      "apply-button" + (isApplied ? " applied" : ""),
+      isApplied ? "✓ Applied" : "Apply Now →"
+    );
+
+    applyButton.type = "button";
+    applyButton.disabled = isApplied;
+
+    applyButton.addEventListener("click", () => {
+      applyScheme(scheme.id);
     });
-  } catch {}
-  appliedIds.add(id);
-  btn.textContent = '✅ Applied';
-  btn.classList.add('applied');
-  btn.style.opacity = '1';
-  updateStats();
-  showToast();
+
+    actions.append(applyButton);
+
+    card.append(imageBox, info, meta, actions);
+    schemesBody.append(card);
+  });
 }
 
-function showToast() {
-  const t = document.getElementById('toast');
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 3000);
+async function applyScheme(schemeId) {
+  if (!currentUser) {
+    showToast("Please log in as a farmer before applying.");
+    window.location.href = "login.html";
+    return;
+  }
+
+  if (appliedIds.has(String(schemeId))) {
+    showToast("You have already applied during this session.");
+    return;
+  }
+
+  const card = [...schemesBody.querySelectorAll(".scheme-card")].find(
+    item => item.querySelector(".apply-button") &&
+      allSchemes.some(scheme =>
+        String(scheme.id) === String(schemeId) &&
+        item.querySelector(".scheme-title")?.textContent === safeText(scheme.title)
+      )
+  );
+
+  // Find the exact button by attaching a temporary busy state to the matching
+  // rendered scheme. Rendering is refreshed after a successful application.
+  const buttons = [...schemesBody.querySelectorAll(".apply-button")];
+  const button = buttons.find(btn => {
+    const parentCard = btn.closest(".scheme-card");
+    const title = parentCard?.querySelector(".scheme-title")?.textContent;
+    const matchingScheme = allSchemes.find(
+      scheme => String(scheme.id) === String(schemeId)
+    );
+    return matchingScheme && title === safeText(matchingScheme.title);
+  });
+
+  if (!button || button.disabled) return;
+
+  const originalText = button.textContent;
+  button.disabled = true;
+  button.textContent = "Submitting…";
+
+  try {
+    const response = await fetch(API_APPLY, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify({
+        farmer_id: currentUser.id ?? currentUser.user_id,
+        scheme_id: schemeId
+      })
+    });
+
+    const contentType = response.headers.get("content-type") || "";
+    let result = null;
+
+    if (contentType.includes("application/json")) {
+      result = await response.json();
+    } else {
+      await response.text();
+    }
+
+    if (!response.ok) {
+      throw new Error(
+        result?.message ||
+        result?.error ||
+        `Application failed (HTTP ${response.status})`
+      );
+    }
+
+    appliedIds.add(String(schemeId));
+    updateStats();
+    renderSchemes();
+    showToast("Application submitted successfully.");
+
+  } catch (error) {
+    console.error("Application submission failed:", error);
+
+    button.disabled = false;
+    button.textContent = originalText;
+
+    showToast(
+      error.message || "Unable to submit application. Please try again."
+    );
+  }
 }
 
+function showToast(message) {
+  const toast = document.getElementById("toast");
+
+  toast.textContent = message;
+  toast.classList.add("show");
+
+  clearTimeout(toastTimer);
+
+  toastTimer = setTimeout(() => {
+    toast.classList.remove("show");
+  }, 3200);
+}
+
+searchBox.addEventListener("input", renderSchemes);
+categoryFilter.addEventListener("change", renderSchemes);
+statusFilter.addEventListener("change", renderSchemes);
+
+document.getElementById("resetButton").addEventListener("click", () => {
+  searchBox.value = "";
+  categoryFilter.value = "all";
+  statusFilter.value = "all";
+  renderSchemes();
+});
+
+currentUser = readUser();
+
+// Start loading live scheme data.
 loadSchemes();
 </script>
 </body>

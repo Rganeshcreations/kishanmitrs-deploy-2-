@@ -1,4 +1,4 @@
-// =======================
+﻿// =======================
 // VALIDATION FUNCTIONS
 // =======================
 
@@ -86,7 +86,7 @@ function registerUser() {
     return;
   }
 
-  fetch("https://kishanmitrs-deploy-2-production.up.railway.app/api/users/register", {
+  fetch("/api/users/register", {
 
     method: "POST",
 
@@ -136,7 +136,7 @@ function loginUser() {
     return;
   }
 
-  fetch("https://kishanmitrs-deploy-2-production.up.railway.app/api/users/login", {
+  fetch("/api/users/login", {
 
     method: "POST",
 
@@ -176,7 +176,7 @@ function sendOtp() {
     return;
   }
 
-  fetch("https://kishanmitrs-deploy-2-production.up.railway.app/api/users/send-otp", {
+  fetch("/api/users/send-otp", {
 
     method: "POST",
 
@@ -221,7 +221,7 @@ function verifyOtp() {
     return;
   }
 
-  fetch("https://kishanmitrs-deploy-2-production.up.railway.app/api/users/verify-otp", {
+  fetch("/api/users/verify-otp", {
 
     method: "POST",
 
@@ -347,7 +347,7 @@ function saveFarmerProfile() {
     return;
   }
 
-  fetch("https://kishanmitrs-deploy-2-production.up.railway.app/api/users/farmer-profile", {
+  fetch("/api/users/farmer-profile", {
 
     method: "POST",
 

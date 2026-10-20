@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Government Schemes â€“ KisanMitra</title>
+<title>Government Schemes – KisanMitra</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -280,9 +280,9 @@
 
   <!-- Stats -->
   <div class="stats-row">
-    <div class="stat-chip"><span class="chip-dot dot-total"></span><span id="statTotal">â€” Total Schemes</span></div>
-    <div class="stat-chip"><span class="chip-dot dot-open"></span><span id="statOpen">â€” Available</span></div>
-    <div class="stat-chip"><span class="chip-dot dot-applied"></span><span id="statApplied">â€” Applied</span></div>
+    <div class="stat-chip"><span class="chip-dot dot-total"></span><span id="statTotal">— Total Schemes</span></div>
+    <div class="stat-chip"><span class="chip-dot dot-open"></span><span id="statOpen">— Available</span></div>
+    <div class="stat-chip"><span class="chip-dot dot-applied"></span><span id="statApplied">— Applied</span></div>
   </div>
 
   <!-- Search -->
@@ -293,11 +293,11 @@
   <!-- Panel -->
   <div class="panel">
     <div class="table-head">
-      <div class="th">ðŸ“‹ Scheme Title</div>
+      <div class="th">📋 Scheme Title</div>
       <div class="th">ðŸ“ Description</div>
-      <div class="th">âœ… Eligibility</div>
-      <div class="th">ðŸ”— Info</div>
-      <div class="th">ðŸš€ Apply</div>
+      <div class="th">✅ Eligibility</div>
+      <div class="th">🔗 Info</div>
+      <div class="th">🚀 Apply</div>
     </div>
     <div id="schemes-body">
       <div class="skeleton-row"><div class="skel" style="width:80%"></div><div class="skel" style="width:90%"></div><div class="skel" style="width:65%"></div><div class="skel" style="width:55%"></div><div class="skel" style="width:60%"></div></div>
@@ -309,7 +309,7 @@
 </div>
 
 <!-- Toast -->
-<div class="toast" id="toast">âœ… Application submitted successfully!</div>
+<div class="toast" id="toast">✅ Application submitted successfully!</div>
 
 <script>
 const user = JSON.parse(localStorage.getItem("user")) || { id: 1 };
@@ -323,7 +323,7 @@ async function loadSchemes() {
   } catch {
     // Demo fallback
     allSchemes = [
-      { id:1, title:"PM Kisan Samman Nidhi",     description:"Direct income support of â‚¹6,000 per year to all landholding farmer families across India.", eligibility:"All landholding farmers with cultivable land.", official_link:"https://pmkisan.gov.in" },
+      { id:1, title:"PM Kisan Samman Nidhi",     description:"Direct income support of ₹6,000 per year to all landholding farmer families across India.", eligibility:"All landholding farmers with cultivable land.", official_link:"https://pmkisan.gov.in" },
       { id:2, title:"Pradhan Mantri Fasal Bima Yojana", description:"Crop insurance scheme providing financial support to farmers suffering crop loss due to unforeseen events.", eligibility:"All farmers including sharecroppers and tenant farmers.", official_link:"https://pmfby.gov.in" },
       { id:3, title:"Kisan Credit Card",          description:"Provides farmers with affordable credit for agricultural needs, post-harvest expenses and allied activities.", eligibility:"Farmers, tenant farmers, oral lessees and sharecroppers.", official_link:"https://agricoop.nic.in" },
       { id:4, title:"PM Krishi Sinchai Yojana",   description:"Ensures access to protective irrigation to all agricultural farms and improve water use efficiency.", eligibility:"All farmers with irrigated or rain-fed land.", official_link:"https://pmksy.gov.in" },
@@ -353,7 +353,7 @@ function filterSchemes() {
 function renderSchemes(schemes) {
   const body = document.getElementById('schemes-body');
   if (!schemes.length) {
-    body.innerHTML = `<div class="empty-state"><div class="empty-icon">ðŸŒ¾</div><h3>No Schemes Found</h3><p>Try a different search keyword.</p></div>`;
+    body.innerHTML = `<div class="empty-state"><div class="empty-icon">🌾</div><h3>No Schemes Found</h3><p>Try a different search keyword.</p></div>`;
     return;
   }
   body.innerHTML = schemes.map((s, i) => `
@@ -361,12 +361,12 @@ function renderSchemes(schemes) {
       <div class="td"><span class="scheme-title">${s.title}</span></div>
       <div class="td" style="font-size:13px;color:rgba(255,255,255,.78)">${s.description}</div>
       <div class="td"><span class="elig-badge">${s.eligibility}</span></div>
-      <div class="td"><a href="${s.official_link}" target="_blank" class="view-link">ðŸ”— View</a></div>
+      <div class="td"><a href="${s.official_link}" target="_blank" class="view-link">🔗 View</a></div>
       <div class="td">
         <button class="btn-apply ${appliedIds.has(s.id) ? 'applied' : ''}"
                 id="btn-${s.id}"
                 onclick="applyScheme(${s.id})">
-          ${appliedIds.has(s.id) ? 'âœ… Applied' : 'ðŸš€ Apply'}
+          ${appliedIds.has(s.id) ? '✅ Applied' : '🚀 Apply'}
         </button>
       </div>
     </div>`).join('');
@@ -385,7 +385,7 @@ async function applyScheme(id) {
     });
   } catch {}
   appliedIds.add(id);
-  btn.textContent = 'âœ… Applied';
+  btn.textContent = '✅ Applied';
   btn.classList.add('applied');
   btn.style.opacity = '1';
   updateStats();

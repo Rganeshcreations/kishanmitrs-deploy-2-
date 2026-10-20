@@ -92,11 +92,11 @@ background:#c8e6c9;
 
 <h1>ðŸ‘¨â€ðŸŒ¾ Expert Profile</h1>
 
-<div class="info-row">ðŸŒ¾ Specialization: <span id="specialization">-</span></div>
-<div class="info-row">ðŸ“… Experience: <span id="experience">-</span></div>
-<div class="info-row">ðŸŽ“ Qualification: <span id="qualification">-</span></div>
+<div class="info-row">🌾 Specialization: <span id="specialization">-</span></div>
+<div class="info-row">📅 Experience: <span id="experience">-</span></div>
+<div class="info-row">🎓 Qualification: <span id="qualification">-</span></div>
 <div class="info-row">ðŸ“ Location: <span id="location">-</span></div>
-<div class="info-row">ðŸ“ž Phone: <span id="phone">-</span></div>
+<div class="info-row">📞 Phone: <span id="phone">-</span></div>
 
 <button class="edit-btn" onclick="editProfile()">Edit Profile</button>
 
@@ -128,7 +128,7 @@ const res = await fetch(
 "/api/users/expert-profile/" + user.id
 );
 
-// ðŸš¨ API error check
+// 🚨 API error check
 if(!res.ok){
 alert("Server error (API not working)");
 return;
@@ -136,14 +136,14 @@ return;
 
 const profile = await res.json();
 
-// ðŸš¨ No profile case
+// 🚨 No profile case
 if(!profile.exists){
 alert("Profile not created");
 window.location.href="expert-profile";
 return;
 }
 
-// âœ… Fill profile safely
+// ✅ Fill profile safely
 document.getElementById("specialization").innerText = profile.specialization || "-";
 document.getElementById("experience").innerText = profile.experience || "-";
 document.getElementById("qualification").innerText = profile.qualification || "-";
@@ -160,7 +160,7 @@ alert("Failed to load profile");
 
 });
 
-// ðŸ”„ Edit redirect
+// 🔄 Edit redirect
 function editProfile(){
 window.location.href="expert-profile";
 }

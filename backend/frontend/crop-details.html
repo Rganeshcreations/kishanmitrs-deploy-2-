@@ -81,17 +81,17 @@ border-radius:10px;
 
 <body>
 
-<div class="header">ðŸŒ¾ Crop Details</div>
+<div class="header">🌾 Crop Details</div>
 
 <div class="tabs">
 
-<button id="detailsTab" class="active" onclick="showTab('details')">ðŸ“‹ Details</button>
+<button id="detailsTab" class="active" onclick="showTab('details')">📋 Details</button>
 
-<button id="expenseTab" onclick="showTab('expense')">ðŸ’° Expenditures</button>
+<button id="expenseTab" onclick="showTab('expense')">💰 Expenditures</button>
 
-<button id="summaryTab" onclick="showTab('summary')">ðŸ“Š Summary</button>
+<button id="summaryTab" onclick="showTab('summary')">📊 Summary</button>
 
-<button onclick="window.location.href='crop-list'">â¬… Back</button>
+<button onclick="window.location.href='crop-list'">⬅️ Back</button>
 
 </div>
 
@@ -141,7 +141,7 @@ const res = await fetch(
 
 const data = await res.json();
 
-// ðŸ”¥ IMPORTANT FIX
+// 🔥 IMPORTANT FIX
 cropData = data;
 
 console.log("CROP DATA:", cropData);
@@ -180,7 +180,7 @@ document.getElementById("contentArea").innerHTML=`
 
 <h3>${cropData.crop_name}</h3>
 
-<p>ðŸ“… Seeding Date: ${formattedDate}</p>
+<p>📅 Seeding Date: ${formattedDate}</p>
 
 <p>â³ Days Passed: ${daysPassed} days</p>
 
@@ -211,7 +211,7 @@ async function updateProduction(){
 const quantity = document.getElementById("quantity").value;
 const price = document.getElementById("price").value;
 
-// âœ… VALIDATION
+// ✅ VALIDATION
 if(!quantity || !price){
 alert("Please enter both quantity and price â—");
 return;
@@ -231,7 +231,7 @@ selling_price:price
 }
 );
 
-// âœ… CHECK RESPONSE
+// ✅ CHECK RESPONSE
 const data = await res.json();
 
 if(!res.ok){
@@ -239,14 +239,14 @@ alert("Update failed âŒ");
 return;
 }
 
-// ðŸ”¥ SUCCESS
-alert("âœ… Production Updated Successfully");
+// 🔥 SUCCESS
+alert("✅ Production Updated Successfully");
 
-// ðŸ”¥ AUTO REFRESH DATA
+// 🔥 AUTO REFRESH DATA
 await loadCrop();
 await loadExpenses();
 
-// ðŸ”¥ OPTIONAL: AUTO SWITCH TO SUMMARY
+// 🔥 OPTIONAL: AUTO SWITCH TO SUMMARY
 showTab("summary");
 
 }catch(err){
@@ -298,7 +298,7 @@ const desc = document.getElementById("desc").value;
 const amount = document.getElementById("amount").value;
 const date = document.getElementById("date").value;
 
-// âœ… VALIDATION
+// ✅ VALIDATION
 if(!desc || !amount || !date){
 alert("Fill all fields â—");
 return;
@@ -328,13 +328,13 @@ alert("Failed to add expense âŒ");
 return;
 }
 
-alert("âœ… Expense Added");
+alert("✅ Expense Added");
 
-// ðŸ”¥ REFRESH LIST
+// 🔥 REFRESH LIST
 await loadExpenses();
 displayExpenses();
 
-// ðŸ”¥ CLEAR INPUTS
+// 🔥 CLEAR INPUTS
 document.getElementById("desc").value="";
 document.getElementById("amount").value="";
 document.getElementById("date").value="";
@@ -365,7 +365,7 @@ list.innerHTML+=`
 
 <p>${exp.description}</p>
 
-<p>â‚¹ ${exp.total_amount}</p>
+<p>₹ ${exp.total_amount}</p>
 
 </div>
 
@@ -375,10 +375,10 @@ list.innerHTML+=`
 
 }
 
-// ================= SUMMARY (FIXED ðŸ”¥) =================
+// ================= SUMMARY (FIXED 🔥) =================
 async function renderSummary(){
 
-// ðŸ”¥ 1. Load latest expenses
+// 🔥 1. Load latest expenses
 await loadExpenses();
 
 let totalExpense = 0;
@@ -388,7 +388,7 @@ expenses.forEach(e=>{
 });
 
 
-// ðŸ”¥ 2. Safe conversion (VERY IMPORTANT)
+// 🔥 2. Safe conversion (VERY IMPORTANT)
 let quantity = Number(cropData.quantity_produced);
 let price = Number(cropData.selling_price);
 
@@ -397,12 +397,12 @@ if(isNaN(quantity)) quantity = 0;
 if(isNaN(price)) price = 0;
 
 
-// ðŸ”¥ 3. Correct calculation
+// 🔥 3. Correct calculation
 let revenue = quantity * price;
 let profit = revenue - totalExpense;
 
 
-// ðŸ”¥ 4. DEBUG (remove later)
+// 🔥 4. DEBUG (remove later)
 console.log("Quantity:", quantity);
 console.log("Price:", price);
 console.log("Revenue:", revenue);
@@ -410,17 +410,17 @@ console.log("Expense:", totalExpense);
 console.log("Profit:", profit);
 
 
-// ðŸ”¥ 5. UI update
+// 🔥 5. UI update
 document.getElementById("contentArea").innerHTML=`
 
-<h3>ðŸ“Š Financial Summary</h3>
+<h3>📊 Financial Summary</h3>
 
-<p>ðŸ’° Total Expense: â‚¹ ${totalExpense.toFixed(2)}</p>
+<p>💰 Total Expense: ₹ ${totalExpense.toFixed(2)}</p>
 
-<p>ðŸ“ˆ Revenue: â‚¹ ${revenue.toFixed(2)}</p>
+<p>📈 Revenue: ₹ ${revenue.toFixed(2)}</p>
 
 <h2 style="color:${profit>=0?'#4CAF50':'red'}">
-${profit>=0?"Profit":"Loss"}: â‚¹ ${profit.toFixed(2)}
+${profit>=0?"Profit":"Loss"}: ₹ ${profit.toFixed(2)}
 </h2>
 
 `;

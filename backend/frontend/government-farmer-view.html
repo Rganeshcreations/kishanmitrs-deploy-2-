@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Farmer Details â€“ AgriGov Portal</title>
+<title>Farmer Details – AgriGov Portal</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
@@ -707,7 +707,7 @@ body {
         <img src="https://via.placeholder.com/80/0a2a5e/ffffff?text=F" alt="Profile">
         <span>My Profile</span>
       </a>
-      <div class="gov-id-badge" id="gov-id-badge">Farmer ID: â€”</div>
+      <div class="gov-id-badge" id="gov-id-badge">Farmer ID: —</div>
     </div>
   </div>
 </header>
@@ -728,9 +728,9 @@ body {
 <div class="breadcrumb-bar">
   <div class="breadcrumb-inner">
     <a href="#">ðŸ  Home</a>
-    <span class="breadcrumb-sep">â€º</span>
+    <span class="breadcrumb-sep">›</span>
     <a href="#">Farmer Records</a>
-    <span class="breadcrumb-sep">â€º</span>
+    <span class="breadcrumb-sep">›</span>
     <span>Farmer Details</span>
   </div>
 </div>
@@ -740,7 +740,7 @@ body {
   <div class="page-title-inner">
     <div class="page-title">
       <h1>Farmer Comprehensive Record</h1>
-      <div class="subtitle" id="page-subtitle">Loading farmer informationâ€¦</div>
+      <div class="subtitle" id="page-subtitle">Loading farmer information…</div>
     </div>
     <div class="status-badge">
       <span class="status-dot"></span>
@@ -764,33 +764,33 @@ body {
             <svg viewBox="0 0 10 10"><path d="M2 5l2.5 2.5L8 3" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
           </div>
         </div>
-        <div class="farmer-name" id="sb-name">â€”</div>
-        <div class="farmer-id" id="sb-id">Loadingâ€¦</div>
+        <div class="farmer-name" id="sb-name">—</div>
+        <div class="farmer-id" id="sb-id">Loading…</div>
       </div>
       <div class="farmer-card-body">
         <div class="info-row">
           <div class="icon">ðŸ“</div>
           <div>
             <div class="label">Location</div>
-            <div class="value" id="sb-location">â€”</div>
+            <div class="value" id="sb-location">—</div>
           </div>
         </div>
         <div class="info-row">
-          <div class="icon">ðŸŒ±</div>
+          <div class="icon">🌱</div>
           <div>
             <div class="label">Soil Type</div>
-            <div class="value" id="sb-soil">â€”</div>
+            <div class="value" id="sb-soil">—</div>
           </div>
         </div>
         <div class="info-row">
-          <div class="icon">ðŸ“…</div>
+          <div class="icon">📅</div>
           <div>
             <div class="label">Record Date</div>
-            <div class="value" id="sb-date">â€”</div>
+            <div class="value" id="sb-date">—</div>
           </div>
         </div>
         <div class="info-row">
-          <div class="icon">âœ…</div>
+          <div class="icon">✅</div>
           <div>
             <div class="label">Status</div>
             <div class="value" style="color:var(--green)">Active &amp; Verified</div>
@@ -804,19 +804,19 @@ body {
       <div class="qs-header">Quick Statistics</div>
       <div class="qs-grid">
         <div class="qs-item">
-          <div class="qs-value" id="qs-crops">â€”</div>
+          <div class="qs-value" id="qs-crops">—</div>
           <div class="qs-label">Crops</div>
         </div>
         <div class="qs-item">
-          <div class="qs-value green" id="qs-revenue">â€”</div>
+          <div class="qs-value green" id="qs-revenue">—</div>
           <div class="qs-label">Revenue</div>
         </div>
         <div class="qs-item">
-          <div class="qs-value saffron" id="qs-profit">â€”</div>
+          <div class="qs-value saffron" id="qs-profit">—</div>
           <div class="qs-label">Profit</div>
         </div>
         <div class="qs-item">
-          <div class="qs-value" id="qs-production">â€”</div>
+          <div class="qs-value" id="qs-production">—</div>
           <div class="qs-label">Prod (kg)</div>
         </div>
       </div>
@@ -830,7 +830,7 @@ body {
     <!-- CROPS TABLE -->
     <div class="section-block">
       <div class="section-head">
-        <h2><span class="icon">ðŸŒ¾</span> Crop Records â€” Full Details</h2>
+        <h2><span class="icon">🌾</span> Crop Records — Full Details</h2>
         <span class="count-pill" id="crop-count-pill">Loading</span>
       </div>
       <div style="overflow-x:auto;">
@@ -843,12 +843,12 @@ body {
               <th>Days Active</th>
               <th>Land (Acres)</th>
               <th>Production (kg)</th>
-              <th>Selling Price (â‚¹/kg)</th>
-              <th>Revenue (â‚¹)</th>
+              <th>Selling Price (₹/kg)</th>
+              <th>Revenue (₹)</th>
             </tr>
           </thead>
           <tbody id="crops-tbody">
-            <tr class="loading-row"><td colspan="8"><div class="spinner"></div><br>Fetching crop recordsâ€¦</td></tr>
+            <tr class="loading-row"><td colspan="8"><div class="spinner"></div><br>Fetching crop records…</td></tr>
           </tbody>
         </table>
       </div>
@@ -857,7 +857,7 @@ body {
     <!-- EXPENSE TABLE -->
     <div class="section-block">
       <div class="section-head">
-        <h2><span class="icon">ðŸ’¸</span> Expenditure Breakdown</h2>
+        <h2><span class="icon">💸</span> Expenditure Breakdown</h2>
         <span class="count-pill" id="exp-count-pill">Loading</span>
       </div>
       <div style="overflow-x:auto;">
@@ -866,14 +866,14 @@ body {
             <tr>
               <th>#</th>
               <th>Crop</th>
-              <th>Total Expenditure (â‚¹)</th>
-              <th>Revenue (â‚¹)</th>
-              <th>Net (â‚¹)</th>
+              <th>Total Expenditure (₹)</th>
+              <th>Revenue (₹)</th>
+              <th>Net (₹)</th>
               <th>Efficiency</th>
             </tr>
           </thead>
           <tbody id="expense-tbody">
-            <tr class="loading-row"><td colspan="6"><div class="spinner"></div><br>Fetching expenditure dataâ€¦</td></tr>
+            <tr class="loading-row"><td colspan="6"><div class="spinner"></div><br>Fetching expenditure data…</td></tr>
           </tbody>
         </table>
       </div>
@@ -882,27 +882,27 @@ body {
     <!-- PROFIT SUMMARY -->
     <div class="section-block">
       <div class="section-head">
-        <h2><span class="icon">ðŸ“Š</span> Financial Summary</h2>
+        <h2><span class="icon">📊</span> Financial Summary</h2>
       </div>
       <div class="profit-grid" id="profit-grid">
         <div class="profit-item crops">
-          <span class="profit-icon">ðŸŒ¾</span>
-          <div class="profit-val" id="ps-crops">â€”</div>
+          <span class="profit-icon">🌾</span>
+          <div class="profit-val" id="ps-crops">—</div>
           <div class="profit-lbl">Total Crops</div>
         </div>
         <div class="profit-item expense">
-          <span class="profit-icon">ðŸ’¸</span>
-          <div class="profit-val" id="ps-expense">â€”</div>
+          <span class="profit-icon">💸</span>
+          <div class="profit-val" id="ps-expense">—</div>
           <div class="profit-lbl">Total Expense</div>
         </div>
         <div class="profit-item revenue">
-          <span class="profit-icon">ðŸ’°</span>
-          <div class="profit-val" id="ps-revenue">â€”</div>
+          <span class="profit-icon">💰</span>
+          <div class="profit-val" id="ps-revenue">—</div>
           <div class="profit-lbl">Total Revenue</div>
         </div>
         <div class="profit-item profit">
-          <span class="profit-icon">ðŸ“ˆ</span>
-          <div class="profit-val" id="ps-profit">â€”</div>
+          <span class="profit-icon">📈</span>
+          <div class="profit-val" id="ps-profit">—</div>
           <div class="profit-lbl">Net Profit</div>
         </div>
       </div>
@@ -911,7 +911,7 @@ body {
     <!-- CHART -->
     <div class="section-block">
       <div class="section-head">
-        <h2><span class="icon">ðŸ“‰</span> Production Growth â€” Crop-wise</h2>
+        <h2><span class="icon">📉</span> Production Growth — Crop-wise</h2>
       </div>
       <div class="chart-wrap">
         <div class="chart-inner">
@@ -1008,15 +1008,15 @@ async function loadData(){
     ).then(r=>r.json());
 
     if(profile.exists){
-      document.getElementById("sb-location").textContent = profile.location || "â€”";
-      document.getElementById("sb-soil").textContent    = profile.soil_type || "â€”";
+      document.getElementById("sb-location").textContent = profile.location || "—";
+      document.getElementById("sb-soil").textContent    = profile.soil_type || "—";
       document.getElementById("page-subtitle").textContent =
         `${profile.location} Â· Soil: ${profile.soil_type} Â· ID: AGF-${String(userId).padStart(6,"0")}`;
     }
   } catch(e){}
 
 
-  // ================= FETCH DATA PARALLEL (FAST ðŸ”¥) =================
+  // ================= FETCH DATA PARALLEL (FAST 🔥) =================
   let crops = [];
   let allExp = [];
 
@@ -1062,11 +1062,11 @@ async function loadData(){
       <td>${days} days</td>
       <td>${c.land_size}</td>
       <td>${c.quantity_produced} kg</td>
-      <td>â‚¹${fmt(c.selling_price)}</td>
-      <td>â‚¹${fmt(rev)}</td>
+      <td>₹${fmt(c.selling_price)}</td>
+      <td>₹${fmt(rev)}</td>
     </tr>`;
 
-    // ================= EXPENSE (OPTIMIZED ðŸ”¥) =================
+    // ================= EXPENSE (OPTIMIZED 🔥) =================
     const expList = allExp.filter(e => e.crop_id === c.id);
 
     let expTotal = 0;
@@ -1082,9 +1082,9 @@ async function loadData(){
     <tr>
       <td>${i+1}</td>
       <td>${c.crop_name}</td>
-      <td>â‚¹${fmt(expTotal)}</td>
-      <td>â‚¹${fmt(rev)}</td>
-      <td style="color:${net>=0?'green':'red'}">â‚¹${fmt(net)}</td>
+      <td>₹${fmt(expTotal)}</td>
+      <td>₹${fmt(rev)}</td>
+      <td style="color:${net>=0?'green':'red'}">₹${fmt(net)}</td>
     </tr>`;
   }
 
@@ -1095,9 +1095,9 @@ async function loadData(){
   expRows += `
   <tr>
     <td colspan="2"><b>Total</b></td>
-    <td>â‚¹${fmt(grandExp)}</td>
-    <td>â‚¹${fmt(grandRev)}</td>
-    <td>â‚¹${fmt(grandRev-grandExp)}</td>
+    <td>₹${fmt(grandExp)}</td>
+    <td>₹${fmt(grandRev)}</td>
+    <td>₹${fmt(grandRev-grandExp)}</td>
   </tr>`;
 
   document.getElementById("crops-tbody").innerHTML = cropRows;
@@ -1111,15 +1111,15 @@ async function loadData(){
     ).then(r=>r.json());
 
     document.getElementById("ps-crops").textContent   = summary.totalCrops;
-    document.getElementById("ps-expense").textContent = "â‚¹"+fmt(summary.totalExpense);
-    document.getElementById("ps-revenue").textContent = "â‚¹"+fmt(summary.totalRevenue);
-    document.getElementById("ps-profit").textContent  = "â‚¹"+fmt(summary.profit);
+    document.getElementById("ps-expense").textContent = "₹"+fmt(summary.totalExpense);
+    document.getElementById("ps-revenue").textContent = "₹"+fmt(summary.totalRevenue);
+    document.getElementById("ps-profit").textContent  = "₹"+fmt(summary.profit);
 
   } catch(e){
     document.getElementById("ps-crops").textContent   = crops.length;
-    document.getElementById("ps-expense").textContent = "â‚¹"+fmt(grandExp);
-    document.getElementById("ps-revenue").textContent = "â‚¹"+fmt(grandRev);
-    document.getElementById("ps-profit").textContent  = "â‚¹"+fmt(grandRev-grandExp);
+    document.getElementById("ps-expense").textContent = "₹"+fmt(grandExp);
+    document.getElementById("ps-revenue").textContent = "₹"+fmt(grandRev);
+    document.getElementById("ps-profit").textContent  = "₹"+fmt(grandRev-grandExp);
   }
 
   document.getElementById("qs-production").textContent = fmt(totalProd)+" kg";
@@ -1139,7 +1139,7 @@ async function loadData(){
         <td>${i+1}</td>
         <td>${s.title}</td>
         <td>${s.status || "Approved"}</td>
-        <td>â‚¹${fmt(s.amount || 0)}</td>
+        <td>₹${fmt(s.amount || 0)}</td>
       </tr>`;
     });
 

@@ -54,11 +54,11 @@ const params = new URLSearchParams(window.location.search);
 const expertId = params.get("id");
 const name = params.get("name");
 
-// âœ… Show name
+// ✅ Show name
 document.getElementById("expertName").innerText =
 `Expert: ${name || "Unknown"}`;
 
-// ðŸ”¥ PROFILE BUTTON
+// 🔥 PROFILE BUTTON
 function openProfile(){
 localStorage.setItem("viewExpertId", expertId);
 localStorage.setItem("viewExpertName", name);

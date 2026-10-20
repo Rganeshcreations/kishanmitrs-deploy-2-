@@ -80,7 +80,7 @@ background:#2e7d32;
 
 <body>
 
-<div class="header">ðŸŒ¾ My Crops</div>
+<div class="header">🌾 My Crops</div>
 
 <div class="container" id="cropList"></div>
 
@@ -112,7 +112,7 @@ container.innerHTML = "";
 
 // if no crops
 if(crops.length === 0){
-container.innerHTML = "<p>No crops added yet ðŸŒ±</p>";
+container.innerHTML = "<p>No crops added yet 🌱</p>";
 return;
 }
 
@@ -125,7 +125,7 @@ container.innerHTML += `
 
 <p>ðŸ“ Land Size: ${c.land_size} acres</p>
 
-<p>ðŸ“… Seeding Date: ${formatDate(c.seeding_date)}</p>
+<p>📅 Seeding Date: ${formatDate(c.seeding_date)}</p>
 
 </div>
 `;

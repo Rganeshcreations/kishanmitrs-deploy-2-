@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 <title>Government Farmers - KisanMitra</title>
@@ -223,7 +223,7 @@ color:#777;
 </div>
 
 <div class="footer">
-© Government of India | Digital Agriculture Mission
+Â© Government of India | Digital Agriculture Mission
 </div>
 
 </div>
@@ -237,7 +237,7 @@ async function loadFarmers(){
 
 try{
 
-const res = await fetch("https://kishanmitrs-deploy-2-production.up.railway.app/api/admin/farmers");
+const res = await fetch("/api/admin/farmers");
 const farmers = await res.json();
 
 allFarmers = farmers;

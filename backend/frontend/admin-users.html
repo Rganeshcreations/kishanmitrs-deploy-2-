@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <head>
@@ -118,7 +118,7 @@ Public Users
 
 async function loadUsers(){
 
-const res = await fetch("https://kishanmitrs-deploy-2-production.up.railway.app/api/admin/public-users");
+const res = await fetch("/api/admin/public-users");
 
 const users = await res.json();
 

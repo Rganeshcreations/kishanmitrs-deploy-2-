@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 <title>Government Schemes</title>
@@ -99,7 +99,7 @@ const eligibility=document.getElementById("eligibility").value;
 const official_link=document.getElementById("link").value;
 
 const res=await fetch(
-"https://kishanmitrs-deploy-2-production.up.railway.app/api/users/government/add-scheme",
+"/api/users/government/add-scheme",
 {
 method:"POST",
 headers:{ "Content-Type":"application/json" },

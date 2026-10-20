@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <head>
@@ -115,7 +115,7 @@ border-radius:5px;
 
 <div class="nav-right">
 
-<!-- ✅ PROFILE IMAGE -->
+<!-- âœ… PROFILE IMAGE -->
 <img src="images/ganesh.jpg" class="profile-img" onclick="goToProfile()">
 
 <button onclick="logout()">Logout</button>
@@ -125,12 +125,12 @@ border-radius:5px;
 
 <div class="main">
 
-<h1>🌾 Farmer Crops</h1>
+<h1>ðŸŒ¾ Farmer Crops</h1>
 
 <!-- Summary Cards -->
 <div class="cards">
 <div class="card">Total Crops: <span id="totalCrops">0</span></div>
-<div class="card">Avg Price: ₹ <span id="avgPrice">0</span></div>
+<div class="card">Avg Price: â‚¹ <span id="avgPrice">0</span></div>
 </div>
 
 <!-- Search -->
@@ -168,7 +168,7 @@ let allCrops = [];
 
 async function loadCrops(){
 
-const res = await fetch("https://kishanmitrs-deploy-2-production.up.railway.app/api/admin/crops");
+const res = await fetch("/api/admin/crops");
 const crops = await res.json();
 
 allCrops = crops;
@@ -199,8 +199,8 @@ table+=`
 <td>${days} days</td>
 <td>${c.land_size} Acres</td>
 <td>${c.quantity_produced || 0} kg</td>
-<td>₹ ${c.selling_price || 0}</td>
-<td><button class="like-btn" onclick="likeCrop()">❤️</button></td>
+<td>â‚¹ ${c.selling_price || 0}</td>
+<td><button class="like-btn" onclick="likeCrop()">â¤ï¸</button></td>
 </tr>
 `;
 
@@ -221,7 +221,7 @@ document.getElementById("totalCrops").innerText = crops.length;
 let totalPrice = 0;
 
 crops.forEach(c=>{
-totalPrice += Number(c.selling_price) || 0; // ✅ FIXED
+totalPrice += Number(c.selling_price) || 0; // âœ… FIXED
 });
 
 document.getElementById("avgPrice").innerText =

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 <title>My Crops - KisanMitra</title>
@@ -80,11 +80,11 @@ background:#2e7d32;
 
 <body>
 
-<div class="header">🌾 My Crops</div>
+<div class="header">ðŸŒ¾ My Crops</div>
 
 <div class="container" id="cropList"></div>
 
-<button class="add-btn" onclick="addCrop()">➕ Add New Crop</button>
+<button class="add-btn" onclick="addCrop()">âž• Add New Crop</button>
 
 <script>
 
@@ -101,7 +101,7 @@ window.location.href="/login";
 async function loadCrops(){
 
 const res = await fetch(
-"https://kishanmitrs-deploy-2-production.up.railway.app/api/users/get-crops/"+user.id
+"/api/users/get-crops/"+user.id
 );
 
 const crops = await res.json();
@@ -112,7 +112,7 @@ container.innerHTML = "";
 
 // if no crops
 if(crops.length === 0){
-container.innerHTML = "<p>No crops added yet 🌱</p>";
+container.innerHTML = "<p>No crops added yet ðŸŒ±</p>";
 return;
 }
 
@@ -123,9 +123,9 @@ container.innerHTML += `
 
 <h3>${c.crop_name}</h3>
 
-<p>📏 Land Size: ${c.land_size} acres</p>
+<p>ðŸ“ Land Size: ${c.land_size} acres</p>
 
-<p>📅 Seeding Date: ${formatDate(c.seeding_date)}</p>
+<p>ðŸ“… Seeding Date: ${formatDate(c.seeding_date)}</p>
 
 </div>
 `;

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 <title>Public Profile - KisanMitra</title>
@@ -75,7 +75,7 @@ font-weight:bold;
 
 <div class="profile-card">
 
-<h1>🌾 Complete Your Public Profile</h1>
+<h1>ðŸŒ¾ Complete Your Public Profile</h1>
 
 <img id="photoPreview"
 src="https://via.placeholder.com/100"
@@ -129,7 +129,7 @@ async function savePublicProfile(){
 
   try {
 
-    const res = await fetch("https://kishanmitrs-deploy-2-production.up.railway.app/api/users/public-profile", {
+    const res = await fetch("/api/users/public-profile", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -142,7 +142,7 @@ async function savePublicProfile(){
       })
     });
 
-    // ✅ HANDLE ERROR SAFELY
+    // âœ… HANDLE ERROR SAFELY
     if (!res.ok) {
       const text = await res.text();
       console.error("Server Error:", text);

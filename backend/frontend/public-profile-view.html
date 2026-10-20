@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <head>
@@ -57,7 +57,7 @@ border-radius:15px;
 </div>
 
 <div class="right">
-<h1>🌾 Public Profile</h1>
+<h1>ðŸŒ¾ Public Profile</h1>
 
 <p><b>Phone:</b> <span id="phone"></span></p>
 <p><b>Location:</b> <span id="loc"></span></p>
@@ -76,7 +76,7 @@ async function loadProfile(){
   try {
 
     const res = await fetch(
-      `https://kishanmitrs-deploy-2-production.up.railway.app/api/users/public-profile/${user.id}`
+      `/api/users/public-profile/${user.id}`
     );
 
     const data = await res.json();

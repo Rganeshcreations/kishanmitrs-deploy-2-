@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 <title>Add Crop</title>
@@ -58,7 +58,7 @@ background:red;
 
 <div class="form-box">
 
-<h2>🌱 Add Crop</h2>
+<h2>ðŸŒ± Add Crop</h2>
 
 <input type="text" id="crop_name" placeholder="Crop Name">
 <input type="date" id="seeding_date">
@@ -84,7 +84,7 @@ alert("Fill all fields");
 return;
 }
 
-await fetch("https://kishanmitrs-deploy-2-production.up.railway.app/api/users/add-crop",{
+await fetch("/api/users/add-crop",{
 method:"POST",
 headers:{"Content-Type":"application/json"},
 body:JSON.stringify({

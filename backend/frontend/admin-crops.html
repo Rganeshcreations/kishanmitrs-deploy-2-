@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <head>
@@ -136,7 +136,7 @@ All Farmer Crops
 
 async function loadCrops(){
 
-const res = await fetch("https://kishanmitrs-deploy-2-production.up.railway.app/api/admin/crops");
+const res = await fetch("/api/admin/crops");
 
 const crops = await res.json();
 
@@ -152,7 +152,7 @@ table+=`
 <td>${new Date(c.seeding_date).toLocaleDateString()}</td>
 <td>${c.land_size} Acres</td>
 <td>${c.quantity_produced} kg</td>
-<td>₹ ${c.selling_price}</td>
+<td>â‚¹ ${c.selling_price}</td>
 </tr>
 `;
 

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <head>
@@ -114,7 +114,7 @@ margin-bottom:20px;
 <h1>Farmer Details</h1>
 
 <div class="profit-box">
-Total Profit: ₹ <span id="profit">0</span>
+Total Profit: â‚¹ <span id="profit">0</span>
 </div>
 
 <!-- Farmer Info -->
@@ -203,7 +203,7 @@ const farmerId = urlParams.get("id");
 
 async function loadFarmer(){
 
-const res = await fetch(`https://kishanmitrs-deploy-2-production.up.railway.app/api/admin/farmer-details/${farmerId}`);
+const res = await fetch(`/api/admin/farmer-details/${farmerId}`);
 const data = await res.json();
 
 /* Farmer */
@@ -236,8 +236,8 @@ cropsHTML+=`
 <td>${new Date(c.seeding_date).toLocaleDateString()}</td>
 <td>${c.land_size} Acres</td>
 <td>${c.quantity_produced} kg</td>
-<td>₹ ${c.selling_price}</td>
-<td>₹ ${value}</td>
+<td>â‚¹ ${c.selling_price}</td>
+<td>â‚¹ ${value}</td>
 </tr>
 `;
 
@@ -259,7 +259,7 @@ expHTML+=`
 <td>${e.crop_name}</td>
 <td>${e.expense_category}</td>
 <td>${e.description}</td>
-<td>₹ ${e.total_amount}</td>
+<td>â‚¹ ${e.total_amount}</td>
 <td>${new Date(e.expense_date).toLocaleDateString()}</td>
 </tr>
 `;

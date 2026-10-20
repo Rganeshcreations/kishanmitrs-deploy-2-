@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html>
 <head>
@@ -139,11 +139,11 @@ cursor:pointer;
 
 <body>
 
-<div class="header">🌱 Crop Management</div>
+<div class="header">ðŸŒ± Crop Management</div>
 
 <div class="top-bar">
-<button onclick="openModal()">➕ Add Crop</button>
-<button onclick="window.location.href='farmer'">⬅ Back</button>
+<button onclick="openModal()">âž• Add Crop</button>
+<button onclick="window.location.href='farmer'">â¬… Back</button>
 </div>
 
 <div class="container" id="cropContainer"></div>
@@ -152,7 +152,7 @@ cursor:pointer;
 
 <div class="modal-content">
 
-<h3>🌾 Add New Crop</h3>
+<h3>ðŸŒ¾ Add New Crop</h3>
 
 <input type="text" id="crop_name" placeholder="Crop Name">
 <input type="date" id="seeding_date">
@@ -200,7 +200,7 @@ return;
 
 try{
 
-await fetch("https://kishanmitrs-deploy-2-production.up.railway.app/api/users/add-crop",{
+await fetch("/api/users/add-crop",{
 method:"POST",
 headers:{"Content-Type":"application/json"},
 body:JSON.stringify({
@@ -240,7 +240,7 @@ async function loadCrops(){
 try{
 
 const response=await fetch(
-"https://kishanmitrs-deploy-2-production.up.railway.app/api/users/get-crops/"+user.id
+"/api/users/get-crops/"+user.id
 );
 
 const crops=await response.json();
@@ -267,11 +267,11 @@ container.innerHTML+=`
 
 <h3>${crop.crop_name}</h3>
 
-<p>📅 Seeding Date: ${formattedDate}</p>
+<p>ðŸ“… Seeding Date: ${formattedDate}</p>
 
-<p>⏳ Days Passed: ${daysPassed} days</p>
+<p>â³ Days Passed: ${daysPassed} days</p>
 
-<p>📏 Land Size: ${crop.land_size} acres</p>
+<p>ðŸ“ Land Size: ${crop.land_size} acres</p>
 
 <button onclick="openCrop(${crop.id})">
 Open

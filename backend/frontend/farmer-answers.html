@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>My Questions – KisanMitra</title>
+<title>My Questions â€“ KisanMitra</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -25,7 +25,7 @@
     color: var(--text-light);
   }
 
-  /* ── BACKGROUND ── */
+  /* â”€â”€ BACKGROUND â”€â”€ */
   .bg-wrap {
     position: fixed; inset: 0; z-index: -1;
     background: url('image.jpg') center/cover no-repeat;
@@ -41,7 +41,7 @@
     );
   }
 
-  /* ── PAGE LAYOUT ── */
+  /* â”€â”€ PAGE LAYOUT â”€â”€ */
   .page {
     min-height: 100vh;
     padding: 40px 24px 60px;
@@ -50,7 +50,7 @@
     align-items: center;
   }
 
-  /* ── TOP NAV BAR ── */
+  /* â”€â”€ TOP NAV BAR â”€â”€ */
   .topnav {
     width: 100%;
     max-width: 1100px;
@@ -86,7 +86,7 @@
   }
   .nav-back:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(232,185,74,.4); }
 
-  /* ── PAGE HEADER ── */
+  /* â”€â”€ PAGE HEADER â”€â”€ */
   .page-header {
     text-align: center;
     margin-bottom: 40px;
@@ -125,7 +125,7 @@
     margin: 14px auto 0;
   }
 
-  /* ── STATS ROW ── */
+  /* â”€â”€ STATS ROW â”€â”€ */
   .stats-row {
     display: flex;
     gap: 16px;
@@ -153,7 +153,7 @@
   .dot-ans    { background: #4caf50; box-shadow: 0 0 6px #4caf50; }
   .dot-pend   { background: #ff9800; box-shadow: 0 0 6px #ff9800; }
 
-  /* ── MAIN GLASS PANEL ── */
+  /* â”€â”€ MAIN GLASS PANEL â”€â”€ */
   .panel {
     width: 100%;
     max-width: 1100px;
@@ -320,12 +320,12 @@
   <!-- Top nav -->
   <nav class="topnav">
     <a href="/" class="nav-brand"><span>Kisan</span>Mitra</a>
-    <a href="javascript:history.back()" class="nav-back">← Dashboard</a>
+    <a href="javascript:history.back()" class="nav-back">â† Dashboard</a>
   </nav>
 
   <!-- Header -->
   <div class="page-header">
-    <div class="badge">💬 Farmer Support</div>
+    <div class="badge">ðŸ’¬ Farmer Support</div>
     <h1>My Questions & Expert Answers</h1>
     <p>Track all your farming queries and receive guidance from certified agricultural experts</p>
     <div class="header-divider"></div>
@@ -333,19 +333,19 @@
 
   <!-- Stats row -->
   <div class="stats-row" id="statsRow">
-    <div class="stat-chip"><span class="dot dot-total"></span><span id="statTotal">— Total</span></div>
-    <div class="stat-chip"><span class="dot dot-ans"></span><span id="statAnswered">— Answered</span></div>
-    <div class="stat-chip"><span class="dot dot-pend"></span><span id="statPending">— Pending</span></div>
+    <div class="stat-chip"><span class="dot dot-total"></span><span id="statTotal">â€” Total</span></div>
+    <div class="stat-chip"><span class="dot dot-ans"></span><span id="statAnswered">â€” Answered</span></div>
+    <div class="stat-chip"><span class="dot dot-pend"></span><span id="statPending">â€” Pending</span></div>
   </div>
 
   <!-- Main panel -->
   <div class="panel">
     <!-- Table header -->
     <div class="table-head">
-      <div class="th">👨‍🌾 Expert</div>
-      <div class="th">❓ Question</div>
-      <div class="th">💡 Answer</div>
-      <div class="th">📋 Status</div>
+      <div class="th">ðŸ‘¨â€ðŸŒ¾ Expert</div>
+      <div class="th">â“ Question</div>
+      <div class="th">ðŸ’¡ Answer</div>
+      <div class="th">ðŸ“‹ Status</div>
     </div>
     <!-- Table body -->
     <div id="table-body">
@@ -393,7 +393,7 @@ function updateStats(questions) {
 async function loadQuestions() {
   try {
     const res = await fetch(
-      "https://kishanmitrs-deploy-2-production.up.railway.app/api/users/farmer-questions/" + user.id
+      "/api/users/farmer-questions/" + user.id
     );
     const questions = await res.json();
 
@@ -417,7 +417,7 @@ function renderTable(questions) {
   if (!questions.length) {
     tbody.innerHTML = `
       <div class="empty-state">
-        <div class="empty-icon">🌱</div>
+        <div class="empty-icon">ðŸŒ±</div>
         <h3>No Questions Yet</h3>
         <p>You haven't asked any questions to our experts yet. Start by submitting your first farming query!</p>
       </div>`;
@@ -440,7 +440,7 @@ function renderTable(questions) {
       <div class="td">
         ${q.answer
           ? `<span class="answer-text">${q.answer}</span>`
-          : `<span class="answer-waiting">⏳ Waiting for expert reply...</span>`
+          : `<span class="answer-waiting">â³ Waiting for expert reply...</span>`
         }
       </div>
       <div class="td">

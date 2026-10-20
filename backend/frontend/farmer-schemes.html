@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Government Schemes – KisanMitra</title>
+<title>Government Schemes â€“ KisanMitra</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -21,7 +21,7 @@
 
   html, body { min-height: 100vh; font-family: 'DM Sans', sans-serif; color: var(--text-light); }
 
-  /* ── BACKGROUND ── */
+  /* â”€â”€ BACKGROUND â”€â”€ */
   .bg-wrap {
     position: fixed; inset: 0; z-index: -1;
     background: url('plant.jpg') center/cover no-repeat;
@@ -37,10 +37,10 @@
     );
   }
 
-  /* ── PAGE ── */
+  /* â”€â”€ PAGE â”€â”€ */
   .page { min-height: 100vh; padding: 36px 24px 60px; display: flex; flex-direction: column; align-items: center; }
 
-  /* ── NAV ── */
+  /* â”€â”€ NAV â”€â”€ */
   .topnav {
     width: 100%; max-width: 1150px;
     display: flex; align-items: center; justify-content: space-between;
@@ -64,7 +64,7 @@
   }
   .nav-back:hover { transform:translateY(-2px); box-shadow:0 6px 18px rgba(232,185,74,.4); }
 
-  /* ── PAGE HEADER ── */
+  /* â”€â”€ PAGE HEADER â”€â”€ */
   .page-header { text-align:center; margin-bottom:36px; animation:fadeUp .7s ease .1s both; }
   .badge {
     display:inline-block;
@@ -81,7 +81,7 @@
   .page-header p { margin-top:10px; font-size:15px; color:var(--text-muted); font-weight:300; }
   .header-divider { width:64px; height:3px; background:linear-gradient(90deg,var(--gold),var(--green-mid)); border-radius:2px; margin:14px auto 0; }
 
-  /* ── STATS ROW ── */
+  /* â”€â”€ STATS ROW â”€â”€ */
   .stats-row {
     display:flex; gap:14px; margin-bottom:30px;
     flex-wrap:wrap; justify-content:center;
@@ -100,7 +100,7 @@
   .dot-open   { background:#4caf50; box-shadow:0 0 6px #4caf50; }
   .dot-applied{ background:#2196f3; box-shadow:0 0 6px #2196f3; }
 
-  /* ── SEARCH BAR ── */
+  /* â”€â”€ SEARCH BAR â”€â”€ */
   .search-wrap {
     width:100%; max-width:1150px;
     margin-bottom:24px;
@@ -119,7 +119,7 @@
   .search-box::placeholder { color:var(--text-muted); }
   .search-box:focus { border-color:var(--gold); }
 
-  /* ── PANEL ── */
+  /* â”€â”€ PANEL â”€â”€ */
   .panel {
     width:100%; max-width:1150px;
     background:var(--glass-bg);
@@ -131,7 +131,7 @@
     animation:fadeUp .7s ease .3s both;
   }
 
-  /* ── TABLE HEAD ── */
+  /* â”€â”€ TABLE HEAD â”€â”€ */
   .table-head {
     display:grid;
     grid-template-columns: 200px 1fr 180px 120px 120px;
@@ -147,7 +147,7 @@
   }
   .th:not(:last-child) { border-right:1px solid rgba(255,255,255,.1); }
 
-  /* ── TABLE ROWS ── */
+  /* â”€â”€ TABLE ROWS â”€â”€ */
   #schemes-body { width:100%; }
   .s-row {
     display:grid;
@@ -267,12 +267,12 @@
   <!-- Nav -->
   <nav class="topnav">
     <a href="/" class="nav-brand"><span>Kisan</span>Mitra</a>
-    <a href="javascript:history.back()" class="nav-back">← Dashboard</a>
+    <a href="javascript:history.back()" class="nav-back">â† Dashboard</a>
   </nav>
 
   <!-- Header -->
   <div class="page-header">
-    <div class="badge">🏛️ Welfare Programs</div>
+    <div class="badge">ðŸ›ï¸ Welfare Programs</div>
     <h1>Government Schemes</h1>
     <p>Explore and apply for government welfare schemes designed to support Indian farmers</p>
     <div class="header-divider"></div>
@@ -280,24 +280,24 @@
 
   <!-- Stats -->
   <div class="stats-row">
-    <div class="stat-chip"><span class="chip-dot dot-total"></span><span id="statTotal">— Total Schemes</span></div>
-    <div class="stat-chip"><span class="chip-dot dot-open"></span><span id="statOpen">— Available</span></div>
-    <div class="stat-chip"><span class="chip-dot dot-applied"></span><span id="statApplied">— Applied</span></div>
+    <div class="stat-chip"><span class="chip-dot dot-total"></span><span id="statTotal">â€” Total Schemes</span></div>
+    <div class="stat-chip"><span class="chip-dot dot-open"></span><span id="statOpen">â€” Available</span></div>
+    <div class="stat-chip"><span class="chip-dot dot-applied"></span><span id="statApplied">â€” Applied</span></div>
   </div>
 
   <!-- Search -->
   <div class="search-wrap">
-    <input class="search-box" id="searchBox" type="text" placeholder="🔍  Search schemes by title, eligibility..." oninput="filterSchemes()"/>
+    <input class="search-box" id="searchBox" type="text" placeholder="ðŸ”  Search schemes by title, eligibility..." oninput="filterSchemes()"/>
   </div>
 
   <!-- Panel -->
   <div class="panel">
     <div class="table-head">
-      <div class="th">📋 Scheme Title</div>
-      <div class="th">📝 Description</div>
-      <div class="th">✅ Eligibility</div>
-      <div class="th">🔗 Info</div>
-      <div class="th">🚀 Apply</div>
+      <div class="th">ðŸ“‹ Scheme Title</div>
+      <div class="th">ðŸ“ Description</div>
+      <div class="th">âœ… Eligibility</div>
+      <div class="th">ðŸ”— Info</div>
+      <div class="th">ðŸš€ Apply</div>
     </div>
     <div id="schemes-body">
       <div class="skeleton-row"><div class="skel" style="width:80%"></div><div class="skel" style="width:90%"></div><div class="skel" style="width:65%"></div><div class="skel" style="width:55%"></div><div class="skel" style="width:60%"></div></div>
@@ -309,7 +309,7 @@
 </div>
 
 <!-- Toast -->
-<div class="toast" id="toast">✅ Application submitted successfully!</div>
+<div class="toast" id="toast">âœ… Application submitted successfully!</div>
 
 <script>
 const user = JSON.parse(localStorage.getItem("user")) || { id: 1 };
@@ -318,12 +318,12 @@ let appliedIds = new Set();
 
 async function loadSchemes() {
   try {
-    const res = await fetch("https://kishanmitrs-deploy-2-production.up.railway.app/api/users/government/schemes");
+    const res = await fetch("/api/users/government/schemes");
     allSchemes = await res.json();
   } catch {
     // Demo fallback
     allSchemes = [
-      { id:1, title:"PM Kisan Samman Nidhi",     description:"Direct income support of ₹6,000 per year to all landholding farmer families across India.", eligibility:"All landholding farmers with cultivable land.", official_link:"https://pmkisan.gov.in" },
+      { id:1, title:"PM Kisan Samman Nidhi",     description:"Direct income support of â‚¹6,000 per year to all landholding farmer families across India.", eligibility:"All landholding farmers with cultivable land.", official_link:"https://pmkisan.gov.in" },
       { id:2, title:"Pradhan Mantri Fasal Bima Yojana", description:"Crop insurance scheme providing financial support to farmers suffering crop loss due to unforeseen events.", eligibility:"All farmers including sharecroppers and tenant farmers.", official_link:"https://pmfby.gov.in" },
       { id:3, title:"Kisan Credit Card",          description:"Provides farmers with affordable credit for agricultural needs, post-harvest expenses and allied activities.", eligibility:"Farmers, tenant farmers, oral lessees and sharecroppers.", official_link:"https://agricoop.nic.in" },
       { id:4, title:"PM Krishi Sinchai Yojana",   description:"Ensures access to protective irrigation to all agricultural farms and improve water use efficiency.", eligibility:"All farmers with irrigated or rain-fed land.", official_link:"https://pmksy.gov.in" },
@@ -353,7 +353,7 @@ function filterSchemes() {
 function renderSchemes(schemes) {
   const body = document.getElementById('schemes-body');
   if (!schemes.length) {
-    body.innerHTML = `<div class="empty-state"><div class="empty-icon">🌾</div><h3>No Schemes Found</h3><p>Try a different search keyword.</p></div>`;
+    body.innerHTML = `<div class="empty-state"><div class="empty-icon">ðŸŒ¾</div><h3>No Schemes Found</h3><p>Try a different search keyword.</p></div>`;
     return;
   }
   body.innerHTML = schemes.map((s, i) => `
@@ -361,12 +361,12 @@ function renderSchemes(schemes) {
       <div class="td"><span class="scheme-title">${s.title}</span></div>
       <div class="td" style="font-size:13px;color:rgba(255,255,255,.78)">${s.description}</div>
       <div class="td"><span class="elig-badge">${s.eligibility}</span></div>
-      <div class="td"><a href="${s.official_link}" target="_blank" class="view-link">🔗 View</a></div>
+      <div class="td"><a href="${s.official_link}" target="_blank" class="view-link">ðŸ”— View</a></div>
       <div class="td">
         <button class="btn-apply ${appliedIds.has(s.id) ? 'applied' : ''}"
                 id="btn-${s.id}"
                 onclick="applyScheme(${s.id})">
-          ${appliedIds.has(s.id) ? '✅ Applied' : '🚀 Apply'}
+          ${appliedIds.has(s.id) ? 'âœ… Applied' : 'ðŸš€ Apply'}
         </button>
       </div>
     </div>`).join('');
@@ -375,17 +375,17 @@ function renderSchemes(schemes) {
 async function applyScheme(id) {
   const btn = document.getElementById('btn-' + id);
   if (!btn || btn.classList.contains('applied')) return;
-  btn.textContent = '⏳ Submitting...';
+  btn.textContent = 'â³ Submitting...';
   btn.style.opacity = '0.7';
   try {
-    await fetch("https://kishanmitrs-deploy-2-production.up.railway.app/api/users/farmer/apply-scheme", {
+    await fetch("/api/users/farmer/apply-scheme", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ farmer_id: user.id, scheme_id: id })
     });
   } catch {}
   appliedIds.add(id);
-  btn.textContent = '✅ Applied';
+  btn.textContent = 'âœ… Applied';
   btn.classList.add('applied');
   btn.style.opacity = '1';
   updateStats();

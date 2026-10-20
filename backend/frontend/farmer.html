@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 <title>Farmer Dashboard - KisanMitra</title>
@@ -113,20 +113,20 @@ cursor:pointer;
 
 <!-- SIDEBAR -->
 <div class="sidebar">
-<h3>🌾 Farmer Panel</h3>
+<h3>ðŸŒ¾ Farmer Panel</h3>
 
-<button onclick="location.href='crop-list'">🌱 Crop Data</button>
-<button onclick="location.href='weather'">☁ Weather</button>
-<button onclick="location.href='ask-options'">👨‍🌾 Ask Expert</button>
-<button onclick="location.href='farmer-answers'">📩 My Questions</button>
-<button onclick="location.href='farmer-schemes'">🏛 Schemes</button>
+<button onclick="location.href='crop-list'">ðŸŒ± Crop Data</button>
+<button onclick="location.href='weather'">â˜ Weather</button>
+<button onclick="location.href='ask-options'">ðŸ‘¨â€ðŸŒ¾ Ask Expert</button>
+<button onclick="location.href='farmer-answers'">ðŸ“© My Questions</button>
+<button onclick="location.href='farmer-schemes'">ðŸ› Schemes</button>
 
 </div>
 
 <!-- CONTENT -->
 <div class="content">
 
-<h2>Welcome to KisanMitra Dashboard 🚜</h2>
+<h2>Welcome to KisanMitra Dashboard ðŸšœ</h2>
 
 <div class="dashboard">
 
@@ -137,17 +137,17 @@ cursor:pointer;
 
 <div class="card">
 <p>Total Expense</p>
-<h2 id="totalExpense">₹0</h2>
+<h2 id="totalExpense">â‚¹0</h2>
 </div>
 
 <div class="card">
 <p>Total Revenue</p>
-<h2 id="totalRevenue">₹0</h2>
+<h2 id="totalRevenue">â‚¹0</h2>
 </div>
 
 <div class="card">
 <p>Profit / Loss</p>
-<h2 id="profit">₹0</h2>
+<h2 id="profit">â‚¹0</h2>
 </div>
 
 </div>
@@ -208,7 +208,7 @@ try{
 const user = JSON.parse(localStorage.getItem("user"));
 
 const res = await fetch(
-"https://kishanmitrs-deploy-2-production.up.railway.app/api/users/farmer-dashboard/"+user.id
+"/api/users/farmer-dashboard/"+user.id
 );
 
 const data = await res.json();
@@ -217,14 +217,14 @@ const data = await res.json();
 document.getElementById("totalCrops").innerText = data.totalCrops;
 
 document.getElementById("totalExpense").innerText =
-"₹ " + data.totalExpense;
+"â‚¹ " + data.totalExpense;
 
 document.getElementById("totalRevenue").innerText =
-"₹ " + data.totalRevenue;
+"â‚¹ " + data.totalRevenue;
 
 const profitEl = document.getElementById("profit");
 
-profitEl.innerText = "₹ " + data.profit;
+profitEl.innerText = "â‚¹ " + data.profit;
 
 // color
 if(data.profit >= 0){

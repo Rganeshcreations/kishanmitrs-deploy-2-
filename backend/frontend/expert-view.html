@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 <title>Expert Profile View - KisanMitra</title>
@@ -90,13 +90,13 @@ background:#c8e6c9;
 <!-- RIGHT PANEL -->
 <div class="right-panel">
 
-<h1>👨‍🌾 Expert Profile</h1>
+<h1>ðŸ‘¨â€ðŸŒ¾ Expert Profile</h1>
 
-<div class="info-row">🌾 Specialization: <span id="specialization">-</span></div>
-<div class="info-row">📅 Experience: <span id="experience">-</span></div>
-<div class="info-row">🎓 Qualification: <span id="qualification">-</span></div>
-<div class="info-row">📍 Location: <span id="location">-</span></div>
-<div class="info-row">📞 Phone: <span id="phone">-</span></div>
+<div class="info-row">ðŸŒ¾ Specialization: <span id="specialization">-</span></div>
+<div class="info-row">ðŸ“… Experience: <span id="experience">-</span></div>
+<div class="info-row">ðŸŽ“ Qualification: <span id="qualification">-</span></div>
+<div class="info-row">ðŸ“ Location: <span id="location">-</span></div>
+<div class="info-row">ðŸ“ž Phone: <span id="phone">-</span></div>
 
 <button class="edit-btn" onclick="editProfile()">Edit Profile</button>
 
@@ -112,7 +112,7 @@ const user = {
 id: localStorage.getItem("viewExpertId"),
 name: localStorage.getItem("viewExpertName")
 };
-// 🔐 Login check
+// ðŸ” Login check
 if(!user){
 alert("Login required");
 window.location.href="/login";
@@ -125,10 +125,10 @@ document.getElementById("expertName").innerText = user.name || "Expert";
 try{
 
 const res = await fetch(
-"https://kishanmitrs-deploy-2-production.up.railway.app/api/users/expert-profile/" + user.id
+"/api/users/expert-profile/" + user.id
 );
 
-// 🚨 API error check
+// ðŸš¨ API error check
 if(!res.ok){
 alert("Server error (API not working)");
 return;
@@ -136,14 +136,14 @@ return;
 
 const profile = await res.json();
 
-// 🚨 No profile case
+// ðŸš¨ No profile case
 if(!profile.exists){
 alert("Profile not created");
 window.location.href="expert-profile";
 return;
 }
 
-// ✅ Fill profile safely
+// âœ… Fill profile safely
 document.getElementById("specialization").innerText = profile.specialization || "-";
 document.getElementById("experience").innerText = profile.experience || "-";
 document.getElementById("qualification").innerText = profile.qualification || "-";
@@ -153,14 +153,14 @@ document.getElementById("expertLocation").innerText = profile.location || "-";
 
 }catch(error){
 
-console.log("❌ Profile error:", error);
+console.log("âŒ Profile error:", error);
 alert("Failed to load profile");
 
 }
 
 });
 
-// 🔄 Edit redirect
+// ðŸ”„ Edit redirect
 function editProfile(){
 window.location.href="expert-profile";
 }

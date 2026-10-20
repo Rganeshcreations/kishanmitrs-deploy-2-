@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html lang="en">
 <head>
@@ -18,7 +18,7 @@
   --text-secondary:#cbd5e1;
   --text-muted:#94a3b8;
 
-  /* 🌿 GREEN THEME */
+  /* ðŸŒ¿ GREEN THEME */
   --accent:#4CAF50;
   --accent-glow:rgba(76,175,80,0.2);
   --accent-soft:rgba(76,175,80,0.08);
@@ -35,7 +35,7 @@
   --mono:'JetBrains Mono',monospace;
 }
 
-/* 🌿 BACKGROUND */
+/* ðŸŒ¿ BACKGROUND */
 body{
   font-family:var(--font);
   min-height:100vh;
@@ -187,7 +187,7 @@ color:#ddd;
 <body>
 
 <div class="header">
-  <h1 class="header-title">🌾 Expert Dashboard</h1>
+  <h1 class="header-title">ðŸŒ¾ Expert Dashboard</h1>
   <div class="badge">Live</div>
 </div>
 
@@ -203,7 +203,7 @@ color:#ddd;
 <script>
 
 const user = JSON.parse(localStorage.getItem("user") || '{"id":1}');
-const BASE = "https://kishanmitrs-deploy-2-production.up.railway.app";
+const BASE = "";
 
 let allQuestions = [];
 let currentFilter = "all";
@@ -248,7 +248,7 @@ async function loadQuestions(){
 }
 
 // =======================
-// RENDER UI (🔥 FIXED)
+// RENDER UI (ðŸ”¥ FIXED)
 // =======================
 function render(){
   const list = document.getElementById("question-list");
@@ -261,7 +261,7 @@ function render(){
   document.getElementById("count-label").innerText = qs.length + " questions";
 
   if(!qs.length){
-    list.innerHTML = "<div class='state-box'>No questions yet 🌱</div>";
+    list.innerHTML = "<div class='state-box'>No questions yet ðŸŒ±</div>";
     return;
   }
 
@@ -271,19 +271,19 @@ function render(){
       <div class="q-text">${q.question}</div>
 
       <div class="q-meta">
-        ${q.answer ? "Answered ✅" : "Pending ⏳"}
+        ${q.answer ? "Answered âœ…" : "Pending â³"}
       </div>
 
       <div class="q-answer">
 
-        <!-- 🔥 FIX HERE -->
+        <!-- ðŸ”¥ FIX HERE -->
         <textarea 
           id="ans_${q.id}" 
           placeholder="Write answer..."
           onclick="event.stopPropagation()"
         >${q.answer || ""}</textarea>
 
-        <!-- 🔥 FIX HERE -->
+        <!-- ðŸ”¥ FIX HERE -->
         <button onclick="event.stopPropagation(); sendAnswer(event, ${q.id})">
           Submit
         </button>
@@ -311,7 +311,7 @@ async function sendAnswer(e, id){
   const answer = document.getElementById("ans_" + id).value.trim();
 
   if(!answer){
-    alert("Please enter answer ❌");
+    alert("Please enter answer âŒ");
     return;
   }
 
@@ -341,13 +341,13 @@ async function sendAnswer(e, id){
       throw new Error(data.message || "Failed");
     }
 
-    alert("Answer submitted ✅");
+    alert("Answer submitted âœ…");
 
     loadQuestions();
 
   }catch(err){
     console.error("Submit Error:", err);
-    alert("Error submitting answer ❌");
+    alert("Error submitting answer âŒ");
   }
 }
 

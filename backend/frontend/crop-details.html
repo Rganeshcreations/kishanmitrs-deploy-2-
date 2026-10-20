@@ -1,435 +1,1182 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Crop Details - KisanMitra</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Details - KisanMitra</title>
 
-<style>
+    <style>
+        :root {
+            --green: #2e7d32;
+            --green-dark: #1b5e20;
+            --green-light: #e8f5e9;
+            --gold: #f9a825;
+            --danger: #c62828;
+            --text: #203127;
+            --muted: #647368;
+            --white: #ffffff;
+            --border: #dce6dc;
+        }
 
-body{
-margin:0;
-font-family:'Segoe UI',sans-serif;
-background:linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.8)),
-url("images/farmer-bg.jpg");
-background-size:cover;
-color:white;
-}
+        * {
+            box-sizing: border-box;
+        }
 
-.header{
-text-align:center;
-padding:25px;
-font-size:26px;
-font-weight:bold;
-}
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Segoe UI", Arial, sans-serif;
+            color: var(--text);
+            background:
+                linear-gradient(
+                    rgba(0, 0, 0, 0.66),
+                    rgba(0, 0, 0, 0.76)
+                ),
+                url("images/farmer-bg.jpg") center center / cover fixed;
+        }
 
-.tabs{
-display:flex;
-justify-content:center;
-gap:20px;
-margin-bottom:20px;
-}
+        button,
+        input,
+        select {
+            font: inherit;
+        }
 
-.tabs button{
-padding:10px 20px;
-border:none;
-border-radius:20px;
-cursor:pointer;
-background:rgba(255,255,255,0.2);
-color:white;
-font-weight:bold;
-}
+        button {
+            cursor: pointer;
+        }
 
-.tabs button.active{
-background:#4CAF50;
-}
+        .page-header {
+            padding: 28px 20px 22px;
+            color: white;
+            text-align: center;
+        }
 
-.content-box{
-width:80%;
-margin:auto;
-background:rgba(255,255,255,0.1);
-padding:25px;
-border-radius:20px;
-backdrop-filter:blur(15px);
-}
+        .page-header h1 {
+            margin: 0;
+            font-size: clamp(25px, 4vw, 34px);
+            letter-spacing: 0.3px;
+        }
 
-input,select{
-padding:10px;
-margin:8px 0;
-border-radius:10px;
-border:none;
-width:100%;
-}
+        .page-header p {
+            margin: 9px 0 0;
+            color: #e0eee0;
+            font-size: 15px;
+        }
 
-button.action-btn{
-padding:10px 20px;
-border-radius:20px;
-border:none;
-cursor:pointer;
-background:#4CAF50;
-color:white;
-margin-top:10px;
-}
+        .page-container {
+            width: min(1120px, 94%);
+            margin: 0 auto 40px;
+        }
 
-.expense-card{
-background:rgba(255,255,255,0.15);
-padding:10px;
-margin:10px 0;
-border-radius:10px;
-}
+        .top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
 
-</style>
+        .back-button {
+            padding: 10px 17px;
+            border: 1px solid rgba(255,255,255,0.55);
+            border-radius: 10px;
+            background: rgba(255,255,255,0.14);
+            color: white;
+            font-weight: 600;
+        }
+
+        .back-button:hover {
+            background: rgba(255,255,255,0.25);
+        }
+
+        .crop-label {
+            color: white;
+            font-size: 14px;
+        }
+
+        .crop-label strong {
+            font-size: 18px;
+        }
+
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .overview-card {
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 7px 22px rgba(0,0,0,0.15);
+            border-top: 4px solid var(--green);
+            min-width: 0;
+        }
+
+        .overview-card .label {
+            color: var(--muted);
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .overview-card .value {
+            color: var(--green-dark);
+            font-size: clamp(18px, 2vw, 25px);
+            font-weight: 700;
+            overflow-wrap: anywhere;
+        }
+
+        .overview-card .subtext {
+            margin-top: 7px;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .main-panel {
+            background: rgba(255,255,255,0.97);
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 12px 35px rgba(0,0,0,0.24);
+        }
+
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            padding: 12px;
+            background: #f3f8f2;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tab-button {
+            flex: 1;
+            min-width: 130px;
+            padding: 13px 15px;
+            border: none;
+            border-radius: 10px;
+            background: transparent;
+            color: #4d6251;
+            font-weight: 650;
+        }
+
+        .tab-button:hover {
+            background: #e3efe3;
+        }
+
+        .tab-button.active {
+            color: white;
+            background: var(--green);
+            box-shadow: 0 3px 8px rgba(46,125,50,0.22);
+        }
+
+        .content-area {
+            padding: 28px;
+            min-height: 300px;
+        }
+
+        .section-heading {
+            margin: 0 0 8px;
+            color: var(--green-dark);
+            font-size: 23px;
+        }
+
+        .section-description {
+            margin: 0 0 24px;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .form-group {
+            min-width: 0;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            min-height: 45px;
+            padding: 11px 13px;
+            border: 1px solid #ccd8cc;
+            border-radius: 9px;
+            background: white;
+            color: var(--text);
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: var(--green);
+            box-shadow: 0 0 0 3px rgba(46,125,50,0.12);
+        }
+
+        .field-help {
+            display: block;
+            margin-top: 6px;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 22px;
+        }
+
+        .action-button {
+            padding: 12px 21px;
+            border: none;
+            border-radius: 9px;
+            background: var(--green);
+            color: white;
+            font-weight: 650;
+            transition: background 0.2s;
+        }
+
+        .action-button:hover {
+            background: var(--green-dark);
+        }
+
+        .action-button:disabled {
+            opacity: 0.65;
+            cursor: wait;
+        }
+
+        .secondary-button {
+            padding: 12px 18px;
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            background: white;
+            color: var(--text);
+        }
+
+        .status-message {
+            display: none;
+            margin-bottom: 20px;
+            padding: 12px 15px;
+            border-radius: 9px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .status-message.success {
+            display: block;
+            background: #e8f5e9;
+            color: #1b5e20;
+        }
+
+        .status-message.error {
+            display: block;
+            background: #ffebee;
+            color: #b71c1c;
+        }
+
+        .status-message.info {
+            display: block;
+            background: #e3f2fd;
+            color: #0d47a1;
+        }
+
+        .expense-list {
+            display: grid;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .expense-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 17px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: #fbfdfb;
+        }
+
+        .expense-card h4 {
+            margin: 0 0 6px;
+            color: var(--text);
+            text-transform: capitalize;
+        }
+
+        .expense-card p {
+            margin: 4px 0;
+            color: var(--muted);
+            font-size: 13px;
+            overflow-wrap: anywhere;
+        }
+
+        .expense-amount {
+            color: var(--danger);
+            font-size: 18px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .empty-state {
+            padding: 30px 15px;
+            text-align: center;
+            color: var(--muted);
+            background: #f8fbf7;
+            border: 1px dashed #cbd9cb;
+            border-radius: 12px;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .summary-card {
+            padding: 22px;
+            border: 1px solid var(--border);
+            border-radius: 13px;
+            background: #fbfdfb;
+        }
+
+        .summary-card .label {
+            color: var(--muted);
+            font-size: 13px;
+            margin-bottom: 12px;
+        }
+
+        .summary-card .amount {
+            font-size: clamp(19px, 2.5vw, 27px);
+            font-weight: 750;
+            overflow-wrap: anywhere;
+        }
+
+        .summary-card.expenses .amount {
+            color: #c62828;
+        }
+
+        .summary-card.revenue .amount {
+            color: #1565c0;
+        }
+
+        .summary-card.profit .amount {
+            color: var(--green-dark);
+        }
+
+        .summary-card.loss .amount {
+            color: var(--danger);
+        }
+
+        .formula-note {
+            padding: 16px;
+            border-radius: 10px;
+            background: #f3f8f2;
+            color: #405342;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .loading {
+            padding: 45px 10px;
+            text-align: center;
+            color: var(--muted);
+        }
+
+        .page-footer {
+            padding: 18px;
+            text-align: center;
+            color: #e3e9e3;
+            font-size: 12px;
+        }
+
+        @media (max-width: 800px) {
+            .overview-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content-area {
+                padding: 21px;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .page-container {
+                width: 94%;
+            }
+
+            .overview-grid {
+                gap: 10px;
+            }
+
+            .overview-card {
+                padding: 14px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full-width {
+                grid-column: auto;
+            }
+
+            .tabs {
+                gap: 4px;
+            }
+
+            .tab-button {
+                min-width: 0;
+                padding: 11px 8px;
+                font-size: 13px;
+            }
+
+            .expense-card {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="header">🌾 Crop Details</div>
+<header class="page-header">
+    <h1>Crop Management</h1>
+    <p>Manage production, track expenditures and review your crop finances.</p>
+</header>
 
-<div class="tabs">
+<main class="page-container">
 
-<button id="detailsTab" class="active" onclick="showTab('details')">📋 Details</button>
+    <div class="top-bar">
+        <button class="back-button" type="button" onclick="goBack()">
+            Back to My Crops
+        </button>
 
-<button id="expenseTab" onclick="showTab('expense')">💰 Expenditures</button>
+        <div class="crop-label">
+            Current Crop:
+            <strong id="topCropName">Loading...</strong>
+        </div>
+    </div>
 
-<button id="summaryTab" onclick="showTab('summary')">📊 Summary</button>
+    <section class="overview-grid" aria-label="Crop overview">
+        <article class="overview-card">
+            <div class="label">Crop Name</div>
+            <div class="value" id="overviewCropName">Loading...</div>
+            <div class="subtext">Selected crop</div>
+        </article>
 
-<button onclick="window.location.href='crop-list'">⬅️ Back</button>
+        <article class="overview-card">
+            <div class="label">Seeding Date</div>
+            <div class="value" id="overviewDate">-</div>
+            <div class="subtext">Date of planting</div>
+        </article>
 
-</div>
+        <article class="overview-card">
+            <div class="label">Days Passed</div>
+            <div class="value" id="overviewDays">-</div>
+            <div class="subtext">Since seeding</div>
+        </article>
 
-<div class="content-box" id="contentArea"></div>
+        <article class="overview-card">
+            <div class="label">Land Size</div>
+            <div class="value" id="overviewLand">-</div>
+            <div class="subtext">Land area in acres</div>
+        </article>
+    </section>
+
+    <section class="main-panel">
+
+        <nav class="tabs" aria-label="Crop management sections">
+            <button class="tab-button active" id="detailsTab"
+                    type="button" aria-selected="true"
+                    onclick="showTab('details')">
+                Crop Production
+            </button>
+
+            <button class="tab-button" id="expenseTab"
+                    type="button" aria-selected="false"
+                    onclick="showTab('expense')">
+                Expenditures
+            </button>
+
+            <button class="tab-button" id="summaryTab"
+                    type="button" aria-selected="false"
+                    onclick="showTab('summary')">
+                Financial Summary
+            </button>
+        </nav>
+
+        <div class="content-area" id="contentArea">
+            <div class="loading">Loading crop information...</div>
+        </div>
+
+    </section>
+
+</main>
+
+<footer class="page-footer">
+    KisanMitra - Crop Management
+</footer>
 
 <script>
+"use strict";
 
-const urlParams=new URLSearchParams(window.location.search);
-const cropId=urlParams.get("crop_id");
-if(!cropId){
-alert("Invalid Crop âŒ");
-window.location.href="crop-list";
+const urlParams = new URLSearchParams(window.location.search);
+const cropId = urlParams.get("crop_id");
+
+let cropData = {};
+let expenses = [];
+let currentTab = "details";
+
+const contentArea = document.getElementById("contentArea");
+
+function escapeHTML(value) {
+    return String(value ?? "").replace(/[&<>"']/g, function (character) {
+        const entities = {
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#39;"
+        };
+        return entities[character];
+    });
 }
 
-let cropData={};
-let expenses=[];
+function formatCurrency(value) {
+    const amount = Number(value) || 0;
 
-// ================= TAB SWITCH =================
-function showTab(tab){
-
-document.querySelectorAll(".tabs button")
-.forEach(btn=>btn.classList.remove("active"));
-
-if(tab==="details"){
-document.getElementById("detailsTab").classList.add("active");
-renderDetails();
+    return new Intl.NumberFormat("en-IN", {
+        style: "currency",
+        currency: "INR",
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    }).format(amount);
 }
 
-if(tab==="expense"){
-document.getElementById("expenseTab").classList.add("active");
-renderExpense();
+function formatDate(value) {
+    if (!value) return "-";
+
+    const date = new Date(value);
+
+    if (Number.isNaN(date.getTime())) return "-";
+
+    return date.toLocaleDateString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric"
+    });
 }
 
-if(tab==="summary"){
-document.getElementById("summaryTab").classList.add("active");
-renderSummary(); // async safe now
+function getDaysPassed(value) {
+    if (!value) return "-";
+
+    const date = new Date(value);
+
+    if (Number.isNaN(date.getTime())) return "-";
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    date.setHours(0, 0, 0, 0);
+
+    const difference = Math.floor(
+        (today.getTime() - date.getTime()) / 86400000
+    );
+
+    if (difference < 0) return "Not started";
+
+    return difference + (difference === 1 ? " day" : " days");
 }
 
+function showMessage(message, type) {
+    const element = document.getElementById("statusMessage");
+
+    if (!element) return;
+
+    element.textContent = message;
+    element.className = "status-message " + type;
 }
 
-// ================= LOAD CROP =================
-async function loadCrop(){
+function clearMessage() {
+    const element = document.getElementById("statusMessage");
 
-const res = await fetch(
-"/api/users/get-crop/"+cropId
-);
-
-const data = await res.json();
-
-// 🔥 IMPORTANT FIX
-cropData = data;
-
-console.log("CROP DATA:", cropData);
-
-renderDetails();
-
+    if (element) {
+        element.textContent = "";
+        element.className = "status-message";
+    }
 }
 
-// ================= LOAD EXPENSES =================
-async function loadExpenses(){
+async function readResponse(response) {
+    const data = await response.json().catch(() => ({}));
 
-const res=await fetch(
-"/api/users/get-expenditures/"+cropId
-);
+    if (!response.ok) {
+        throw new Error(
+            data.message || data.error ||
+            "Request failed with status " + response.status
+        );
+    }
 
-expenses=await res.json();
-
-return expenses;
-
+    return data;
 }
 
-// ================= DETAILS =================
-function renderDetails(){
+function setActiveTab(tab) {
+    currentTab = tab;
 
-const today=new Date();
-const seedDate=new Date(cropData.seeding_date);
+    const tabs = {
+        details: "detailsTab",
+        expense: "expenseTab",
+        summary: "summaryTab"
+    };
 
-const daysPassed=Math.floor(
-(today-seedDate)/(1000*60*60*24)
-);
+    Object.entries(tabs).forEach(([name, id]) => {
+        const button = document.getElementById(id);
+        const active = name === tab;
 
-const formattedDate=new Date(cropData.seeding_date)
-.toLocaleDateString();
-
-document.getElementById("contentArea").innerHTML=`
-
-<h3>${cropData.crop_name}</h3>
-
-<p>📅 Seeding Date: ${formattedDate}</p>
-
-<p>â³ Days Passed: ${daysPassed} days</p>
-
-<p>ðŸ“ Land Size: ${cropData.land_size} acres</p>
-
-<hr>
-
-<h4>Add Production Details</h4>
-
-<input type="number" id="quantity"
-placeholder="Quantity Produced"
-value="${cropData.quantity_produced || ''}">
-
-<input type="number" id="price"
-placeholder="Selling Price per unit"
-value="${cropData.selling_price || ''}">
-
-<button class="action-btn"
-onclick="updateProduction()">Save</button>
-
-`;
-
+        button.classList.toggle("active", active);
+        button.setAttribute("aria-selected", String(active));
+    });
 }
 
-// ================= UPDATE PRODUCTION =================
-async function updateProduction(){
+async function showTab(tab) {
+    if (!cropId) return;
 
-const quantity = document.getElementById("quantity").value;
-const price = document.getElementById("price").value;
+    setActiveTab(tab);
 
-// ✅ VALIDATION
-if(!quantity || !price){
-alert("Please enter both quantity and price â—");
-return;
+    if (tab === "details") {
+        renderDetails();
+    } else if (tab === "expense") {
+        renderExpense();
+    } else if (tab === "summary") {
+        await renderSummary();
+    }
 }
 
-try{
+function updateOverview() {
+    const name = cropData.crop_name || "Crop";
 
-const res = await fetch(
-"/api/users/update-production/"+cropId,
-{
-method:"PUT",
-headers:{"Content-Type":"application/json"},
-body:JSON.stringify({
-quantity_produced:quantity,
-selling_price:price
-})
-}
-);
+    document.getElementById("topCropName").textContent = name;
+    document.getElementById("overviewCropName").textContent = name;
+    document.getElementById("overviewDate").textContent =
+        formatDate(cropData.seeding_date);
+    document.getElementById("overviewDays").textContent =
+        getDaysPassed(cropData.seeding_date);
 
-// ✅ CHECK RESPONSE
-const data = await res.json();
+    const landSize = Number(cropData.land_size);
 
-if(!res.ok){
-alert("Update failed âŒ");
-return;
+    document.getElementById("overviewLand").textContent =
+        cropData.land_size !== null &&
+        cropData.land_size !== undefined &&
+        cropData.land_size !== ""
+            ? (Number.isFinite(landSize) ? landSize + " acres" : "-")
+            : "-";
 }
 
-// 🔥 SUCCESS
-alert("✅ Production Updated Successfully");
+async function loadCrop() {
+    if (!cropId) {
+        contentArea.innerHTML = `
+            <div class="status-message error" style="display:block">
+                No crop ID was provided. Return to My Crops and select a crop.
+            </div>
+        `;
 
-// 🔥 AUTO REFRESH DATA
-await loadCrop();
-await loadExpenses();
+        document.getElementById("topCropName").textContent = "Unavailable";
+        document.getElementById("overviewCropName").textContent = "-";
+        return false;
+    }
 
-// 🔥 OPTIONAL: AUTO SWITCH TO SUMMARY
-showTab("summary");
+    try {
+        const response = await fetch(
+            "/api/users/get-crop/" + encodeURIComponent(cropId)
+        );
 
-}catch(err){
+        const data = await readResponse(response);
 
-console.log("Error:", err);
-alert("Server error âŒ");
+        // Support a direct crop object or a common wrapped response.
+        cropData = data.crop || data.data || data;
 
+        if (!cropData || !cropData.crop_name) {
+            throw new Error("Crop information was not found.");
+        }
+
+        updateOverview();
+
+        return true;
+
+    } catch (error) {
+        console.error("Failed to load crop:", error);
+
+        contentArea.innerHTML = `
+            <div class="status-message error" style="display:block">
+                ${escapeHTML(error.message)}
+            </div>
+            <button class="action-button" onclick="loadCrop().then(ok => {
+                if (ok) showTab(currentTab);
+            })">
+                Try Again
+            </button>
+        `;
+
+        return false;
+    }
 }
 
+async function loadExpenses() {
+    const response = await fetch(
+        "/api/users/get-expenditures/" + encodeURIComponent(cropId)
+    );
+
+    const data = await readResponse(response);
+
+    expenses = Array.isArray(data)
+        ? data
+        : Array.isArray(data.expenses)
+            ? data.expenses
+            : Array.isArray(data.data)
+                ? data.data
+                : [];
+
+    return expenses;
 }
 
-// ================= EXPENSE TAB =================
-function renderExpense(){
+function renderDetails() {
+    contentArea.innerHTML = `
+        <h2 class="section-heading">Production Details</h2>
+        <p class="section-description">
+            Record your harvested quantity and expected selling price.
+            These values are used to calculate your crop revenue.
+        </p>
 
-document.getElementById("contentArea").innerHTML=`
+        <div id="statusMessage" class="status-message"></div>
 
-<h3>Add Expenditure</h3>
+        <form id="productionForm">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="quantity">Quantity Produced</label>
+                    <input type="number" id="quantity" min="0" step="any"
+                           placeholder="Enter quantity"
+                           value="${escapeHTML(cropData.quantity_produced ?? "")}"
+                           required>
+                    <span class="field-help">
+                        Enter the quantity harvested in your preferred unit.
+                    </span>
+                </div>
 
-<select id="expenseType">
-<option value="worker">Worker</option>
-<option value="fertilizer">Fertilizer</option>
-<option value="other">Other</option>
-</select>
+                <div class="form-group">
+                    <label for="price">Selling Price Per Unit (INR)</label>
+                    <input type="number" id="price" min="0" step="any"
+                           placeholder="Enter price per unit"
+                           value="${escapeHTML(cropData.selling_price ?? "")}"
+                           required>
+                    <span class="field-help">
+                        Use the same unit as your production quantity.
+                    </span>
+                </div>
+            </div>
 
-<input type="text" id="desc" placeholder="Description">
-<input type="number" id="amount" placeholder="Total Amount">
-<input type="date" id="date">
+            <div class="form-actions">
+                <button class="action-button" id="saveProductionButton"
+                        type="submit">
+                    Save Production Details
+                </button>
+                <button class="secondary-button" type="button"
+                        onclick="showTab('summary')">
+                    View Financial Summary
+                </button>
+            </div>
+        </form>
+    `;
 
-<button class="action-btn"
-onclick="addExpense()">Add Expense</button>
-
-<hr>
-
-<h4>Expense List</h4>
-
-<div id="expenseList"></div>
-
-`;
-
-loadExpenses().then(displayExpenses);
-
+    document.getElementById("productionForm").addEventListener(
+        "submit",
+        updateProduction
+    );
 }
 
-// ================= ADD EXPENSE =================
-async function addExpense(){
+async function updateProduction(event) {
+    event.preventDefault();
 
-const type = document.getElementById("expenseType").value;
-const desc = document.getElementById("desc").value;
-const amount = document.getElementById("amount").value;
-const date = document.getElementById("date").value;
+    const quantityInput = document.getElementById("quantity");
+    const priceInput = document.getElementById("price");
 
-// ✅ VALIDATION
-if(!desc || !amount || !date){
-alert("Fill all fields â—");
-return;
+    const quantity = quantityInput.value.trim();
+    const price = priceInput.value.trim();
+
+    if (
+        quantity === "" ||
+        price === "" ||
+        !Number.isFinite(Number(quantity)) ||
+        !Number.isFinite(Number(price)) ||
+        Number(quantity) < 0 ||
+        Number(price) < 0
+    ) {
+        showMessage(
+            "Enter a valid non-negative quantity and selling price.",
+            "error"
+        );
+        return;
+    }
+
+    const button = document.getElementById("saveProductionButton");
+    button.disabled = true;
+    button.textContent = "Saving...";
+
+    try {
+        const response = await fetch(
+            "/api/users/update-production/" + encodeURIComponent(cropId),
+            {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    quantity_produced: Number(quantity),
+                    selling_price: Number(price)
+                })
+            }
+        );
+
+        const data = await readResponse(response);
+
+        showMessage(
+            data.message || "Production details saved successfully.",
+            "success"
+        );
+
+        // Refresh the saved values from the backend.
+        const cropLoaded = await loadCrop();
+
+        if (cropLoaded) {
+            await showTab("summary");
+        }
+
+    } catch (error) {
+        console.error("Production update failed:", error);
+        showMessage(error.message || "Unable to save production details.", "error");
+    } finally {
+        const saveButton = document.getElementById("saveProductionButton");
+
+        if (saveButton) {
+            saveButton.disabled = false;
+            saveButton.textContent = "Save Production Details";
+        }
+    }
 }
 
-try{
+function renderExpense() {
+    contentArea.innerHTML = `
+        <h2 class="section-heading">Expenditure Management</h2>
+        <p class="section-description">
+            Track labour, fertilizer and other costs associated with this crop.
+        </p>
 
-const res = await fetch(
-"/api/users/add-expenditure",
-{
-method:"POST",
-headers:{"Content-Type":"application/json"},
-body:JSON.stringify({
-crop_id:cropId,
-expense_category:type,
-description:desc,
-total_amount:amount,
-expense_date:date
-})
-}
-);
+        <div id="statusMessage" class="status-message"></div>
 
-const data = await res.json();
+        <form id="expenseForm">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="expenseType">Expense Category</label>
+                    <select id="expenseType" required>
+                        <option value="worker">Labour / Worker</option>
+                        <option value="fertilizer">Fertilizer</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
 
-if(!res.ok){
-alert("Failed to add expense âŒ");
-return;
-}
+                <div class="form-group">
+                    <label for="amount">Amount (INR)</label>
+                    <input type="number" id="amount" min="0.01" step="0.01"
+                           placeholder="Enter amount" required>
+                </div>
 
-alert("✅ Expense Added");
+                <div class="form-group full-width">
+                    <label for="desc">Description</label>
+                    <input type="text" id="desc" maxlength="250"
+                           placeholder="Example: Fertilizer purchase"
+                           required>
+                </div>
 
-// 🔥 REFRESH LIST
-await loadExpenses();
-displayExpenses();
+                <div class="form-group">
+                    <label for="date">Expense Date</label>
+                    <input type="date" id="date" required>
+                </div>
+            </div>
 
-// 🔥 CLEAR INPUTS
-document.getElementById("desc").value="";
-document.getElementById("amount").value="";
-document.getElementById("date").value="";
+            <div class="form-actions">
+                <button class="action-button" id="addExpenseButton" type="submit">
+                    Add Expenditure
+                </button>
+            </div>
+        </form>
 
-}catch(err){
-console.log(err);
-alert("Server error âŒ");
-}
+        <hr style="border:0;border-top:1px solid #dce6dc;margin:30px 0">
 
-}
+        <h2 class="section-heading">Recorded Expenditures</h2>
+        <p class="section-description">
+            Review the expenses recorded for this crop.
+        </p>
 
-// ================= DISPLAY EXPENSE =================
-function displayExpenses(){
+        <div id="expenseList" class="expense-list">
+            <div class="loading">Loading expenditures...</div>
+        </div>
+    `;
 
-const list=document.getElementById("expenseList");
+    const dateInput = document.getElementById("date");
+    dateInput.value = new Date().toLocaleDateString("en-CA");
 
-if(!list)return;
+    document.getElementById("expenseForm").addEventListener(
+        "submit",
+        addExpense
+    );
 
-list.innerHTML="";
-
-expenses.forEach(exp=>{
-
-list.innerHTML+=`
-
-<div class="expense-card">
-
-<p><strong>${exp.expense_category}</strong></p>
-
-<p>${exp.description}</p>
-
-<p>₹ ${exp.total_amount}</p>
-
-</div>
-
-`;
-
-});
-
+    refreshExpenseList();
 }
 
-// ================= SUMMARY (FIXED 🔥) =================
-async function renderSummary(){
+async function refreshExpenseList() {
+    const list = document.getElementById("expenseList");
 
-// 🔥 1. Load latest expenses
-await loadExpenses();
+    if (!list) return;
 
-let totalExpense = 0;
+    list.innerHTML = `<div class="loading">Loading expenditures...</div>`;
 
-expenses.forEach(e=>{
-  totalExpense += Number(e.total_amount) || 0;
-});
+    try {
+        await loadExpenses();
+        displayExpenses();
+    } catch (error) {
+        console.error("Unable to load expenditures:", error);
 
-
-// 🔥 2. Safe conversion (VERY IMPORTANT)
-let quantity = Number(cropData.quantity_produced);
-let price = Number(cropData.selling_price);
-
-// Handle invalid values
-if(isNaN(quantity)) quantity = 0;
-if(isNaN(price)) price = 0;
-
-
-// 🔥 3. Correct calculation
-let revenue = quantity * price;
-let profit = revenue - totalExpense;
-
-
-// 🔥 4. DEBUG (remove later)
-console.log("Quantity:", quantity);
-console.log("Price:", price);
-console.log("Revenue:", revenue);
-console.log("Expense:", totalExpense);
-console.log("Profit:", profit);
-
-
-// 🔥 5. UI update
-document.getElementById("contentArea").innerHTML=`
-
-<h3>📊 Financial Summary</h3>
-
-<p>💰 Total Expense: ₹ ${totalExpense.toFixed(2)}</p>
-
-<p>📈 Revenue: ₹ ${revenue.toFixed(2)}</p>
-
-<h2 style="color:${profit>=0?'#4CAF50':'red'}">
-${profit>=0?"Profit":"Loss"}: ₹ ${profit.toFixed(2)}
-</h2>
-
-`;
-
+        list.innerHTML = `
+            <div class="empty-state">
+                Unable to load expenditures.
+                <button class="secondary-button" type="button"
+                        onclick="refreshExpenseList()">
+                    Try Again
+                </button>
+            </div>
+        `;
+    }
 }
 
-// INIT
-loadCrop();
+async function addExpense(event) {
+    event.preventDefault();
 
+    const type = document.getElementById("expenseType").value;
+    const desc = document.getElementById("desc").value.trim();
+    const amount = document.getElementById("amount").value;
+    const date = document.getElementById("date").value;
+
+    if (
+        !desc ||
+        !amount ||
+        !date ||
+        !Number.isFinite(Number(amount)) ||
+        Number(amount) <= 0
+    ) {
+        showMessage(
+            "Enter a description, a valid amount greater than zero, and a date.",
+            "error"
+        );
+        return;
+    }
+
+    const button = document.getElementById("addExpenseButton");
+    button.disabled = true;
+    button.textContent = "Saving...";
+
+    try {
+        const response = await fetch("/api/users/add-expenditure", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                crop_id: cropId,
+                expense_category: type,
+                description: desc,
+                total_amount: Number(amount),
+                expense_date: date
+            })
+        });
+
+        const data = await readResponse(response);
+
+        showMessage(
+            data.message || "Expenditure added successfully.",
+            "success"
+        );
+
+        document.getElementById("desc").value = "";
+        document.getElementById("amount").value = "";
+
+        await loadExpenses();
+        displayExpenses();
+
+    } catch (error) {
+        console.error("Unable to add expenditure:", error);
+        showMessage(error.message || "Unable to add expenditure.", "error");
+    } finally {
+        const addButton = document.getElementById("addExpenseButton");
+
+        if (addButton) {
+            addButton.disabled = false;
+            addButton.textContent = "Add Expenditure";
+        }
+    }
+}
+
+function displayExpenses() {
+    const list = document.getElementById("expenseList");
+
+    if (!list) return;
+
+    if (expenses.length === 0) {
+        list.innerHTML = `
+            <div class="empty-state">
+                No expenditures recorded yet.
+                Add your first expense using the form above.
+            </div>
+        `;
+        return;
+    }
+
+    list.innerHTML = expenses.map(function (expense) {
+        const category = String(expense.expense_category || "other");
+        const description = String(expense.description || "No description");
+        const date = formatDate(expense.expense_date);
+
+        return `
+            <article class="expense-card">
+                <div>
+                    <h4>${escapeHTML(category)}</h4>
+                    <p>${escapeHTML(description)}</p>
+                    <p>Expense date: ${escapeHTML(date)}</p>
+                </div>
+                <div class="expense-amount">
+                    ${escapeHTML(formatCurrency(expense.total_amount))}
+                </div>
+            </article>
+        `;
+    }).join("");
+}
+
+async function renderSummary() {
+    contentArea.innerHTML = `
+        <h2 class="section-heading">Financial Summary</h2>
+        <p class="section-description">
+            Review estimated crop revenue, recorded expenses and the resulting profit or loss.
+        </p>
+        <div class="loading">Calculating financial summary...</div>
+    `;
+
+    try {
+        await loadExpenses();
+
+        const quantity = Number(cropData.quantity_produced) || 0;
+        const price = Number(cropData.selling_price) || 0;
+
+        const totalExpense = expenses.reduce(function (total, expense) {
+            return total + (Number(expense.total_amount) || 0);
+        }, 0);
+
+        const revenue = quantity * price;
+        const profit = revenue - totalExpense;
+        const isProfit = profit >= 0;
+
+        contentArea.innerHTML = `
+            <h2 class="section-heading">Financial Summary</h2>
+            <p class="section-description">
+                Calculations use the production details and expenditures currently saved for this crop.
+            </p>
+
+            <div id="statusMessage" class="status-message"></div>
+
+            <div class="summary-grid">
+                <article class="summary-card expenses">
+                    <div class="label">Total Expenditures</div>
+                    <div class="amount">${escapeHTML(formatCurrency(totalExpense))}</div>
+                </article>
+
+                <article class="summary-card revenue">
+                    <div class="label">Estimated Revenue</div>
+                    <div class="amount">${escapeHTML(formatCurrency(revenue))}</div>
+                </article>
+
+                <article class="summary-card ${isProfit ? "profit" : "loss"}">
+                    <div class="label">${isProfit ? "Estimated Profit" : "Estimated Loss"}</div>
+                    <div class="amount">${escapeHTML(formatCurrency(Math.abs(profit)))}</div>
+                </article>
+            </div>
+
+            <div class="formula-note">
+                <strong>Calculation details</strong><br>
+                Quantity produced: ${escapeHTML(quantity)}<br>
+                Selling price per unit: ${escapeHTML(formatCurrency(price))}<br>
+                Revenue = Quantity x Selling price<br>
+                Profit or loss = Revenue - Total expenditures
+            </div>
+
+            <div class="form-actions">
+                <button class="action-button" type="button"
+                        onclick="showTab('details')">
+                    Update Production
+                </button>
+
+                <button class="secondary-button" type="button"
+                        onclick="showTab('expense')">
+                    Manage Expenditures
+                </button>
+            </div>
+        `;
+
+    } catch (error) {
+        console.error("Unable to calculate financial summary:", error);
+
+        contentArea.innerHTML = `
+            <h2 class="section-heading">Financial Summary</h2>
+            <div class="status-message error" style="display:block">
+                Unable to load expenditures, so the financial summary cannot be calculated.
+                ${escapeHTML(error.message)}
+            </div>
+            <button class="action-button" type="button"
+                    onclick="renderSummary()">
+                Try Again
+            </button>
+        `;
+    }
+}
+
+function goBack() {
+    window.location.href = "crop-list";
+}
+
+// Initial page load.
+(async function init() {
+    const loaded = await loadCrop();
+
+    if (loaded) {
+        await showTab("details");
+    }
+})();
 </script>
 
 </body>

@@ -1,122 +1,413 @@
 ﻿<!DOCTYPE html>
-
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ask an Agriculture Expert | KisanMitra</title>
 
-<title>Ask Expert</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-<style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            padding: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, Helvetica, sans-serif;
+            background:
+                linear-gradient(rgba(20, 70, 28, 0.72), rgba(0, 0, 0, 0.82)),
+                url("images/farmer-bg.jpg");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+        }
 
-body{
-margin:0;
-font-family:Arial;
-background:
-linear-gradient(rgba(34,139,34,0.6),rgba(0,0,0,0.7)),
-url("images/farmer-bg.jpg");
-background-size:cover;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-color:white;
-}
+        .page {
+            width: 100%;
+            max-width: 560px;
+        }
 
-.box{
-background:rgba(255,255,255,0.15);
-padding:30px;
-border-radius:15px;
-backdrop-filter:blur(10px);
-width:420px;
-text-align:center;
-}
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
 
-textarea{
-width:100%;
-height:120px;
-padding:10px;
-border-radius:6px;
-border:none;
-}
+        .brand {
+            font-size: 20px;
+            font-weight: bold;
+            color: #d4f8c8;
+        }
 
-button{
-margin-top:15px;
-padding:12px 18px;
-background:#2e7d32;
-color:white;
-border:none;
-border-radius:6px;
-cursor:pointer;
-}
+        .back-btn {
+            display: inline-block;
+            padding: 9px 13px;
+            color: white;
+            text-decoration: none;
+            border: 1px solid rgba(255,255,255,.35);
+            border-radius: 8px;
+            background: rgba(255,255,255,.1);
+        }
 
-button:hover{
-background:#1b5e20;
-}
+        .back-btn:hover {
+            background: rgba(255,255,255,.2);
+        }
 
-</style>
+        .box {
+            padding: 32px;
+            border: 1px solid rgba(255,255,255,.23);
+            border-radius: 20px;
+            background: rgba(255,255,255,.13);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            box-shadow: 0 12px 38px rgba(0,0,0,.28);
+        }
 
+        .icon {
+            width: 60px;
+            height: 60px;
+            display: grid;
+            place-items: center;
+            border-radius: 16px;
+            background: rgba(200,247,185,.17);
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: clamp(25px, 5vw, 32px);
+            margin: 0 0 12px;
+        }
+
+        .intro {
+            color: #e0e9df;
+            line-height: 1.7;
+            margin-bottom: 26px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 9px;
+            font-weight: bold;
+        }
+
+        .hint {
+            color: #dce7d9;
+            font-size: 13px;
+            line-height: 1.6;
+            margin: -2px 0 12px;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 160px;
+            padding: 15px;
+            border: 1px solid rgba(255,255,255,.35);
+            border-radius: 11px;
+            outline: none;
+            resize: vertical;
+            font-family: inherit;
+            font-size: 15px;
+            line-height: 1.6;
+            background: rgba(255,255,255,.96);
+            color: #203124;
+        }
+
+        textarea:focus {
+            border-color: #a8e69a;
+            box-shadow: 0 0 0 3px rgba(168,230,154,.2);
+        }
+
+        .textarea-footer {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 8px;
+            color: #dce7d9;
+            font-size: 12px;
+        }
+
+        .examples {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            background: rgba(0,0,0,.16);
+        }
+
+        .examples strong {
+            display: block;
+            margin-bottom: 8px;
+            color: #d4f8c8;
+            font-size: 14px;
+        }
+
+        .examples ul {
+            margin: 0;
+            padding-left: 19px;
+            color: #e3ebe1;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .submit-btn {
+            width: 100%;
+            margin-top: 23px;
+            padding: 14px 18px;
+            border: none;
+            border-radius: 10px;
+            background: #2e7d32;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background .2s;
+        }
+
+        .submit-btn:hover:not(:disabled) {
+            background: #1b5e20;
+        }
+
+        .submit-btn:disabled {
+            opacity: .65;
+            cursor: not-allowed;
+        }
+
+        #msg {
+            display: none;
+            margin-top: 18px;
+            padding: 13px;
+            border-radius: 9px;
+            font-size: 14px;
+            line-height: 1.6;
+            overflow-wrap: anywhere;
+        }
+
+        #msg.success {
+            display: block;
+            background: rgba(40,140,65,.24);
+            border: 1px solid rgba(150,255,165,.5);
+        }
+
+        #msg.error {
+            display: block;
+            background: rgba(180,40,40,.2);
+            border: 1px solid rgba(255,150,150,.5);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 18px;
+            color: #d8e2d5;
+            font-size: 12px;
+        }
+
+        @media (max-width: 520px) {
+            body {
+                padding: 15px;
+                align-items: flex-start;
+            }
+
+            .page {
+                margin: auto 0;
+            }
+
+            .box {
+                padding: 23px 19px;
+            }
+
+            .textarea-footer {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
 </head>
 
 <body>
+<div class="page">
 
-<div class="box">
+    <header class="topbar">
+        <div class="brand">🌱 KisanMitra</div>
+        <a class="back-btn" href="javascript:history.back()">← Back</a>
+    </header>
 
-<h2>Ask Agriculture Expert</h2>
+    <main class="box">
+        <div class="icon">🌾</div>
 
-<textarea id="question"
-placeholder="Describe your farming problem..."></textarea>
+        <h1>Ask an Agriculture Expert</h1>
 
-<button onclick="submitQuestion()">Submit Question</button>
+        <p class="intro">
+            Describe the challenge you are facing on your farm.
+            Provide clear details so the expert can better understand
+            your problem and offer relevant guidance.
+        </p>
 
-<p id="msg"></p>
+        <form id="questionForm">
+            <label for="question">Describe your farming problem</label>
+
+            <p class="hint">
+                Include relevant details such as crop name, symptoms,
+                when the problem started, and the conditions you observed.
+            </p>
+
+            <textarea
+                id="question"
+                name="question"
+                minlength="10"
+                maxlength="2000"
+                placeholder="Example: My tomato plants have yellow leaves. The problem started five days ago. What could be the reason?"
+                required
+            ></textarea>
+
+            <div class="textarea-footer">
+                <span>Write at least 10 characters.</span>
+                <span id="charCount">0 / 2000</span>
+            </div>
+
+            <div class="examples">
+                <strong>Questions you can ask</strong>
+                <ul>
+                    <li>Why are my crop leaves turning yellow?</li>
+                    <li>How can I identify common crop pests?</li>
+                    <li>What could be causing poor plant growth?</li>
+                </ul>
+            </div>
+
+            <button class="submit-btn" id="submitBtn" type="submit">
+                Submit Question →
+            </button>
+        </form>
+
+        <div id="msg" role="status" aria-live="polite"></div>
+    </main>
+
+    <footer>
+        KisanMitra · Helping farmers make informed decisions
+    </footer>
 
 </div>
 
 <script>
+    const questionInput = document.getElementById("question");
+    const charCount = document.getElementById("charCount");
+    const form = document.getElementById("questionForm");
+    const submitBtn = document.getElementById("submitBtn");
+    const msg = document.getElementById("msg");
 
-const user = JSON.parse(localStorage.getItem("user"));
-const expertId = localStorage.getItem("selectedExpert");
+    let submitting = false;
 
-if(!user){
-window.location.href="/login";
-}
+    function showMessage(message, type) {
+        msg.textContent = message;
+        msg.className = type;
+    }
 
-async function submitQuestion(){
+    function updateCharacterCount() {
+        charCount.textContent = `${questionInput.value.length} / 2000`;
+    }
 
-const question=document.getElementById("question").value;
+    // Verify login and expert selection before submitting.
+    let user = null;
+    let expertId = localStorage.getItem("selectedExpert");
 
-if(!question){
-alert("Enter question");
-return;
-}
+    try {
+        user = JSON.parse(localStorage.getItem("user"));
+    } catch (error) {
+        console.error("Invalid saved user information.");
+    }
 
-const res = await fetch(
-"/api/users/ask-question",
-{
-method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
-body:JSON.stringify({
-farmer_id:user.id,
-expert_id:expertId,
-question
-})
-}
-);
+    if (!user || !user.id) {
+        window.location.replace("/login");
+    } else if (!expertId) {
+        showMessage(
+            "Please select an agriculture expert before submitting a question.",
+            "error"
+        );
+        submitBtn.disabled = true;
+    }
 
-const data = await res.json();
+    questionInput.addEventListener("input", updateCharacterCount);
 
-document.getElementById("msg").innerText=data.message;
+    form.addEventListener("submit", async function (event) {
+        event.preventDefault();
 
-setTimeout(()=>{
-window.location.href="farmer";
-},1500);
+        if (submitting) return;
 
-}
+        const question = questionInput.value.trim();
 
+        if (question.length < 10) {
+            showMessage(
+                "Please enter at least 10 characters describing your problem.",
+                "error"
+            );
+            questionInput.focus();
+            return;
+        }
+
+        if (!user || !user.id || !expertId) {
+            showMessage(
+                "Your login or expert selection is missing. Please log in and select an expert again.",
+                "error"
+            );
+            return;
+        }
+
+        submitting = true;
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Submitting...";
+        msg.className = "";
+        msg.style.display = "none";
+
+        try {
+            const response = await fetch("/api/users/ask-question", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    farmer_id: user.id,
+                    expert_id: expertId,
+                    question: question
+                })
+            });
+
+            const data = await response.json().catch(() => ({}));
+
+            if (!response.ok) {
+                throw new Error(
+                    data.message || `Request failed (${response.status}).`
+                );
+            }
+
+            showMessage(
+                data.message || "Your question has been submitted successfully!",
+                "success"
+            );
+
+            questionInput.disabled = true;
+            setTimeout(() => {
+                window.location.href = "farmer";
+            }, 1800);
+
+        } catch (error) {
+            console.error("Question submission failed:", error);
+            showMessage(
+                error.message || "Unable to submit your question. Please try again.",
+                "error"
+            );
+
+            submitting = false;
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Submit Question →";
+        }
+    });
+
+    updateCharacterCount();
 </script>
-
 </body>
 </html>
-
-

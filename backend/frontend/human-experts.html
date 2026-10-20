@@ -1,116 +1,498 @@
 ﻿<!DOCTYPE html>
-
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agriculture Experts | KisanMitra</title>
 
-<title>Agriculture Experts</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-<style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            background:
+                linear-gradient(rgba(12, 48, 22, 0.78), rgba(0, 0, 0, 0.82)),
+                url("images/farmer-bg.jpg");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #fff;
+            padding: 28px 20px 45px;
+        }
 
-body{
-margin:0;
-font-family:Arial;
-background:
-linear-gradient(rgba(34,139,34,0.6),rgba(0,0,0,0.7)),
-url("images/farmer-bg.jpg");
-background-size:cover;
-color:white;
-padding:40px;
-}
+        .page {
+            max-width: 1200px;
+            margin: auto;
+        }
 
-h1{
-text-align:center;
-margin-bottom:40px;
-}
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
 
-.container{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:25px;
-}
+        .brand {
+            font-size: 21px;
+            font-weight: bold;
+            color: #c8f7b9;
+        }
 
-.card{
-background:rgba(255,255,255,0.15);
-padding:20px;
-border-radius:15px;
-backdrop-filter:blur(10px);
-box-shadow:0 6px 20px rgba(0,0,0,0.3);
-}
+        .back-btn {
+            display: inline-block;
+            padding: 10px 15px;
+            border: 1px solid rgba(255,255,255,.35);
+            border-radius: 8px;
+            color: white;
+            text-decoration: none;
+            background: rgba(255,255,255,.1);
+        }
 
-.card h3{
-margin-top:0;
-}
+        .back-btn:hover {
+            background: rgba(255,255,255,.2);
+        }
 
-.card button{
-margin-top:10px;
-padding:10px 16px;
-background:#2e7d32;
-color:white;
-border:none;
-border-radius:6px;
-cursor:pointer;
-}
+        .hero {
+            text-align: center;
+            margin: 35px 0 30px;
+        }
 
-.card button:hover{
-background:#1b5e20;
-}
+        .hero .eyebrow {
+            color: #c8f7b9;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 12px;
+            font-weight: bold;
+        }
 
-</style>
+        h1 {
+            font-size: clamp(28px, 5vw, 43px);
+            margin: 12px 0;
+        }
 
+        .hero p {
+            max-width: 650px;
+            margin: auto;
+            color: #e0e8df;
+            line-height: 1.7;
+        }
+
+        .toolbar {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 14px;
+            margin: 28px 0 20px;
+        }
+
+        .toolbar input,
+        .toolbar select {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid rgba(255,255,255,.28);
+            border-radius: 10px;
+            outline: none;
+            font-size: 15px;
+            background: rgba(255,255,255,.95);
+            color: #1e2a20;
+        }
+
+        .result-count {
+            color: #e1eadf;
+            margin: 18px 0;
+            font-size: 14px;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 22px;
+        }
+
+        .card {
+            padding: 24px;
+            border: 1px solid rgba(255,255,255,.2);
+            border-radius: 17px;
+            background: rgba(255,255,255,.12);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 8px 25px rgba(0,0,0,.22);
+            display: flex;
+            flex-direction: column;
+            transition: transform .2s, background .2s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            background: rgba(255,255,255,.17);
+        }
+
+        .avatar {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: #d8f3d0;
+            color: #205b2b;
+            display: grid;
+            place-items: center;
+            font-size: 23px;
+            font-weight: bold;
+            margin-bottom: 16px;
+        }
+
+        .card h2 {
+            font-size: 20px;
+            margin: 0 0 8px;
+            overflow-wrap: anywhere;
+        }
+
+        .specialization {
+            display: inline-block;
+            width: fit-content;
+            max-width: 100%;
+            background: rgba(200,247,185,.17);
+            border: 1px solid rgba(200,247,185,.3);
+            color: #d5ffc9;
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-bottom: 17px;
+            overflow-wrap: anywhere;
+        }
+
+        .detail {
+            display: grid;
+            grid-template-columns: 105px 1fr;
+            gap: 8px;
+            margin: 7px 0;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        .detail-label {
+            color: #d1ddd0;
+        }
+
+        .detail-value {
+            overflow-wrap: anywhere;
+        }
+
+        .card button {
+            width: 100%;
+            margin-top: auto;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 9px;
+            background: #2e7d32;
+            color: white;
+            font-weight: bold;
+            font-size: 15px;
+            cursor: pointer;
+            transition: background .2s;
+        }
+
+        .card button:hover {
+            background: #1b5e20;
+        }
+
+        .card .button-wrap {
+            margin-top: 22px;
+        }
+
+        .message {
+            grid-column: 1 / -1;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            background: rgba(255,255,255,.12);
+            line-height: 1.7;
+        }
+
+        .retry-btn {
+            margin-top: 12px;
+            padding: 10px 15px;
+            border: 0;
+            border-radius: 8px;
+            background: #2e7d32;
+            color: white;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #d5dfd3;
+            font-size: 13px;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 18px 13px 30px;
+            }
+
+            .toolbar {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                margin-top: 25px;
+            }
+
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                padding: 20px;
+            }
+        }
+    </style>
 </head>
 
 <body>
+<div class="page">
 
-<h1>Available Agriculture Experts</h1>
+    <header class="topbar">
+        <div class="brand">🌱 KisanMitra</div>
+        <a class="back-btn" href="javascript:history.back()">← Back</a>
+    </header>
 
-<div class="container" id="expertsContainer"></div>
+    <section class="hero">
+        <div class="eyebrow">Knowledge for better farming</div>
+        <h1>Available Agriculture Experts</h1>
+        <p>
+            Connect with agriculture professionals, explore their expertise,
+            and ask questions to get guidance for your farming needs.
+        </p>
+    </section>
 
-<script>
+    <section class="toolbar" aria-label="Find agriculture experts">
+        <input
+            type="search"
+            id="searchInput"
+            placeholder="Search by name, location or qualification..."
+            aria-label="Search experts"
+        >
 
-async function loadExperts(){
+        <select id="specializationFilter" aria-label="Filter by specialization">
+            <option value="">All specializations</option>
+        </select>
+    </section>
 
-const res = await fetch(
-"/api/users/experts"
-);
+    <div class="result-count" id="resultCount">Loading experts...</div>
 
-const experts = await res.json();
+    <main class="container" id="expertsContainer" aria-live="polite">
+        <div class="message">Loading agriculture experts...</div>
+    </main>
 
-const container = document.getElementById("expertsContainer");
-
-experts.forEach(expert=>{
-
-container.innerHTML += `
-<div class="card">
-
-<h3>${expert.name}</h3>
-
-<p><b>Specialization:</b> ${expert.specialization}</p>
-<p><b>Experience:</b> ${expert.experience} years</p>
-<p><b>Qualification:</b> ${expert.qualification}</p>
-<p><b>Location:</b> ${expert.location}</p>
-
-<button onclick="selectExpert(${expert.id})">
-Ask Question
-</button>
+    <footer>
+        KisanMitra · Supporting farmers through expert guidance
+    </footer>
 
 </div>
-`;
 
-});
+<script>
+    const container = document.getElementById("expertsContainer");
+    const searchInput = document.getElementById("searchInput");
+    const specializationFilter = document.getElementById("specializationFilter");
+    const resultCount = document.getElementById("resultCount");
 
-}
+    let allExperts = [];
 
-function selectExpert(id){
+    function addTextElement(parent, tag, className, text) {
+        const element = document.createElement(tag);
+        if (className) element.className = className;
+        element.textContent = text;
+        parent.appendChild(element);
+        return element;
+    }
 
-localStorage.setItem("selectedExpert",id);
+    function showMessage(message, retry = false) {
+        container.replaceChildren();
+        const box = addTextElement(container, "div", "message", message);
 
-window.location.href="ask-expert";
+        if (retry) {
+            const button = addTextElement(box, "button", "retry-btn", "Try Again");
+            button.type = "button";
+            button.addEventListener("click", loadExperts);
+        }
+    }
 
-}
+    function getInitials(name) {
+        return String(name || "Expert")
+            .trim()
+            .split(/\s+/)
+            .slice(0, 2)
+            .map(part => part.charAt(0))
+            .join("")
+            .toUpperCase() || "E";
+    }
 
-loadExperts();
+    function createExpertCard(expert) {
+        const card = document.createElement("article");
+        card.className = "card";
 
+        addTextElement(card, "div", "avatar", getInitials(expert.name));
+        addTextElement(card, "h2", "", expert.name || "Agriculture Expert");
+
+        addTextElement(
+            card,
+            "div",
+            "specialization",
+            expert.specialization || "General Agriculture"
+        );
+
+        const details = [
+            ["Experience", expert.experience !== null &&
+                expert.experience !== undefined &&
+                expert.experience !== ""
+                ? `${expert.experience} years`
+                : "Not provided"],
+            ["Qualification", expert.qualification || "Not provided"],
+            ["Location", expert.location || "Not provided"]
+        ];
+
+        details.forEach(([label, value]) => {
+            const row = document.createElement("div");
+            row.className = "detail";
+
+            addTextElement(row, "span", "detail-label", label);
+            addTextElement(row, "span", "detail-value", String(value));
+
+            card.appendChild(row);
+        });
+
+        const buttonWrap = document.createElement("div");
+        buttonWrap.className = "button-wrap";
+
+        const button = addTextElement(
+            buttonWrap,
+            "button",
+            "",
+            "Ask Question →"
+        );
+
+        button.type = "button";
+        button.addEventListener("click", () => selectExpert(expert.id));
+
+        card.appendChild(buttonWrap);
+        return card;
+    }
+
+    function renderExperts() {
+        const searchTerm = searchInput.value.trim().toLowerCase();
+        const selectedSpecialization = specializationFilter.value;
+
+        const filtered = allExperts.filter(expert => {
+            const searchableText = [
+                expert.name,
+                expert.specialization,
+                expert.qualification,
+                expert.location
+            ].join(" ").toLowerCase();
+
+            const matchesSearch = searchableText.includes(searchTerm);
+            const matchesSpecialization =
+                !selectedSpecialization ||
+                expert.specialization === selectedSpecialization;
+
+            return matchesSearch && matchesSpecialization;
+        });
+
+        container.replaceChildren();
+        resultCount.textContent =
+            `${filtered.length} expert${filtered.length === 1 ? "" : "s"} found`;
+
+        if (filtered.length === 0) {
+            showMessage("No experts match your search. Try another name or filter.");
+            return;
+        }
+
+        filtered.forEach(expert => {
+            container.appendChild(createExpertCard(expert));
+        });
+    }
+
+    function populateSpecializations() {
+        const values = [...new Set(
+            allExperts
+                .map(expert => expert.specialization)
+                .filter(value => typeof value === "string" && value.trim())
+        )].sort((a, b) => a.localeCompare(b));
+
+        specializationFilter.replaceChildren();
+
+        const defaultOption = document.createElement("option");
+        defaultOption.value = "";
+        defaultOption.textContent = "All specializations";
+        specializationFilter.appendChild(defaultOption);
+
+        values.forEach(value => {
+            const option = document.createElement("option");
+            option.value = value;
+            option.textContent = value;
+            specializationFilter.appendChild(option);
+        });
+    }
+
+    async function loadExperts() {
+        showMessage("Loading agriculture experts...");
+        resultCount.textContent = "Please wait...";
+
+        try {
+            const response = await fetch("/api/users/experts");
+
+            if (!response.ok) {
+                throw new Error(`Server returned HTTP ${response.status}`);
+            }
+
+            const data = await response.json();
+
+            // Accept either a direct array or a common wrapped response.
+            const experts = Array.isArray(data)
+                ? data
+                : Array.isArray(data.experts)
+                    ? data.experts
+                    : Array.isArray(data.data)
+                        ? data.data
+                        : null;
+
+            if (!experts) {
+                throw new Error("Unexpected expert data format.");
+            }
+
+            allExperts = experts;
+            populateSpecializations();
+            renderExperts();
+
+        } catch (error) {
+            console.error("Unable to load experts:", error);
+            resultCount.textContent = "Experts could not be loaded";
+            showMessage(
+                "We couldn't load agriculture experts. Check your connection and try again.",
+                true
+            );
+        }
+    }
+
+    function selectExpert(id) {
+        if (id === undefined || id === null || id === "") {
+            alert("This expert does not have a valid ID. Please try another expert.");
+            return;
+        }
+
+        localStorage.setItem("selectedExpert", String(id));
+        window.location.href = "ask-expert";
+    }
+
+    searchInput.addEventListener("input", renderExperts);
+    specializationFilter.addEventListener("change", renderExperts);
+
+    loadExperts();
 </script>
-
 </body>
 </html>

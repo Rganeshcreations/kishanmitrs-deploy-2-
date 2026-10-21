@@ -604,37 +604,124 @@ res.json({message:"Expert profile saved successfully"});
 //  EXPERT PROFILE view
 // ======================================================
 
-router.get("/expert-profile/:user_id", (req, res) => {
 
-const user_id = req.params.user_id;
+router.post("/expert-profile", (req, res) => {
+    const {
+        user_id,
+        specialization,
+        experience,
+        qualification,
+        location,
+        phone
+    } = req.body;
 
-console.log("📥 Fetching expert profile:", user_id);
+    if (
+        !user_id ||
+        !specialization?.trim() ||
+        experience === undefined ||
+        experience === "" ||
+        !qualification?.trim() ||
+        !location?.trim() ||
+        !phone?.trim()
+    ) {
+        return res.status(400).json({
+            message: "All fields are required"
+        });
+    }
 
-db.query(
-"SELECT * FROM expert_profiles WHERE user_id = ?",
-[user_id],
-(err, rows) => {
+    const experienceYears = Number(experience);
 
-if(err){
-console.log("❌ DB ERROR:", err);
-return res.status(500).json({ error: "Database error" });
-}
+    if (
+        !Number.isInteger(experienceYears) ||
+        experienceYears < 0
+    ) {
+        return res.status(400).json({
+            message: "Experience must be a non-negative whole number"
+        });
+    }
 
-if(rows.length === 0){
-console.log("⚠ No profile found");
-return res.json({ exists: false });
-}
+    const values = [
+        specialization.trim(),
+        experienceYears,
+        qualification.trim(),
+        location.trim(),
+        phone.trim()
+    ];
 
-console.log("✅ Profile found");
+    // Check whether this expert already has a profile.
+    db.query(
+        "SELECT user_id FROM expert_profiles WHERE user_id = ? LIMIT 1",
+        [user_id],
+        (err, rows) => {
+            if (err) {
+                console.error("Expert profile lookup error:", err);
+                return res.status(500).json({
+                    message: "Could not check existing expert profile"
+                });
+            }
 
-res.json({
-exists: true,
-...rows[0]
-});
+            if (rows.length > 0) {
+                // Update the existing profile.
+                const updateSql = `
+                    UPDATE expert_profiles
+                    SET specialization = ?,
+                        experience = ?,
+                        qualification = ?,
+                        location = ?,
+                        phone = ?
+                    WHERE user_id = ?
+                `;
 
-}
-);
+                db.query(
+                    updateSql,
+                    [...values, user_id],
+                    (updateErr) => {
+                        if (updateErr) {
+                            console.error(
+                                "Expert profile update error:",
+                                updateErr
+                            );
+                            return res.status(500).json({
+                                message: "Failed to update expert profile"
+                            });
+                        }
 
+                        return res.json({
+                            message: "Expert profile updated successfully"
+                        });
+                    }
+                );
+            } else {
+                // Create a profile for a first-time expert.
+                const insertSql = `
+                    INSERT INTO expert_profiles
+                    (user_id, specialization, experience,
+                     qualification, location, phone)
+                    VALUES (?, ?, ?, ?, ?, ?)
+                `;
+
+                db.query(
+                    insertSql,
+                    [user_id, ...values],
+                    (insertErr) => {
+                        if (insertErr) {
+                            console.error(
+                                "Expert profile insert error:",
+                                insertErr
+                            );
+                            return res.status(500).json({
+                                message: "Failed to save expert profile"
+                            });
+                        }
+
+                        return res.json({
+                            message: "Expert profile saved successfully"
+                        });
+                    }
+                );
+            }
+        }
+    );
 });
 
 

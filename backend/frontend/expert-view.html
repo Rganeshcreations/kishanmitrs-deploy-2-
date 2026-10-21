@@ -147,13 +147,32 @@ document.addEventListener("DOMContentLoaded", loadExpertProfile);
 async function loadExpertProfile() {
     const status = document.getElementById("status");
 
-    const userId = localStorage.getItem("viewExpertId");
-    const userName = localStorage.getItem("viewExpertName");
+    
+const user = JSON.parse(localStorage.getItem("user") || "null");
 
-    if (!userId || userId === "null" || userId === "undefined") {
-        status.textContent = "Expert ID is missing. Please open this page from the expert list.";
-        return;
-    }
+const savedExpertId = localStorage.getItem("viewExpertId");
+const savedExpertName = localStorage.getItem("viewExpertName");
+
+// Prefer the selected expert; otherwise use the logged-in expert.
+const userId =
+    savedExpertId &&
+    savedExpertId !== "null" &&
+    savedExpertId !== "undefined"
+        ? savedExpertId
+        : user?.role === "expert"
+            ? String(user.id)
+            : null;
+
+const userName =
+    savedExpertName ||
+    (user?.role === "expert" ? user.name : null);
+
+if (!userId || userId === "undefined") {
+    status.textContent =
+        "Expert ID is missing. Please log in as an expert or open a profile from the expert list.";
+    return;
+}
+
 
     document.getElementById("expertName").textContent =
         userName || "Expert";

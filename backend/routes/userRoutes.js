@@ -572,34 +572,7 @@ router.get("/public-profile/:id", (req, res) => {
 
 });
 
-// ======================================================
-// SAVE EXPERT PROFILE
-// ======================================================
 
-router.post("/expert-profile",(req,res)=>{
-
-const {user_id,specialization,experience,qualification,location,phone} = req.body;
-
-console.log("👨‍🌾 Saving expert profile:",user_id);
-
-const sql = `INSERT INTO expert_profiles
-(user_id,specialization,experience,qualification,location,phone)
-VALUES (?,?,?,?,?,?)`;
-
-db.query(sql,[user_id,specialization,experience,qualification,location,phone],(err)=>{
-
-if(err){
-console.log("❌ Expert profile error:",err);
-return res.status(500).json({message:"Failed to save expert profile"});
-}
-
-console.log("✅ Expert profile saved:",user_id);
-
-res.json({message:"Expert profile saved successfully"});
-
-});
-
-});
 // ======================================================
 //  EXPERT PROFILE view
 // ======================================================
@@ -724,6 +697,38 @@ router.post("/expert-profile", (req, res) => {
     );
 });
 
+
+router.get("/expert-profile/:user_id", (req, res) => {
+    const userId = req.params.user_id;
+
+    const sql = `
+        SELECT *
+        FROM expert_profiles
+        WHERE user_id = ?
+        LIMIT 1
+    `;
+
+    db.query(sql, [userId], (err, rows) => {
+        if (err) {
+            console.error("Expert profile fetch error:", err);
+            return res.status(500).json({
+                message: "Failed to fetch expert profile"
+            });
+        }
+
+        if (rows.length === 0) {
+            return res.status(404).json({
+                exists: false,
+                message: "Expert profile not found"
+            });
+        }
+
+        return res.json({
+            exists: true,
+            ...rows[0]
+        });
+    });
+});
 
 
 
